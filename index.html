@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compendium - Prototyp</title>
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --card-bg: #121712;
+            --green: #33FF66;
+            --green-dim: #1F8F44;
+            --text-white: #FFFFFF;
+            --text-muted: #9FCDAF;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            color: var(--green);
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 2px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0;
+        }
+
+        #app-container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--green-dim);
+            padding-bottom: 1rem;
+        }
+
+        #back-btn {
+            background: transparent;
+            color: var(--green);
+            border: 1px solid var(--green);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            display: none; 
+            transition: all 0.2s;
+        }
+
+        #back-btn:hover {
+            background: var(--green-dim);
+            color: var(--text-white);
+        }
+
+        #current-category {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--green-dim);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--green);
+        }
+
+        .card h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--green);
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        
+        .card.book {
+            border-color: #555;
+            cursor: default;
+        }
+        .card.book:hover {
+            transform: none;
+            border-color: #555;
+        }
+        .card.book h3 {
+            color: var(--text-white);
+        }
+        .card.book .author {
+            color: var(--green);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>COMPENDIUM</h1>
+        <p class="subtitle">Ordnung im Meer der Bücher.</p>
+    </header>
+
+    <div id="app-container">
+        <div class="nav-header">
+            <button id="back-btn">← Zurück</button>
+            <div id="current-category">Wähle deinen Pfad</div>
+        </div>
+        <div id="content-grid" class="grid">
+            
+        </div>
+    </div>
+
+    <script>
+       
+        const genreTree = {
+            id: "root",
+            title: "Wähle deinen Pfad",
+            children: [
+                {
+                    id: "fiction",
+                    title: "Belletristik",
+                    desc: "Eintauchen in fiktive Welten, Geschichten und Romane.",
+                    children: [
+                        {
+                            id: "scifi",
+                            title: "Science Fiction",
+                            desc: "Technologische Zukunftsvisionen und ferne Galaxien.",
+                            children: [
+                                { isBook: true, title: "Dune", author: "Frank Herbert", desc: "Ein Meisterwerk über Politik, Religion und Ökologie auf einem Wüstenplaneten." },
+                                { isBook: true, title: "Foundation", author: "Isaac Asimov", desc: "Der Fall und Wiederaufbau eines galaktischen Imperiums." }
+                            ]
+                        },
+                        {
+                            id: "fantasy",
+                            title: "Fantasy",
+                            desc: "Magie, Mythen und epische Heldenreisen.",
+                            children: [
+                                { isBook: true, title: "Der Herr der Ringe", author: "J.R.R. Tolkien", desc: "Der Klassiker, der das Genre definierte." }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "non-fiction",
+                    title: "Fachliteratur",
+                    desc: "Wissen, Philosophie, Geschichte und Technologie.",
+                    children: [
+                        {
+                            id: "tech",
+                            title: "Informatik & Code",
+                            desc: "Bücher über Softwareentwicklung und Architektur.",
+                            children: [
+                                { isBook: true, title: "Clean Code", author: "Robert C. Martin", desc: "Handbuch für agile Softwarehandwerkskunst." }
+                            ]
+                        },
+                        {
+                            id: "philosophy",
+                            title: "Philosophie",
+                            desc: "Gedanken über die Existenz, Moral und Erkenntnis.",
+                            children: [
+                                { isBook: true, title: "Meditationen", author: "Marcus Aurelius", desc: "Tagebuch eines römischen Kaisers über den Stoizismus." }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        
+        let historyStack = [];
+        let currentNode = genreTree;
+
+       
+        const grid = document.getElementById('content-grid');
+        const backBtn = document.getElementById('back-btn');
+        const categoryLabel = document.getElementById('current-category');
+
+        
+        function renderNode(node) {
+            grid.innerHTML = ''; 
+            categoryLabel.textContent = node.title;
+
+            
+            if (historyStack.length > 0) {
+                backBtn.style.display = 'block';
+            } else {
+                backBtn.style.display = 'none';
+            }
+
+            
+            node.children.forEach(child => {
+                const card = document.createElement('div');
+                card.className = 'card' + (child.isBook ? ' book' : '');
+
+                if (child.isBook) {
+                    card.innerHTML = `
+                        <h3>${child.title}</h3>
+                        <span class="author">By ${child.author}</span>
+                        <p>${child.desc}</p>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <h3>${child.title}</h3>
+                        <p>${child.desc}</p>
+                    `;
+                    
+                    card.addEventListener('click', () => {
+                        historyStack.push(currentNode);
+                        currentNode = child;
+                        renderNode(currentNode);
+                    });
+                }
+                grid.appendChild(card);
+            });
+        }
+
+        
+        backBtn.addEventListener('click', () => {
+            if (historyStack.length > 0) {
+                currentNode = historyStack.pop();
+                renderNode(currentNode);
+            }
+        });
+
+        
+        renderNode(currentNode);
+    </script>
+</body>
+</html>

@@ -19,4 +19,4 @@ Dieses Repository enthält den ersten interaktiven Frontend-Prototypen, der das 
 
 ## Setup / Demo
 Das Projekt besteht aktuell aus einer einzigen `index.html` Datei ohne externe Abhängigkeiten.
-👉 **[Hier klicken für die Live-Demo]()**
+👉 **[Hier klicken für die Live-Demo](https://averageuserr42.github.io/Compendium/)**

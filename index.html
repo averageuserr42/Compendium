@@ -5,47 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compendium - Prototyp</title>
     <style>
+        :root {
+            --bg: #0A0A0A;
+            --card-bg: #121712;
+            --green: #33FF66;
+            --green-dim: #1F8F44;
+            --text-white: #FFFFFF;
+            --text-muted: #9FCDAF;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text-white);
+            font-family: ui-monospace, 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        header {
+            max-width: 1100px;
+            margin: 0 auto 2.5rem auto;
+            border-bottom: 1px solid var(--green-dim);
+            padding-bottom: 1.5rem;
+        }
+
+        header h1 {
+            color: var(--green);
+            letter-spacing: 0.2em;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.6rem;
+        }
+
+        header .subtitle {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        #app-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tree-switcher {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .tree-btn {
+            background: transparent;
+            border: 1px solid var(--green-dim);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tree-btn.active,
+        .tree-btn:hover {
+            border-color: var(--green);
+            color: var(--green);
+            background: rgba(51, 255, 102, 0.06);
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            min-height: 2rem;
+        }
+
+        #back-btn {
+            background: transparent;
+            border: 1px solid var(--green-dim);
+            color: var(--green);
+            padding: 0.4rem 0.9rem;
+            border-radius: 4px;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        #back-btn:hover {
+            border-color: var(--green);
+            background: rgba(51, 255, 102, 0.06);
+        }
+
+        #current-category {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #262b26;
+            border-left: 4px solid var(--green);
+            border-radius: 4px 8px 8px 4px;
+            padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+            cursor: pointer;
+            transition: background-color 0.25s, box-shadow 0.25s, border-left-color 0.25s;
+        }
+
+        .card:hover {
+            background-color: #161d16;
+            box-shadow: 0 0 0 1px rgba(51, 255, 102, 0.08), 0 4px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        .card h3 {
+            color: var(--text-white);
+            margin: 0 0 0.5rem 0;
+            font-size: 1.05rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
         .card.book {
-  background-color: var(--card-bg);
-  border: 1px solid #262b26;
-  border-left: 4px solid var(--green-dim);
-  border-radius: 4px 8px 8px 4px;
-  padding: 1.5rem 1.5rem 1.5rem 1.25rem;
-  cursor: default;
-  transition: border-left-color 0.25s, box-shadow 0.25s, background-color 0.25s;
-}
+            border-left-color: var(--green-dim);
+            cursor: default;
+        }
 
-.card.book:hover {
-  border-left-color: var(--green);
-  background-color: #161d16;
-  box-shadow: 0 0 0 1px rgba(51, 255, 102, 0.08), 0 4px 16px rgba(0, 0, 0, 0.35);
-}
+        .card.book:hover {
+            border-left-color: var(--green);
+        }
 
-.card.book h3 {
-  color: var(--text-white);
-  font-size: 1.1rem;
-  font-style: italic;
-  margin: 0 0 0.35rem 0;
-}
+        .card.book h3 {
+            font-style: italic;
+            margin: 0 0 0.35rem 0;
+            font-size: 1.1rem;
+        }
 
-.card.book .author {
-  color: var(--green);
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  display: block;
-  border-bottom: 1px solid rgba(159, 205, 175, 0.15);
-}
+        .card.book .author {
+            color: var(--green);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            display: block;
+            border-bottom: 1px solid rgba(159, 205, 175, 0.15);
+        }
 
-.card.book p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
+        .cross-link {
+            display: inline-block;
+            margin-top: 0.85rem;
+            color: var(--green);
+            font-size: 0.8rem;
+            border-bottom: 1px dashed var(--green-dim);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .cross-link:hover {
+            color: var(--text-white);
+            border-bottom-color: var(--green);
+        }
     </style>
 </head>
 <body>
@@ -56,19 +192,22 @@
     </header>
 
     <div id="app-container">
+        <div class="tree-switcher">
+            <button class="tree-btn active" data-tree="literature">Literatur</button>
+            <button class="tree-btn" data-tree="novels">Manga &amp; Web-Novels</button>
+        </div>
+
         <div class="nav-header">
             <button id="back-btn">← Zurück</button>
             <div id="current-category">Wähle deinen Pfad</div>
         </div>
-        <div id="content-grid" class="grid">
-            
-        </div>
+
+        <div id="content-grid" class="grid"></div>
     </div>
 
     <script>
-       
-        const genreTree = {
-            id: "root",
+        const literatureTree = {
+            id: "lit-root",
             title: "Wähle deinen Pfad",
             children: [
                 {
@@ -81,8 +220,8 @@
                             title: "Science Fiction",
                             desc: "Technologische Zukunftsvisionen und ferne Galaxien.",
                             children: [
-                                { isBook: true, title: "Dune", author: "Frank Herbert", desc: "Ein Meisterwerk über Politik, Religion und Ökologie auf einem Wüstenplaneten." },
-                                { isBook: true, title: "Foundation", author: "Isaac Asimov", desc: "Der Fall und Wiederaufbau eines galaktischen Imperiums." }
+                                { isBook: true, id: "dune", title: "Dune", author: "Frank Herbert", desc: "Ein Meisterwerk über Politik, Religion und Ökologie auf einem Wüstenplaneten." },
+                                { isBook: true, id: "foundation", title: "Foundation", author: "Isaac Asimov", desc: "Der Fall und Wiederaufbau eines galaktischen Imperiums." }
                             ]
                         },
                         {
@@ -90,7 +229,23 @@
                             title: "Fantasy",
                             desc: "Magie, Mythen und epische Heldenreisen.",
                             children: [
-                                { isBook: true, title: "Der Herr der Ringe", author: "J.R.R. Tolkien", desc: "Der Klassiker, der das Genre definierte." }
+                                { isBook: true, id: "lotr", title: "Der Herr der Ringe", author: "J.R.R. Tolkien", desc: "Der Klassiker, der das Genre definierte." }
+                            ]
+                        },
+                        {
+                            id: "world-lit",
+                            title: "Weltliteratur",
+                            desc: "Klassiker der internationalen Moderne.",
+                            children: [
+                                {
+                                    isBook: true,
+                                    id: "nlh-novel",
+                                    title: "No Longer Human",
+                                    author: "Osamu Dazai",
+                                    desc: "Eine schonungslose Innenschau über Entfremdung und Identitätsverlust im modernen Japan.",
+                                    relatedId: "nlh-manga",
+                                    relatedTitle: "No Longer Human (Manga)"
+                                }
                             ]
                         }
                     ]
@@ -105,7 +260,7 @@
                             title: "Informatik & Code",
                             desc: "Bücher über Softwareentwicklung und Architektur.",
                             children: [
-                                { isBook: true, title: "Clean Code", author: "Robert C. Martin", desc: "Handbuch für agile Softwarehandwerkskunst." }
+                                { isBook: true, id: "clean-code", title: "Clean Code", author: "Robert C. Martin", desc: "Handbuch für agile Softwarehandwerkskunst." }
                             ]
                         },
                         {
@@ -113,7 +268,7 @@
                             title: "Philosophie",
                             desc: "Gedanken über die Existenz, Moral und Erkenntnis.",
                             children: [
-                                { isBook: true, title: "Meditationen", author: "Marcus Aurelius", desc: "Tagebuch eines römischen Kaisers über den Stoizismus." }
+                                { isBook: true, id: "meditations", title: "Meditationen", author: "Marcus Aurelius", desc: "Tagebuch eines römischen Kaisers über den Stoizismus." }
                             ]
                         }
                     ]
@@ -121,55 +276,175 @@
             ]
         };
 
-        
-        let historyStack = [];
-        let currentNode = genreTree;
+        const novelTree = {
+            id: "novel-root",
+            title: "Wähle deinen Pfad",
+            children: [
+                {
+                    id: "manga",
+                    title: "Manga",
+                    desc: "Japanische Comics in allen Stilrichtungen und Zielgruppen.",
+                    children: [
+                        {
+                            id: "shonen",
+                            title: "Shonen",
+                            desc: "Actionreiche Geschichten für junge Leser.",
+                            children: [
+                                { isBook: true, id: "one-piece", title: "One Piece", author: "Eiichiro Oda", desc: "Piratenabenteuer über Freiheit, Träume und Freundschaft." },
+                                { isBook: true, id: "aot", title: "Attack on Titan", author: "Hajime Isayama", desc: "Dystopie über Menschheit, Mauern und Freiheit." }
+                            ]
+                        },
+                        {
+                            id: "seinen",
+                            title: "Seinen",
+                            desc: "Erwachsene Themen, psychologische Tiefe.",
+                            children: [
+                                {
+                                    isBook: true,
+                                    id: "nlh-manga",
+                                    title: "No Longer Human",
+                                    author: "Junji Ito (Adaption)",
+                                    desc: "Manga-Adaption von Osamu Dazais Roman, visualisiert im typischen Stil Junji Itos.",
+                                    relatedId: "nlh-novel",
+                                    relatedTitle: "No Longer Human (Roman)"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "webnovel",
+                    title: "Web-Novels",
+                    desc: "Digital publizierte Romanformen, oft mit Manga- oder Anime-Adaption.",
+                    children: [
+                        {
+                            id: "light-novel",
+                            title: "Light Novels",
+                            desc: "Illustrierte Romane aus Japan, häufig mit Anime-Adaption.",
+                            children: [
+                                { isBook: true, id: "spice-wolf", title: "Spice and Wolf", author: "Isuna Hasekura", desc: "Wirtschaft und Romantik im mittelalterlichen Europa." }
+                            ]
+                        },
+                        {
+                            id: "isekai",
+                            title: "Isekai",
+                            desc: "Protagonisten in fremden Welten.",
+                            children: [
+                                { isBook: true, id: "re-zero", title: "Re:Zero", author: "Tappei Nagatsuki", desc: "Zeitschleifen, Trauma und Heldentum wider Willen." }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
 
-       
+        const trees = {
+            literature: literatureTree,
+            novels: novelTree
+        };
+
+        let activeTreeKey = 'literature';
+        let historyStack = [];
+        let currentNode = trees[activeTreeKey];
+
         const grid = document.getElementById('content-grid');
         const backBtn = document.getElementById('back-btn');
         const categoryLabel = document.getElementById('current-category');
+        const treeButtons = document.querySelectorAll('.tree-btn');
 
-        
-        function renderNode(node) {
-            grid.innerHTML = ''; 
-            categoryLabel.textContent = node.title;
-
-            
-            if (historyStack.length > 0) {
-                backBtn.style.display = 'block';
-            } else {
-                backBtn.style.display = 'none';
+        function findPath(node, targetId, path = []) {
+            const currentPath = [...path, node];
+            if (node.id === targetId) return currentPath;
+            if (!node.children) return null;
+            for (const child of node.children) {
+                const result = findPath(child, targetId, currentPath);
+                if (result) return result;
             }
+            return null;
+        }
 
-            
+        function navigateTo(targetId) {
+            for (const key of Object.keys(trees)) {
+                const path = findPath(trees[key], targetId);
+                if (!path) continue;
+
+                const target = path[path.length - 1];
+
+                activeTreeKey = key;
+
+                if (target.isBook && path.length >= 2) {
+                    historyStack = path.slice(0, -2);
+                    currentNode = path[path.length - 2];
+                } else {
+                    historyStack = path.slice(0, -1);
+                    currentNode = target;
+                }
+
+                updateSwitcher();
+                renderNode(currentNode);
+                return;
+            }
+        }
+
+        function updateSwitcher() {
+            treeButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tree === activeTreeKey);
+            });
+        }
+
+        function switchTree(key) {
+            if (activeTreeKey === key) return;
+            activeTreeKey = key;
+            historyStack = [];
+            currentNode = trees[key];
+            updateSwitcher();
+            renderNode(currentNode);
+        }
+
+        function renderNode(node) {
+            grid.innerHTML = '';
+            categoryLabel.textContent = node.title;
+            backBtn.style.display = historyStack.length > 0 ? 'block' : 'none';
+
             node.children.forEach(child => {
                 const card = document.createElement('div');
                 card.className = 'card' + (child.isBook ? ' book' : '');
 
                 if (child.isBook) {
+                    const crossLink = child.relatedId
+                        ? `<span class="cross-link" data-target="${child.relatedId}">→ Verbunden: ${child.relatedTitle}</span>`
+                        : '';
+
                     card.innerHTML = `
                         <h3>${child.title}</h3>
                         <span class="author">By ${child.author}</span>
                         <p>${child.desc}</p>
+                        ${crossLink}
                     `;
+
+                    const link = card.querySelector('.cross-link');
+                    if (link) {
+                        link.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            navigateTo(link.dataset.target);
+                        });
+                    }
                 } else {
                     card.innerHTML = `
                         <h3>${child.title}</h3>
                         <p>${child.desc}</p>
                     `;
-                    
                     card.addEventListener('click', () => {
                         historyStack.push(currentNode);
                         currentNode = child;
                         renderNode(currentNode);
                     });
                 }
+
                 grid.appendChild(card);
             });
         }
 
-        
         backBtn.addEventListener('click', () => {
             if (historyStack.length > 0) {
                 currentNode = historyStack.pop();
@@ -177,7 +452,10 @@
             }
         });
 
-        
+        treeButtons.forEach(btn => {
+            btn.addEventListener('click', () => switchTree(btn.dataset.tree));
+        });
+
         renderNode(currentNode);
     </script>
 </body>

@@ -22,7 +22,7 @@
             color: var(--text-white);
             font-family: ui-monospace, 'Courier New', monospace;
             min-height: 100vh;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
         }
 
         header {
@@ -36,13 +36,20 @@
             color: var(--green);
             letter-spacing: 0.2em;
             margin: 0 0 0.5rem 0;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
         }
 
         header .subtitle {
             color: var(--text-muted);
+            margin: 0 0 0.35rem 0;
+            font-size: 0.95rem;
+        }
+
+        header .legend {
+            color: var(--green-dim);
             margin: 0;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
         }
 
         #app-container {
@@ -53,7 +60,7 @@
         .tree-switcher {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
 
@@ -61,10 +68,10 @@
             background: transparent;
             border: 1px solid var(--green-dim);
             color: var(--text-muted);
-            padding: 0.5rem 1rem;
+            padding: 0.55rem 1.1rem;
             border-radius: 4px;
             font-family: inherit;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -80,7 +87,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
             min-height: 2rem;
         }
 
@@ -88,7 +95,7 @@
             background: transparent;
             border: 1px solid var(--green-dim);
             color: var(--green);
-            padding: 0.4rem 0.9rem;
+            padding: 0.45rem 0.95rem;
             border-radius: 4px;
             font-family: inherit;
             cursor: pointer;
@@ -104,13 +111,19 @@
         #current-category {
             color: var(--text-muted);
             font-size: 0.9rem;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
+            line-height: 1.4;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.1rem;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .card {
@@ -121,6 +134,7 @@
             padding: 1.5rem 1.5rem 1.5rem 1.25rem;
             cursor: pointer;
             transition: background-color 0.25s, box-shadow 0.25s, border-left-color 0.25s;
+            animation: cardIn 0.35s ease-out backwards;
         }
 
         .card:hover {
@@ -130,15 +144,25 @@
 
         .card h3 {
             color: var(--text-white);
-            margin: 0 0 0.5rem 0;
-            font-size: 1.05rem;
+            margin: 0 0 0.55rem 0;
+            font-size: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .card .meta {
+            display: inline-block;
+            color: var(--green-dim);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
         }
 
         .card p {
             margin: 0;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.55;
+            font-size: 1rem;
+            line-height: 1.65;
         }
 
         .card.book {
@@ -153,34 +177,51 @@
         .card.book h3 {
             font-style: italic;
             margin: 0 0 0.35rem 0;
-            font-size: 1.1rem;
+            font-size: 1.25rem;
         }
 
         .card.book .author {
             color: var(--green);
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.55rem;
             display: block;
             border-bottom: 1px solid rgba(159, 205, 175, 0.15);
         }
 
-        .cross-link {
-            display: inline-block;
-            margin-top: 0.85rem;
+        .star {
             color: var(--green);
-            font-size: 0.8rem;
-            border-bottom: 1px dashed var(--green-dim);
+            font-size: 0.95em;
+            margin-right: 0.25em;
+            filter: drop-shadow(0 0 4px rgba(51, 255, 102, 0.4));
+        }
+
+        .cross-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            margin-top: 1rem;
+            padding: 0.4rem 0.75rem;
+            border: 1px solid var(--green-dim);
+            border-radius: 4px;
+            color: var(--green);
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: color 0.2s, border-color 0.2s;
+            background: rgba(51, 255, 102, 0.04);
+            transition: border-color 0.2s, background-color 0.2s;
         }
 
         .cross-link:hover {
-            color: var(--text-white);
-            border-bottom-color: var(--green);
+            border-color: var(--green);
+            background: rgba(51, 255, 102, 0.1);
+        }
+
+        .cross-icon {
+            font-weight: 700;
+            font-size: 1em;
         }
     </style>
 </head>
@@ -189,6 +230,7 @@
     <header>
         <h1>COMPENDIUM</h1>
         <p class="subtitle">Ordnung im Meer der Bücher.</p>
+        <p class="legend"><span class="star">★</span> Persönlich gelesen und empfohlen</p>
     </header>
 
     <div id="app-container">
@@ -220,8 +262,12 @@
                             title: "Science Fiction",
                             desc: "Technologische Zukunftsvisionen und ferne Galaxien.",
                             children: [
-                                { isBook: true, id: "dune", title: "Dune", author: "Frank Herbert", desc: "Ein Meisterwerk über Politik, Religion und Ökologie auf einem Wüstenplaneten." },
-                                { isBook: true, id: "foundation", title: "Foundation", author: "Isaac Asimov", desc: "Der Fall und Wiederaufbau eines galaktischen Imperiums." }
+                                { isBook: true, id: "1984", title: "1984", author: "George Orwell", recommended: true, desc: "Eine dystopische Welt unter totaler Überwachung, in der Sprache selbst zur Waffe wird. Orwells Klassiker ist eine Warnung vor Machtmissbrauch und Gedankenkontrolle, die nichts von ihrer Aktualität verloren hat." },
+                                { isBook: true, id: "last-question", title: "Die letzte Frage", author: "Isaac Asimov", recommended: true, desc: "Eine der berühmtesten Kurzgeschichten der Science Fiction — die Menschheit sucht über Äonen hinweg nach einer Antwort auf die letzte Frage. Asimov verdichtet Thermodynamik, Kosmologie und Philosophie in wenigen Seiten und liefert einen der stärksten Schlusssätze des Genres." },
+                                { isBook: true, id: "dune", title: "Dune", author: "Frank Herbert", desc: "Ein Meisterwerk über Politik, Religion und Ökologie auf einem Wüstenplaneten. Frank Herbert erschuf damit die Vorlage für moderne Science Fiction und behandelt Themen, die bis heute aktuell sind." },
+                                { isBook: true, id: "foundation", title: "Foundation", author: "Isaac Asimov", desc: "Der Fall und Wiederaufbau eines galaktischen Imperiums über Jahrtausende hinweg. Asimov verbindet Mathematik, Geschichte und Soziologie zu einer einzigartigen Zukunftsvision." },
+                                { isBook: true, id: "fahrenheit", title: "Fahrenheit 451", author: "Ray Bradbury", desc: "In einer Gesellschaft, in der Bücher verboten sind, arbeitet Guy Montag als Feuerwehrmann, dessen Aufgabe es ist, sie zu verbrennen. Bradbury erzählt von Medienkonsum, Zensur und dem Wert des Lesens." },
+                                { isBook: true, id: "neuromancer", title: "Neuromancer", author: "William Gibson", desc: "Der Roman, der das Cyberpunk-Genre begründete. Gibson zeichnet eine Welt aus Konzernen, Hackern und künstlicher Intelligenz, deren Einfluss bis heute in der Popkultur spürbar ist." }
                             ]
                         },
                         {
@@ -229,7 +275,9 @@
                             title: "Fantasy",
                             desc: "Magie, Mythen und epische Heldenreisen.",
                             children: [
-                                { isBook: true, id: "lotr", title: "Der Herr der Ringe", author: "J.R.R. Tolkien", desc: "Der Klassiker, der das Genre definierte." }
+                                { isBook: true, id: "lotr", title: "Der Herr der Ringe", author: "J.R.R. Tolkien", desc: "Der Klassiker, der das Fantasy-Genre definierte. Tolkien erschuf mit Mittelerde eine vollständige Welt samt eigener Sprachen, Geschichte und Mythologie." },
+                                { isBook: true, id: "hobbit", title: "Der Hobbit", author: "J.R.R. Tolkien", desc: "Ein gemütlicher Hobbit wird auf ein Abenteuer mit Drachen, Zwergen und einem Ring geschickt. Tolkiens Vorläufer zu Der Herr der Ringe — zugänglicher und verspielter, aber mit demselben erzählerischen Tiefgang." },
+                                { isBook: true, id: "asoiaf", title: "A Song of Ice and Fire", author: "George R. R. Martin", desc: "Ein brutales politisches Spiel um den Eisernen Thron in einer Welt ohne klare Helden. Martin bricht bewusst mit Fantasy-Konventionen und erzählt von Macht, Verrat und Moral jenseits von Gut und Böse." }
                             ]
                         },
                         {
@@ -237,15 +285,22 @@
                             title: "Weltliteratur",
                             desc: "Klassiker der internationalen Moderne.",
                             children: [
+                                { isBook: true, id: "auferstehung", title: "Auferstehung", author: "Leo Tolstoi", recommended: true, desc: "Tolstois letzter großer Roman über Schuld, Vergebung und gesellschaftliche Ungerechtigkeit im zaristischen Russland. Ein Fürst folgt einer Verurteilten nach Sibirien — und findet dort keine einfache Erlösung, sondern eine unbequeme Wahrheit." },
+                                { isBook: true, id: "meister-margarita", title: "Der Meister und Margarita", author: "Michail Bulgakow", recommended: true, desc: "Der Teufel besucht das atheistische Moskau der 1930er Jahre — und stiftet Chaos zwischen Bürokratie, Literaturbetrieb und Liebe. Bulgakow verwebt Satire, Religion und Fantastik zu einem der bedeutendsten Romane des 20. Jahrhunderts." },
+                                { isBook: true, id: "alchimist", title: "Der Alchimist", author: "Paulo Coelho", recommended: true, desc: "Ein andalusischer Hirtenjunge zieht los, um einen Schatz zu finden — und entdeckt unterwegs, was wirklich zählt. Coelhos Parabel über Träume, Mut und Selbstverwirklichung wurde in über 80 Sprachen übersetzt." },
+                                { isBook: true, id: "jakobsweg", title: "Auf dem Jakobsweg", author: "Paulo Coelho", recommended: true, desc: "Coelhos persönlicher Bericht über seine Pilgerreise nach Santiago de Compostela im Jahr 1986. Kein Reiseführer, sondern eine Reflexion über Selbstfindung, Verzicht und die Fragen, die man sich unterwegs stellt." },
                                 {
                                     isBook: true,
                                     id: "nlh-novel",
                                     title: "No Longer Human",
                                     author: "Osamu Dazai",
-                                    desc: "Eine schonungslose Innenschau über Entfremdung und Identitätsverlust im modernen Japan.",
+                                    desc: "Eine schonungslose Innenschau über Entfremdung und Identitätsverlust im modernen Japan. Dazai verarbeitet eigene Erfahrungen zu einem der eindringlichsten Werke der japanischen Moderne.",
                                     relatedId: "nlh-manga",
                                     relatedTitle: "No Longer Human (Manga)"
-                                }
+                                },
+                                { isBook: true, id: "process", title: "Der Process", author: "Franz Kafka", desc: "Josef K. wird eines Morgens verhaftet, ohne zu erfahren, warum. Kafka beschreibt eine bürokratische Albtraumwelt, in der Schuld und Verfahren undurchschaubar bleiben." },
+                                { isBook: true, id: "verwandlung", title: "Die Verwandlung", author: "Franz Kafka", desc: "Gregor Samsa erwacht eines Morgens als Käfer. Kafkas berühmteste Erzählung über Familie, Ausgrenzung und den Verlust menschlicher Identität." },
+                                { isBook: true, id: "schuld", title: "Schuld und Sühne", author: "Fjodor Dostojewski", desc: "Ein mittelloser Student begeht einen Mord und ringt danach mit Schuld, Gewissen und Erlösung. Dostojewski verbindet Psychologie, Moral und Gesellschaftskritik in einem der einflussreichsten Romane der Weltliteratur." }
                             ]
                         }
                     ]
@@ -260,7 +315,9 @@
                             title: "Informatik & Code",
                             desc: "Bücher über Softwareentwicklung und Architektur.",
                             children: [
-                                { isBook: true, id: "clean-code", title: "Clean Code", author: "Robert C. Martin", desc: "Handbuch für agile Softwarehandwerkskunst." }
+                                { isBook: true, id: "clean-code", title: "Clean Code", author: "Robert C. Martin", desc: "Ein Handbuch für agile Softwarehandwerkskunst mit Prinzipien für lesbaren und wartbaren Code. Martin zeigt, wie Software nicht nur funktioniert, sondern langfristig verständlich bleibt." },
+                                { isBook: true, id: "pragmatic", title: "The Pragmatic Programmer", author: "Hunt & Thomas", desc: "Ein Leitfaden für praktische Entwickler, der Werkzeuge, Denkweisen und Verantwortung verbindet. Die Autoren formulieren Prinzipien, die unabhängig von Sprache und Framework gelten." },
+                                { isBook: true, id: "refactoring", title: "Refactoring", author: "Martin Fowler", desc: "Wie man bestehenden Code systematisch verbessert, ohne sein Verhalten zu ändern. Fowler liefert einen Katalog von Techniken, die heute zum Standardrepertoire professioneller Entwicklung gehören." }
                             ]
                         },
                         {
@@ -268,7 +325,19 @@
                             title: "Philosophie",
                             desc: "Gedanken über die Existenz, Moral und Erkenntnis.",
                             children: [
-                                { isBook: true, id: "meditations", title: "Meditationen", author: "Marcus Aurelius", desc: "Tagebuch eines römischen Kaisers über den Stoizismus." }
+                                { isBook: true, id: "kunst-seins", title: "Die Kunst des Seins", author: "Erich Fromm", recommended: true, desc: "Fromm fragt, was ein erfülltes Leben jenseits von Besitz und Konsum bedeuten kann. Kurz vor seinem Tod verfasst, ist das Buch eine knappe, klare Zusammenfassung seiner humanistischen Philosophie." },
+                                { isBook: true, id: "meditations", title: "Meditationen", author: "Marcus Aurelius", desc: "Tagebuch eines römischen Kaisers über den Stoizismus — Selbstdisziplin, Akzeptanz und innere Ruhe. Kein theoretisches Werk, sondern praktische Notizen eines Menschen an der Macht." },
+                                { isBook: true, id: "sisyphos", title: "Der Mythos des Sisyphos", author: "Albert Camus", desc: "Camus fragt, ob das Leben trotz fehlenden Sinns lebenswert ist. Seine Antwort — der absurde Mensch — ist ein zentraler Text der modernen Philosophie." },
+                                { isBook: true, id: "zarathustra", title: "Also sprach Zarathustra", author: "Friedrich Nietzsche", desc: "Nietzsches philosophisches Prosagedicht über den Übermenschen, den Willen zur Macht und die Ewige Wiederkunft. Provokant, poetisch und bis heute umstritten." }
+                            ]
+                        },
+                        {
+                            id: "science-society",
+                            title: "Wissenschaft & Gesellschaft",
+                            desc: "Sachbücher über Wissenschaft, Geschichte und ihre Wirkung auf die Gesellschaft.",
+                            children: [
+                                { isBook: true, id: "sapiens", title: "Sapiens: Eine kurze Geschichte der Menschheit", author: "Yuval Noah Harari", recommended: true, desc: "Von den ersten Jägern und Sammlern bis zu künstlicher Intelligenz und Gentechnik — Harari erzählt die Geschichte unserer Spezies in großen Linien. Das Buch stellt unbequeme Fragen zu Fortschritt, Moral und der Zukunft des Menschen." },
+                                { isBook: true, id: "lsd", title: "LSD: Mein Sorgenkind", author: "Albert Hofmann", recommended: true, desc: "Albert Hofmann, der Entdecker des LSD, erzählt die Geschichte seiner Substanz — von der zufälligen Entdeckung 1943 bis zu ihrer kulturellen Wirkung. Ein wissenschaftliches Memoir, das zugleich eine Warnung und eine Verteidigung ist." }
                             ]
                         }
                     ]
@@ -290,8 +359,9 @@
                             title: "Shonen",
                             desc: "Actionreiche Geschichten für junge Leser.",
                             children: [
-                                { isBook: true, id: "one-piece", title: "One Piece", author: "Eiichiro Oda", desc: "Piratenabenteuer über Freiheit, Träume und Freundschaft." },
-                                { isBook: true, id: "aot", title: "Attack on Titan", author: "Hajime Isayama", desc: "Dystopie über Menschheit, Mauern und Freiheit." }
+                                { isBook: true, id: "one-piece", title: "One Piece", author: "Eiichiro Oda", desc: "Piratenabenteuer über Freiheit, Träume und Freundschaft — seit über 25 Jahren. Oda verbindet Humor, Tragik und Weltbau in einem der erfolgreichsten Werke der Comicgeschichte." },
+                                { isBook: true, id: "aot", title: "Attack on Titan", author: "Hajime Isayama", desc: "Dystopie über Menschheit, Mauern und Freiheit, in der jede Antwort neue Fragen aufwirft. Isayama erzählt von Krieg, Schuld und dem, was Menschen füreinander tun — im Guten wie im Bösen." },
+                                { isBook: true, id: "fma", title: "Fullmetal Alchemist", author: "Hiromu Arakawa", desc: "Zwei Brüder suchen den Stein der Weisen, um ihre Körper wiederherzustellen. Ein Manga über Krieg, Wissenschaft und Moral, der seine Geschichte konsequent zu Ende erzählt." }
                             ]
                         },
                         {
@@ -304,10 +374,21 @@
                                     id: "nlh-manga",
                                     title: "No Longer Human",
                                     author: "Junji Ito (Adaption)",
-                                    desc: "Manga-Adaption von Osamu Dazais Roman, visualisiert im typischen Stil Junji Itos.",
+                                    desc: "Manga-Adaption von Osamu Dazais Roman, visualisiert im typischen Stil Junji Itos. Eine düstere, verstörende Interpretation, die die Vorlage in Bildern neu erzählt.",
                                     relatedId: "nlh-novel",
                                     relatedTitle: "No Longer Human (Roman)"
-                                }
+                                },
+                                { isBook: true, id: "berserk", title: "Berserk", author: "Kentaro Miura", desc: "Ein düsteres Dark-Fantasy-Epos über Schicksal, Freundschaft und Verrat. Miura erschuf eine Welt, die in ihrer Brutalität und Tiefe bis heute Maßstäbe setzt." },
+                                { isBook: true, id: "monster", title: "Monster", author: "Naoki Urasawa", desc: "Ein Arzt rettet einen Jungen — Jahre später wird dieser zum Serienmörder. Urasawa verbindet Thriller, Psychologie und Nachkriegsgeschichte zu einem Meisterwerk der Spannung." }
+                            ]
+                        },
+                        {
+                            id: "shoujo",
+                            title: "Shoujo",
+                            desc: "Emotionale Geschichten über Beziehungen und Erwachsenwerden.",
+                            children: [
+                                { isBook: true, id: "fruits-basket", title: "Fruits Basket", author: "Natsuki Takaya", desc: "Ein Waisenmädchen trifft eine Familie mit einem seltsamen Fluch. Hinter der warmen Oberfläche erzählt die Geschichte von Trauma, Familie und Heilung." },
+                                { isBook: true, id: "nana", title: "Nana", author: "Ai Yazawa", desc: "Zwei Frauen, beide Nana, teilen sich in Tokio eine Wohnung und träumen von Musik und Liebe. Ai Yazawa zeichnet Erwachsenwerden, Abhängigkeit und Verlust mit ungewöhnlicher Ehrlichkeit." }
                             ]
                         }
                     ]
@@ -322,7 +403,9 @@
                             title: "Light Novels",
                             desc: "Illustrierte Romane aus Japan, häufig mit Anime-Adaption.",
                             children: [
-                                { isBook: true, id: "spice-wolf", title: "Spice and Wolf", author: "Isuna Hasekura", desc: "Wirtschaft und Romantik im mittelalterlichen Europa." }
+                                { isBook: true, id: "spice-wolf", title: "Spice and Wolf", author: "Isuna Hasekura", desc: "Wirtschaft und Romantik im mittelalterlichen Europa — ein Kaufmann und eine Wolfsgöttin reisen gemeinsam. Hasekura verbindet Handel, Philosophie und leise Romanze zu einer ungewöhnlichen Reihe." },
+                                { isBook: true, id: "re-zero", title: "Re:Zero", author: "Tappei Nagatsuki", desc: "Zeitschleifen, Trauma und Heldentum wider Willen — Subaru stirbt, um zu lernen. Nagatsuki dekonstruiert das Isekai-Genre und stellt seine Hauptfigur auf eine ehrliche Probe." },
+                                { isBook: true, id: "overlord", title: "Overlord", author: "Kugane Maruyama", desc: "Ein Spieler bleibt nach dem Logout in einer fremden Welt gefangen — als Skelettmagier mit übermächtiger Macht. Der Roman erzählt konsequent aus der Perspektive des Bösewichts." }
                             ]
                         },
                         {
@@ -330,7 +413,33 @@
                             title: "Isekai",
                             desc: "Protagonisten in fremden Welten.",
                             children: [
-                                { isBook: true, id: "re-zero", title: "Re:Zero", author: "Tappei Nagatsuki", desc: "Zeitschleifen, Trauma und Heldentum wider Willen." }
+                                { isBook: true, id: "mushoku", title: "Mushoku Tensei", author: "Rifujin na Magonote", desc: "Ein erfolgloser Mensch wird in einer Fantasywelt wiedergeboren und bekommt eine zweite Chance. Die Reihe gilt als Wegbereiter moderner Isekai-Literatur." },
+                                { isBook: true, id: "konosuba", title: "Konosuba", author: "Natsume Akatsuki", desc: "Ein junger Mann stirbt und landet in einer Fantasywelt — begleitet von einer nutzlosen Göttin. Eine Parodie auf Isekai-Klischees, die ihre Figuren trotzdem ernst nimmt." }
+                            ]
+                        },
+                        {
+                            id: "korean-webnovel",
+                            title: "Koreanische Web-Novels",
+                            desc: "Digital publizierte Romane aus Südkorea, oft mit Manga- oder Anime-Adaption.",
+                            children: [
+                                { isBook: true, id: "solo-leveling", title: "Solo Leveling", author: "Chugong", recommended: true, desc: "Ein schwacher Jäger erhält ein System, das ihm erlaubt, unbegrenzt stärker zu werden — und steigt zur stärksten Waffe der Menschheit auf. Die koreanische Web-Novel verbindet Action, Aufstiegsfantasie und eine düstere Welt voller Monster." },
+                                { isBook: true, id: "lms", title: "The Legendary Moonlight Sculptor", author: "Nam Heesung", recommended: true, desc: "Ein verschuldeter junger Mann verdient sein Geld in einem Virtual-Reality-Spiel, das zur zweiten Welt geworden ist. Die koreanische Web-Novel verbindet Wirtschaft, Rollenspiel und Aufstiegsfantasie auf ungewöhnlich konsequente Weise." },
+                                { 
+    isBook: true, 
+    id: "world-after-fall", 
+    title: "The World After the Fall", 
+    author: "Sing-Shong", 
+    recommended: true, 
+    desc: "Als plötzlich gigantische Türme auf der Erde erscheinen und Monster die Menschheit bedrohen, wird Jaehwan zum Tower Walker. Doch nach 100 Ebenen entdeckt er, dass der Turm eine Illusion war — und beschließt, das System selbst zu zerstören, das ihn und die Welt betrogen hat." 
+}
+                            ]
+                        },
+                        {
+                            id: "chinese-webnovel",
+                            title: "Chinesische Web-Novels",
+                            desc: "Digital publizierte Romane aus China, häufig mit Science-Fiction- oder Wuxia-Elementen.",
+                            children: [
+                                { isBook: true, id: "legendary-mechanic", title: "The Legendary Mechanic", author: "Qi Peijia", recommended: true, desc: "Ein Spieler erwacht in der Welt des Spiels — nicht als Held, sondern als NPC mit eigenen Zielen. Die chinesische Web-Novel erzählt aus ungewöhnlicher Perspektive von Systemen, Macht und Überleben." }
                             ]
                         }
                     ]
@@ -343,6 +452,11 @@
             novels: novelTree
         };
 
+        const treeLabels = {
+            literature: 'Literatur',
+            novels: 'Manga & Web-Novels'
+        };
+
         let activeTreeKey = 'literature';
         let historyStack = [];
         let currentNode = trees[activeTreeKey];
@@ -351,6 +465,11 @@
         const backBtn = document.getElementById('back-btn');
         const categoryLabel = document.getElementById('current-category');
         const treeButtons = document.querySelectorAll('.tree-btn');
+
+        function countWorks(node) {
+            if (!node.children) return 0;
+            return node.children.reduce((sum, child) => sum + (child.isBook ? 1 : countWorks(child)), 0);
+        }
 
         function findPath(node, targetId, path = []) {
             const currentPath = [...path, node];
@@ -369,7 +488,6 @@
                 if (!path) continue;
 
                 const target = path[path.length - 1];
-
                 activeTreeKey = key;
 
                 if (target.isBook && path.length >= 2) {
@@ -401,23 +519,42 @@
             renderNode(currentNode);
         }
 
+        function updateBreadcrumb() {
+            if (historyStack.length === 0) {
+                categoryLabel.textContent = 'Wähle deinen Pfad';
+                return;
+            }
+            const path = [...historyStack, currentNode].slice(1).map(n => n.title);
+            categoryLabel.textContent = [treeLabels[activeTreeKey], ...path].join(' › ');
+        }
+
+        function goBack() {
+            if (historyStack.length === 0) return;
+            currentNode = historyStack.pop();
+            renderNode(currentNode);
+        }
+
         function renderNode(node) {
             grid.innerHTML = '';
-            categoryLabel.textContent = node.title;
+            updateBreadcrumb();
             backBtn.style.display = historyStack.length > 0 ? 'block' : 'none';
 
-            node.children.forEach(child => {
+            node.children.forEach((child, index) => {
                 const card = document.createElement('div');
                 card.className = 'card' + (child.isBook ? ' book' : '');
+                card.style.animationDelay = `${index * 40}ms`;
 
                 if (child.isBook) {
+                    const star = child.recommended
+                        ? '<span class="star" title="Persönlich gelesen und empfohlen">★</span> '
+                        : '';
                     const crossLink = child.relatedId
-                        ? `<span class="cross-link" data-target="${child.relatedId}">→ Verbunden: ${child.relatedTitle}</span>`
+                        ? `<div class="cross-link" data-target="${child.relatedId}"><span class="cross-icon">↔</span><span>${child.relatedTitle}</span></div>`
                         : '';
 
                     card.innerHTML = `
-                        <h3>${child.title}</h3>
-                        <span class="author">By ${child.author}</span>
+                        <h3>${star}${child.title}</h3>
+                        <span class="author">Von ${child.author}</span>
                         <p>${child.desc}</p>
                         ${crossLink}
                     `;
@@ -430,10 +567,17 @@
                         });
                     }
                 } else {
+                    const count = countWorks(child);
+                    const countLabel = count > 0
+                        ? `<span class="meta">${count} ${count === 1 ? 'Werk' : 'Werke'}</span>`
+                        : '';
+
                     card.innerHTML = `
                         <h3>${child.title}</h3>
+                        ${countLabel}
                         <p>${child.desc}</p>
                     `;
+
                     card.addEventListener('click', () => {
                         historyStack.push(currentNode);
                         currentNode = child;
@@ -445,11 +589,10 @@
             });
         }
 
-        backBtn.addEventListener('click', () => {
-            if (historyStack.length > 0) {
-                currentNode = historyStack.pop();
-                renderNode(currentNode);
-            }
+        backBtn.addEventListener('click', goBack);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') goBack();
         });
 
         treeButtons.forEach(btn => {

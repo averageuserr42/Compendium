@@ -1,118 +1,154 @@
 # Dokumentation – Compendium
 
-Diese Dokumentation richtet sich an das Bewertungsteam und beschreibt die Architektur, die getroffenen Entscheidungen sowie die aktuelle Navigationslogik des Prototyps. Für eine kurze Projektübersicht siehe [README.md](./README.md).
+Diese Dokumentation ist für das Bewertungsteam. Sie erklärt die Architektur, die Entscheidungen und die Navigation des Prototyps. Eine kurze Übersicht steht in [README.md](./README.md).
 
 ---
 
-## 1. Problemstellung und Lösungsansatz
+## 1. Problem und Lösung
 
-Klassische und Fachliteratur sind über unzählige Quellen verstreut, und gängige Empfehlungssysteme optimieren auf Popularität statt auf tatsächliche Passung. Wer nicht bereits weiß, wonach er sucht, findet selten Bücher, die wirklich zu ihm passen — und verliert das Interesse am Lesen.
+Klassische und Fachliteratur sind über viele Quellen verteilt. Empfehlungssysteme zeigen oft nur populäre Bücher. Sie zeigen aber nicht, was wirklich zu einem Menschen passt. Wer nicht genau weiß, was er sucht, findet selten ein gutes Buch. Viele verlieren dadurch die Freude am Lesen.
 
-Compendium begegnet dem mit einem **Genre-Baum**: Wurzel (Hauptgenre) → Äste (Untergenres) → Blätter (einzelne kuratierte Werke). Der Nutzer navigiert aktiv durch eine überschaubare Struktur, anstatt sich durch endlose Empfehlungslisten zu scrollen. Der Fokus liegt bewusst auf klassischen, breit zugänglichen Werken statt auf einer engen Nische.
+Compendium löst das mit einem **Genre-Baum**. Der Aufbau ist einfach:
 
-**Zielgruppe:** Leserinnen und Leser, die Orientierung suchen — von Schülern über Berufseinsteiger bis zu lebenslang Lernenden.
+- **Wurzel** = Hauptgenre
+- **Äste** = Untergenres
+- **Blätter** = einzelne Werke
+
+Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare Struktur statt einer endlosen Liste. Der Start-Inhalt zeigt klassische Werke für ein breites Publikum — nicht nur eine kleine Nische.
+
+**Zielgruppe:** Menschen, die Orientierung suchen — Schüler, Berufseinsteiger, lebenslang Lernende.
 
 ---
 
-## 2. Architekturentscheidungen
+## 2. Architektur-Entscheidungen
 
-### 2.1 Single-File-Prototyp
+### 2.1 Alles in einer Datei
 
-Der gesamte Code (HTML, CSS, JavaScript) liegt aktuell in einer einzigen `index.html`. Das ist eine bewusste Entscheidung für die Prototyp-Phase: keine Build-Pipeline, kein Bundler, sofortiges Deployment über GitHub Pages, minimaler Overhead für schnelle Iteration. Eine spätere Auftrennung in Module ist jederzeit möglich, aber für die Demonstration des Kernkonzepts nicht erforderlich.
+Der ganze Code liegt in einer einzigen `index.html` — HTML, CSS und JavaScript zusammen. Das ist Absicht. Vorteile für den Prototyp:
+
+- Keine Build-Tools, kein Bundler
+- Sofortiges Deployment über GitHub Pages
+- Schnelle Änderungen möglich
+
+Eine spätere Aufteilung in Module ist jederzeit möglich. Für die Demo ist sie aber nicht nötig.
 
 ### 2.2 JSON statt Datenbank
 
-Die Genre-Bäume sind als hartcodierte JavaScript-Objekte im Code hinterlegt statt in einer externen Datenbank. Auch das ist eine bewusste Prototyp-Entscheidung, kein Zeitmangel: kein Backend, keine Hosting-Kosten, keine Authentifizierung und keine Netzwerkabhängigkeit nötig, um das Kernkonzept zu demonstrieren. Eine Anbindung an eine echte Datenquelle (z. B. Firebase oder ein Flask-Backend, siehe Abschnitt 8) ist im Backlog vorgesehen.
+Die Genre-Bäume sind direkt im JavaScript-Code als Objekt gespeichert. Auch das ist Absicht. Vorteile:
 
-### 2.3 Zwei-Baum-Struktur
+- Kein Backend nötig
+- Keine Hosting-Kosten
+- Keine Anmeldung, keine Sicherheitsregeln
+- Keine Netzwerkabhängigkeit
 
-Der Prototyp enthält zwei unabhängige Bäume — `literatureTree` (Belletristik, Fachliteratur) und `novelTree` (Manga, Web-Novels) —, die über eine gemeinsame Datenstruktur und identische Navigationslogik funktionieren. Damit wird das Architekturprinzip „ein Muster, mehrere Bäume" praktisch nachgewiesen: ein drittes Baum (z. B. Filme oder Hörbücher) ließe sich allein durch Ergänzung der Daten und einer Kopfzeilen-Schaltfläche hinzufügen, ohne die Navigationslogik zu ändern.
+Eine echte Datenbank (z. B. Firebase oder Flask-Backend, siehe Abschnitt 8) ist im Backlog geplant.
+
+### 2.3 Zwei Bäume statt einem
+
+Der Prototyp hat zwei Bäume:
+
+- `literatureTree` — Belletristik und Fachliteratur
+- `novelTree` — Manga und Web-Novels
+
+Beide Bäume nutzen dieselbe Logik und dieselbe Datenstruktur. Das beweist: Die Architektur ist erweiterbar. Ein drittes Baum (z. B. Filme) braucht nur neue Daten und einen neuen Button — keine neuen Funktionen.
 
 ### 2.4 Keine externen Abhängigkeiten
 
-Es werden ausschließlich HTML5, CSS3 (Custom Properties, CSS Grid) und Vanilla JavaScript verwendet. Keine Frameworks, keine Bibliotheken, keine Build-Tools. Das reduziert Angriffsfläche, Wartungsaufwand und Einarbeitungszeit — und stellt sicher, dass der Prototyp langfristig auch ohne Toolchain lauffähig bleibt.
+Es werden nur HTML5, CSS3 und Vanilla JavaScript verwendet. Keine Frameworks, keine Bibliotheken. Das bedeutet: weniger Wartung, weniger Fehlerquellen, keine Einarbeitung in fremde Tools.
 
 ---
 
 ## 3. Datenmodell
 
-Jeder Knoten im Baum ist entweder ein **Kategorie-Knoten** oder ein **Buch-Knoten**:
+Jeder Knoten ist entweder eine **Kategorie** oder ein **Buch**.
 
-| Feld | Kategorie-Knoten | Buch-Knoten (`isBook: true`) |
+| Feld | Kategorie | Buch (`isBook: true`) |
 |---|---|---|
-| `id` | eindeutige ID (global) | eindeutige ID (global) |
-| `title` | Anzeigename | Buchtitel |
+| `id` | eindeutige ID | eindeutige ID |
+| `title` | Name der Kategorie | Buchtitel |
 | `desc` | Kurzbeschreibung | Beschreibung (2 Sätze) |
-| `children` | Array weiterer Knoten | – |
+| `children` | Liste weiterer Knoten | – |
 | `author` | – | Autor |
-| `recommended` | – | optional (Boolean), zeigt ★-Markierung |
-| `relatedId` | – | optional, ID des verknüpften Werks im anderen Baum |
-| `relatedTitle` | – | optional, Anzeigename der Verknüpfung |
+| `recommended` | – | optional, zeigt ★ |
+| `relatedId` | – | optional, verknüpftes Werk |
+| `relatedTitle` | – | optional, Name der Verknüpfung |
 
-Zwei unabhängige Bäume werden im Objekt `trees` zusammengefasst:
+Zwei Bäume werden im Objekt `trees` gespeichert:
 
-- **`literatureTree`** — Belletristik (Science Fiction, Fantasy, Weltliteratur) und Fachliteratur (Informatik & Code, Philosophie, Wissenschaft & Gesellschaft)
-- **`novelTree`** — Manga (Shonen, Seinen, Shoujo) und Web-Novels (Light Novels, Isekai, koreanische und chinesische Web-Novels)
+- **`literatureTree`** — Belletristik (Science Fiction, Fantasy, Weltliteratur) und Fachliteratur (Informatik, Philosophie, Wissenschaft & Gesellschaft)
+- **`novelTree`** — Manga (Shonen, Seinen, Shoujo) und Web-Novels (Light Novels, Isekai, koreanische, chinesische)
 
-Die menschenlesbaren Anzeigenamen für die Kopfzeile sind in `treeLabels` hinterlegt und vom technischen Schlüssel getrennt — Umbenennungen sind dadurch ohne Datenänderung möglich.
+Die Anzeigenamen für die Kopfzeile stehen in `treeLabels`. Dadurch kann man einen Baum umbenennen, ohne die Daten zu ändern.
 
-**Aktueller Umfang:** 35 kuratierte Werke in 13 Kategorien.
+**Aktueller Umfang:** 35 Werke in 13 Kategorien.
 
 ---
 
-## 4. Navigationslogik
+## 4. Navigation
 
-### 4.1 Drill-Down und `historyStack`
+### 4.1 Drill-Down mit `historyStack`
 
-Die Navigation erfolgt klickbasiert und ohne Page-Reload. Der Zustand wird in zwei Variablen gehalten:
+Die Navigation funktioniert ohne Page-Reload. Zwei Variablen speichern den Zustand:
 
-- `currentNode` — der aktuell gerenderte Knoten.
-- `historyStack` — Array der bisher besuchten Elternknoten; ermöglicht Zurück-Navigation durch `pop()`.
+- `currentNode` — der aktuelle Knoten
+- `historyStack` — Liste der vorherigen Knoten
 
-Beim Klick auf eine Kategorie wird der aktuelle Knoten auf den Stack gelegt und der neue Knoten gerendert. Beim Klick auf „Zurück" wird der letzte Knoten wieder ausgelesen.
+Ein Klick auf eine Kategorie macht drei Dinge:
 
-### 4.2 Kernfunktionen
+1. Der aktuelle Knoten kommt auf den Stack.
+2. Der neue Knoten wird aktiv.
+3. Der neue Knoten wird gerendert.
 
-- **`renderNode(node)`** — rendert die Kinder des aktuellen Knotens als Grid aus `.card`-Elementen. Unterscheidet zwischen Kategorie-Karten (klickbar, navigiert eine Ebene tiefer) und Buch-Karten (nicht klickbar, zeigt Titel/Autor/Beschreibung).
-- **`findPath(node, targetId)`** — rekursive Tiefensuche, die den vollständigen Pfad von der Wurzel bis zu einem Knoten mit gegebener `id` zurückgibt. Grundlage für baumübergreifende Sprünge.
-- **`navigateTo(targetId)`** — durchsucht beide Bäume nach einer Ziel-`id` und aktualisiert `activeTreeKey`, `historyStack` und `currentNode`. Wird für Cross-Links genutzt. Falls das Ziel ein Buch ist, wird zur übergeordneten Kategorie gesprungen, damit der Nutzer das Werk im Kontext sieht.
-- **`switchTree(key)`** — wechselt über die Buttons im Header zwischen `literature` und `novels`. Der `historyStack` wird dabei zurückgesetzt, um Fehlnavigation über Baumgrenzen hinweg zu vermeiden.
-- **`countWorks(node)`** — zählt rekursiv, wie viele Bücher unter einem Kategorie-Knoten liegen, für die Anzeige „X Werke" auf den Karten.
+Ein Klick auf „Zurück" liest den letzten Knoten aus dem Stack und zeigt ihn wieder.
+
+### 4.2 Wichtige Funktionen
+
+- **`renderNode(node)`** — zeigt die Kinder eines Knotens als Karten. Kategorien sind klickbar, Bücher nicht.
+- **`findPath(node, targetId)`** — sucht einen Knoten mit einer bestimmten ID. Gibt den ganzen Pfad von der Wurzel zurück.
+- **`navigateTo(targetId)`** — springt zu einem Knoten, auch in den anderen Baum. Wird für Cross-Links benutzt. Wenn das Ziel ein Buch ist, springt die App zur übergeordneten Kategorie — so sieht der Nutzer das Buch im Kontext.
+- **`switchTree(key)`** — wechselt zwischen den zwei Bäumen. Der `historyStack` wird dabei geleert, damit die Zurück-Taste nicht in den anderen Baum springt.
+- **`countWorks(node)`** — zählt rekursiv alle Bücher unter einer Kategorie. Zeigt „X Werke" auf der Karte.
 
 ### 4.3 Breadcrumb-Navigation
 
-Unterhalb der Kopfzeile wird der aktuell navigierte Pfad angezeigt (z. B. `Literatur › Belletristik › Science Fiction`). Diese Anzeige macht die hierarchische Struktur unmittelbar sichtbar und dient gleichzeitig als Orientierungshilfe für den Nutzer.
+Unter der Kopfzeile zeigt die App den aktuellen Pfad. Beispiel:
 
-### 4.4 Tastatursteuerung und Animation
+`Literatur › Belletristik › Science Fiction`
 
-- Die **Escape-Taste** löst dieselbe Aktion aus wie der „Zurück"-Button — ein Detail, das die Bedienung flüssiger macht.
-- Beim Rendern eines Knotens werden die Karten mit einer kurzen Einblendanimation (`@keyframes cardIn`, gestaffelt um 40 ms pro Karte) versehen. Das verbessert die visuelle Wahrnehmung insbesondere bei Video- und Online-Präsentationen.
+Das macht die Struktur sichtbar und hilft bei der Orientierung.
+
+### 4.4 Tastatur und Animation
+
+- Die **Escape-Taste** macht dasselbe wie der Zurück-Button.
+- Beim Rendern erscheinen die Karten mit einer kurzen Einblend-Animation (40 ms pro Karte versetzt). Das sieht in Videos und Online-Präsentationen besser aus.
 
 ---
 
 ## 5. Cross-Media-Verknüpfung
 
-Buch-Knoten können optional `relatedId` und `relatedTitle` besitzen, um sie mit einem thematisch verwandten Werk im jeweils anderen Baum zu verknüpfen. Auf der Buch-Karte erscheint dafür ein `.cross-link`-Button; ein Klick darauf ruft `navigateTo(relatedId)` auf und springt direkt — auch baumübergreifend — zum verknüpften Werk.
+Ein Buch kann optional mit einem Werk im anderen Baum verknüpft werden. Dafür gibt es die Felder `relatedId` und `relatedTitle`. Auf der Buch-Karte erscheint dann ein Button mit dem Symbol `↔`. Ein Klick darauf ruft `navigateTo()` auf und springt zum verknüpften Werk — auch in den anderen Baum.
 
-**Aktuell umgesetztes Beispiel:** der Roman *No Longer Human* von Osamu Dazai ↔ die gleichnamige Manga-Adaption von Junji Ito.
+**Aktuelles Beispiel:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito.
 
-Diese Verknüpfung war ursprünglich als späteres Roadmap-Ziel vorgesehen und ist im aktuellen Stand bereits als Basis-Implementierung vorhanden. Sie demonstriert, dass die Architektur nicht nur behauptet, sondern tatsächlich erweiterbar ist. Weitere Verknüpfungen sind im Backlog vorgesehen.
+Diese Funktion war ursprünglich nur als Roadmap-Ziel geplant. Sie ist aber schon als Basis umgesetzt. Das zeigt: Die Architektur ist wirklich erweiterbar, nicht nur auf dem Papier. Weitere Verknüpfungen sind im Backlog.
 
 ---
 
-## 6. Kuratierungssystem (★-Empfehlungen)
+## 6. Kuratierung mit ★
 
-Compendium positioniert sich bewusst als Alternative zu algorithmischen Empfehlungssystemen. Buch-Knoten können mit dem Feld `recommended: true` ausgezeichnet werden; in der Oberfläche erscheint dann ein ★-Symbol vor dem Titel. Eine Legende im Kopfbereich erklärt die Bedeutung: *„★ Persönlich gelesen und empfohlen"*.
+Compendium ist eine Alternative zu algorithmischen Empfehlungen. Ein Buch kann mit `recommended: true` markiert werden. Dann erscheint ein ★ vor dem Titel. Eine Legende in der Kopfzeile erklärt:
 
-**Grundidee:** Nicht Beliebtheit oder Klickzahlen bestimmen die Empfehlung, sondern die tatsächliche, persönliche Leseerfahrung des Kurators. Damit wird der zentrale Kritikpunkt an bestehenden Empfehlungssystemen (Optimierung auf Popularität statt auf Passung) unmittelbar adressiert.
+> ★ Persönlich gelesen und empfohlen
 
-**Aktueller Stand:** 13 Werke sind mit ★ ausgezeichnet, verteilt über beide Bäume und mehrere Kategorien.
+**Die Idee:** Nicht Klickzahlen entscheiden, sondern die echte Leseerfahrung des Kurators. Damit löst das Projekt den zentralen Kritikpunkt an bestehenden Systemen: Popularität ist nicht dasselbe wie Passung.
+
+**Aktueller Stand:** 13 Werke sind mit ★ markiert.
 
 ---
 
 ## 7. Design-System
 
-Der Prototyp verwendet ein dunkles Farbschema im „Matrix"-Stil, das sich an das persönliche Portfolio des Autors anlehnt. Alle Farben sind als CSS Custom Properties zentral definiert:
+Der Prototyp nutzt ein dunkles Farbschema im „Matrix"-Stil. Alle Farben sind als CSS-Variablen zentral definiert.
 
 | Variable | Wert | Verwendung |
 |---|---|---|
@@ -121,49 +157,68 @@ Der Prototyp verwendet ein dunkles Farbschema im „Matrix"-Stil, das sich an da
 | `--green` | `#33FF66` | Akzent, Hover, aktive Elemente |
 | `--green-dim` | `#1F8F44` | Rahmen, gedämpfter Akzent |
 | `--text-white` | `#FFFFFF` | Überschriften |
-| `--text-muted` | `#9FCDAF` | Fließtext, Beschreibungen |
+| `--text-muted` | `#9FCDAF` | Fließtext |
 
-**Visuelle Hierarchie:** Kategorie-Karten tragen eine kräftige linke Rahmenlinie in `--green` und sind klickbar. Buch-Karten haben eine gedämpfte Rahmenlinie in `--green-dim`, einen kursiven Titel und einen Autor in Großbuchstaben — sie sind bewusst nicht klickbar.
+**Visuelle Hierarchie:**
 
-**Lesbarkeit für Präsentationen:** Schriftgrößen wurden gegenüber dem ersten Prototyp erhöht (`h3`: 1.25 rem, `p`: 1 rem, `line-height`: 1.65), um auch bei Video- und Online-Präsentationen (z. B. über Microsoft Teams oder Aufzeichnung in 1080p) gut lesbar zu bleiben.
+- Kategorie-Karten: kräftige linke Linie in Grün, klickbar.
+- Buch-Karten: gedämpfte Linie, kursiver Titel, Autor in Großbuchstaben, nicht klickbar.
 
----
-
-## 8. Bekannte Einschränkungen und Backlog
-
-- Keine Persistenz- oder Datenbank-Anbindung — die Daten sind hartcodiert im JavaScript.
-- Keine Build-Pipeline und keine Modultrennung (bewusst, siehe 2.1).
-- Kein automatisiertes Testing.
-- Aktuell ist eine Cross-Media-Verknüpfung umgesetzt; weitere sind geplant.
-- Keine Suchfunktion und keine Filter; die Navigation ist bewusst explorativ.
-- **Mögliche nächste Ausbaustufe:** Backend-Anbindung, z. B. nach dem im Unterricht gezeigten Flask-Muster (Frontend ruft einen JSON-Endpunkt per `fetch` ab, statt Daten hart zu codieren) als leichtgewichtige Alternative zu Firebase.
+**Lesbarkeit:** Die Schriftgrößen wurden für Video und Online-Präsentationen erhöht (`h3`: 1.25 rem, `p`: 1 rem, `line-height`: 1.65).
 
 ---
 
-## 9. Changelog
+## 8. Grenzen und Backlog
+
+Aktuelle Grenzen:
+
+- Keine Datenbank — die Daten sind hartcodiert.
+- Keine Build-Pipeline, keine Module.
+- Keine automatisierten Tests.
+- Nur eine Cross-Media-Verknüpfung.
+- Keine Suche und keine Filter.
+
+**Nächster Schritt: Flask-Backend**
+
+Im Unterricht wurde ein einfaches Flask-Beispiel gezeigt:
+
+- Das Frontend ruft mit `fetch("/api/begruessung")` einen Endpunkt auf.
+- Das Backend antwortet mit JSON.
+- Das Frontend zeigt die Daten an.
+
+Dieses Muster ist ein guter nächster Schritt für Compendium. Statt die Genre-Bäume direkt im JavaScript zu speichern, könnten sie über einen Flask-Endpunkt geladen werden. Vorteile:
+
+- Die Daten sind vom Code getrennt.
+- Neue Werke können ohne Code-Änderung hinzugefügt werden.
+- Flask ist leichtgewichtig und gut für den Einstieg geeignet.
+
+Firebase bleibt als spätere Option im Backlog.
+
+---
+
+## 9. Änderungen im Überblick
 
 ### Version 0.1 — Erster Prototyp
-- Einzelner Literatur-Baum (`genreTree`)
-- Drill-Down-Navigation mit `historyStack` und Zurück-Button
-- Grundlegende Buch- und Kategorie-Karten
+- Ein Literatur-Baum
+- Drill-Down mit Zurück-Button
+- Einfache Karten für Bücher und Kategorien
 
 ### Version 0.2 — Zweiter Baum und Cross-Media
-- Zweiter Baum (`novelTree`) für Manga und Web-Novels
-- Baum-Umschalter (`switchTree`) in der Kopfzeile
-- Erste Cross-Media-Verknüpfung (*No Longer Human*: Roman ↔ Manga)
-- `findPath()` und `navigateTo()` für baumübergreifende Sprünge
+- Zweiter Baum für Manga und Web-Novels
+- Umschalter zwischen Bäumen
+- Erste Cross-Media-Verknüpfung (*No Longer Human*)
+- `findPath()` und `navigateTo()`
 
 ### Version 0.3 — Inhalte und Kuratierung
-- Content auf 35 Werke in 13 Kategorien erweitert
-- ★-Empfehlungssystem: persönlich gelesene Werke werden markiert
+- 35 Werke in 13 Kategorien
+- ★-System für persönliche Empfehlungen
 - Breadcrumb-Navigation
-- Werk-Zähler auf Kategorie-Karten
+- Werk-Zähler auf Kategorien
 
-### Version 0.4 — Präsentationsoptimierung
-- Schriftgrößen für Video- und Online-Präsentation angepasst
-- Karten-Einblendanimation (`cardIn` mit Stagger)
+### Version 0.4 — Optimierung für Präsentation
+- Größere Schrift für Video und Online
+- Einblend-Animation für Karten
 - Escape-Taste als Zurück-Shortcut
-- Überarbeitete Farbkontraste für bessere Sichtbarkeit in Aufzeichnungen
 
 ---
 

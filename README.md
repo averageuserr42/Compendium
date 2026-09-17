@@ -14,7 +14,7 @@ Dieses Repository enthält den interaktiven Frontend-Prototypen, der das Kernkon
 - **Erste Cross-Media-Verknüpfungen** zwischen thematisch verwandten Werken aus beiden Bäumen (z. B. Roman ↔ Manga-Adaption desselben Stoffs) — ursprünglich als späteres Roadmap-Ziel geplant, jetzt als Basis-Implementierung vorhanden.
 - Integriertes Design-System (Dark-Theme mit Akzentfarben, "Matrix"-Stil).
 
-Für Details zur Architektur und den Designentscheidungen siehe [DOCUMENTATION.md](./DOCUMENTATION.md).
+Für Details zur Architektur und den Designentscheidungen siehe [Documentation.md](./Documentation.md).
 
 ## Tech Stack
 - HTML5

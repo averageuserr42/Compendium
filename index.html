@@ -165,6 +165,38 @@
             line-height: 1.65;
         }
 
+        .card p.desc {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card p.desc.expanded {
+            display: block;
+            -webkit-line-clamp: unset;
+            overflow: visible;
+        }
+
+        .desc-toggle {
+            display: inline-block;
+            margin-top: 0.6rem;
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--green-dim);
+            font-family: inherit;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .desc-toggle:hover {
+            color: var(--green);
+            text-decoration: underline;
+        }
+
         .card.book {
             border-left-color: var(--green-dim);
             cursor: default;
@@ -495,6 +527,7 @@
                 renderNode(currentNode);
                 return;
             }
+            console.warn('Cross-Link target not found:', targetId);
         }
 
         function updateSwitcher() {
@@ -548,7 +581,7 @@
                     card.innerHTML = `
                         <h3>${star}${child.title}</h3>
                         <span class="author">Von ${child.author}</span>
-                        <p>${child.desc}</p>
+                        <p class="desc">${child.desc}</p>
                         ${crossLink}
                     `;
 
@@ -579,6 +612,24 @@
                 }
 
                 grid.appendChild(card);
+
+                if (child.isBook) {
+                    const descEl = card.querySelector('.desc');
+                    const needsToggle = descEl.scrollHeight - descEl.clientHeight > 2;
+
+                    if (needsToggle) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'desc-toggle';
+                        btn.textContent = 'Mehr anzeigen';
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const expanded = descEl.classList.toggle('expanded');
+                            btn.textContent = expanded ? 'Weniger anzeigen' : 'Mehr anzeigen';
+                        });
+                        descEl.insertAdjacentElement('afterend', btn);
+                    }
+                }
             });
         }
 

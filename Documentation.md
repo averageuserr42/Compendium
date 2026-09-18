@@ -103,7 +103,7 @@ Ein Klick auf „Zurück" liest den letzten Knoten aus dem Stack und zeigt ihn w
 
 ### 4.2 Wichtige Funktionen
 
-- **`renderNode(node)`** — zeigt die Kinder eines Knotens als Karten. Kategorien sind klickbar, Bücher nicht.
+- **`renderNode(node)`** — zeigt die Kinder eines Knotens als Karten. Kategorien sind klickbar, Bücher nicht. Bei Büchern prüft die Funktion nach dem Rendern, ob die Beschreibung abgeschnitten ist. Wenn ja, fügt sie den Button „Mehr anzeigen" ein (siehe 4.5).
 - **`findPath(node, targetId)`** — sucht einen Knoten mit einer bestimmten ID. Gibt den ganzen Pfad von der Wurzel zurück.
 - **`navigateTo(targetId)`** — springt zu einem Knoten, auch in den anderen Baum. Wird für Cross-Links benutzt. Wenn das Ziel ein Buch ist, springt die App zur übergeordneten Kategorie — so sieht der Nutzer das Buch im Kontext.
 - **`switchTree(key)`** — wechselt zwischen den zwei Bäumen. Der `historyStack` wird dabei geleert, damit die Zurück-Taste nicht in den anderen Baum springt.
@@ -121,6 +121,18 @@ Das macht die Struktur sichtbar und hilft bei der Orientierung.
 
 - Die **Escape-Taste** macht dasselbe wie der Zurück-Button.
 - Beim Rendern erscheinen die Karten mit einer kurzen Einblend-Animation (40 ms pro Karte versetzt). Das sieht in Videos und Online-Präsentationen besser aus.
+
+### 4.5 Aufklappbare Beschreibungen („Mehr anzeigen")
+
+Lange Buchbeschreibungen passen nicht immer auf die Karte. Damit die Karten gleich hoch bleiben, ist die Beschreibung auf 2 Zeilen begrenzt (CSS `line-clamp`).
+
+So funktioniert es:
+
+1. Nach dem Rendern vergleicht die App die volle Höhe des Texts mit der sichtbaren Höhe (`scrollHeight` gegen `clientHeight`).
+2. Ist der Text wirklich abgeschnitten, erscheint unter der Beschreibung der Button „Mehr anzeigen".
+3. Ein Klick darauf klappt den Text auf. Der Button wechselt zu „Weniger anzeigen". Ein weiterer Klick klappt den Text wieder zu.
+
+Wichtig dabei: Der Button erscheint nur, wenn der Text wirklich zu lang ist. Kurze Beschreibungen bekommen keinen Button. Das hält die Karten sauber.
 
 ---
 
@@ -219,6 +231,12 @@ Firebase bleibt als spätere Option im Backlog.
 - Größere Schrift für Video und Online
 - Einblend-Animation für Karten
 - Escape-Taste als Zurück-Shortcut
+
+### Version 0.5 — Mehr anzeigen
+- Lange Buchbeschreibungen werden auf 2 Zeilen begrenzt (CSS line-clamp)
+- Button „Mehr anzeigen" / „Weniger anzeigen" klappt den Text auf und zu
+- Der Button erscheint nur, wenn der Text wirklich abgeschnitten ist
+- Reihenfolge in der Buchkarte: Titel, Autor, Beschreibung, Toggle, Cross-Link
 
 ---
 

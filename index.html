@@ -12,17 +12,28 @@
             --green-dim: #1F8F44;
             --text-white: #FFFFFF;
             --text-muted: #9FCDAF;
+
+            /* Form und Lesbarkeit (reine Darstellung) */
+            --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+            --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;
+            --mono: ui-monospace, 'Cascadia Mono', 'Courier New', monospace;
+            --border: #232a24;
+            --radius-card: 14px;
+            --radius-pill: 999px;
+            --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.35);
+            --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.5);
+            --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
         }
 
         * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            background: var(--bg);
+            background: radial-gradient(1100px 520px at 50% -8%, rgba(51, 255, 102, 0.05), transparent 62%), var(--bg);
             color: var(--text-white);
-            font-family: ui-monospace, 'Courier New', monospace;
+            font-family: var(--sans);
             min-height: 100vh;
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem 4rem 2rem;
         }
 
         header {
@@ -30,19 +41,27 @@
             margin: 0 auto 2.5rem auto;
             border-bottom: 1px solid var(--green-dim);
             padding-bottom: 1.5rem;
+            text-align: center;
         }
 
+        /* Buchtitel wie auf einer Titelseite: Serifenschrift, gesperrt, mittig */
         header h1 {
+            font-family: var(--serif);
             color: var(--green);
-            letter-spacing: 0.2em;
-            margin: 0 0 0.5rem 0;
-            font-size: 1.7rem;
+            margin: 0 0 0.85rem 0;
+            font-size: clamp(2rem, 4.6vw, 3rem);
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            line-height: 1.2;
+            text-shadow: 0 0 30px rgba(51, 255, 102, 0.18);
         }
 
         header .subtitle {
+            font-family: var(--serif);
+            font-style: italic;
             color: var(--text-muted);
-            margin: 0 0 0.35rem 0;
-            font-size: 0.95rem;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.05rem;
         }
 
         header .legend {
@@ -68,8 +87,8 @@
             background: transparent;
             border: 1px solid var(--green-dim);
             color: var(--text-muted);
-            padding: 0.55rem 1.1rem;
-            border-radius: 4px;
+            padding: 0.55rem 1.3rem;
+            border-radius: var(--radius-pill);
             font-family: inherit;
             font-size: 0.9rem;
             cursor: pointer;
@@ -95,8 +114,8 @@
             background: transparent;
             border: 1px solid var(--green-dim);
             color: var(--green);
-            padding: 0.45rem 0.95rem;
-            border-radius: 4px;
+            padding: 0.45rem 1.05rem;
+            border-radius: var(--radius-pill);
             font-family: inherit;
             cursor: pointer;
             font-size: 0.85rem;
@@ -117,8 +136,8 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.1rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
         }
 
         @keyframes cardIn {
@@ -127,42 +146,50 @@
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid #262b26;
-            border-left: 4px solid var(--green);
-            border-radius: 4px 8px 8px 4px;
-            padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+            background: linear-gradient(180deg, #151b15 0%, var(--card-bg) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            box-shadow: inset 3px 0 0 var(--green), var(--shadow-card);
+            padding: 1.4rem 1.5rem 1.5rem 1.5rem;
             cursor: pointer;
-            transition: background-color 0.25s, box-shadow 0.25s, border-left-color 0.25s;
+            transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
             animation: cardIn 0.35s ease-out backwards;
         }
 
         .card:hover {
-            background-color: #161d16;
-            box-shadow: 0 0 0 1px rgba(51, 255, 102, 0.08), 0 4px 16px rgba(0, 0, 0, 0.35);
+            transform: translateY(-3px);
+            border-color: rgba(51, 255, 102, 0.35);
+            box-shadow: inset 3px 0 0 var(--green), var(--shadow-hover);
         }
 
         .card h3 {
             color: var(--text-white);
             margin: 0 0 0.55rem 0;
-            font-size: 1.25rem;
-            line-height: 1.3;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.35;
         }
 
         .card .meta {
             display: inline-block;
-            color: var(--green-dim);
-            font-size: 0.75rem;
+            padding: 0.24rem 0.65rem;
+            border: 1px solid rgba(31, 143, 68, 0.45);
+            border-radius: var(--radius-pill);
+            background: rgba(31, 143, 68, 0.14);
+            color: var(--green);
+            font-family: var(--mono);
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.75rem;
+            letter-spacing: 0.07em;
+            margin-bottom: 0.8rem;
         }
 
         .card p {
             margin: 0;
             color: var(--text-muted);
             font-size: 1rem;
-            line-height: 1.65;
+            line-height: 1.72;
         }
 
         .card p.desc {
@@ -198,12 +225,12 @@
         }
 
         .card.book {
-            border-left-color: var(--green-dim);
+            box-shadow: inset 3px 0 0 var(--green-dim), var(--shadow-card);
             cursor: default;
         }
 
         .card.book:hover {
-            border-left-color: var(--green);
+            box-shadow: inset 3px 0 0 var(--green), var(--shadow-hover);
         }
 
         .card.book h3 {
@@ -214,9 +241,10 @@
 
         .card.book .author {
             color: var(--green);
+            font-family: var(--mono);
             font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 0.04em;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             margin-bottom: 0.85rem;
             padding-bottom: 0.55rem;
@@ -236,9 +264,9 @@
             align-items: center;
             gap: 0.45rem;
             margin-top: 1rem;
-            padding: 0.4rem 0.75rem;
+            padding: 0.42rem 0.85rem;
             border: 1px solid var(--green-dim);
-            border-radius: 4px;
+            border-radius: var(--radius-pill);
             color: var(--green);
             font-size: 0.85rem;
             cursor: pointer;
@@ -254,6 +282,26 @@
         .cross-icon {
             font-weight: 700;
             font-size: 1em;
+        }
+
+        /* Tastatur-Fokus sichtbar machen */
+        .tree-btn:focus-visible,
+        #back-btn:focus-visible,
+        .desc-toggle:focus-visible,
+        .cross-link:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 2px;
+        }
+
+        /* Systemeinstellung für weniger Bewegung respektieren */
+        @media (prefers-reduced-motion: reduce) {
+            .card { animation: none; }
+            .card:hover { transform: none; }
+            .card,
+            .tree-btn,
+            #back-btn,
+            .desc-toggle,
+            .cross-link { transition: none; }
         }
     </style>
 </head>

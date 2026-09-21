@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" role="img" aria-label="Titelbild: Der Process – Franz Kafka">
+  <title>Der Process – Franz Kafka</title>
+  <defs>
+    <linearGradient id="bg" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#121712"/>
+      <stop offset="55%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#0E1410"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0%" stop-color="#1F8F44" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1F8F44" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <circle cx="86" cy="128" r="230" fill="url(#glow)"/>
+  <rect x="18" y="18" width="364" height="564" fill="none" stroke="#1F8F44" stroke-width="1" opacity="0.35"/>
+
+  <text x="200.0" y="60" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="11" fill="#9FCDAF" letter-spacing="3.4" opacity="0.85">LITERATUR</text>
+  <text x="200.0" y="82" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#1F8F44" letter-spacing="1.6">WELTLITERATUR</text>
+  <path d="M168.0 102 L232.0 102" stroke="#33FF66" stroke-width="1" opacity="0.45"/>
+  <text x="200.0" y="295.7" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#FFFFFF" letter-spacing="0.5">Der Process</text>
+  <path d="M176.0 339.4 L224.0 339.4" stroke="#33FF66" stroke-width="1" opacity="0.35"/>
+  <text x="200.0" y="373.4" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12.5" fill="#9FCDAF" letter-spacing="2.2">FRANZ KAFKA</text>
+  <path d="M200.0 566.0 L197.1 524.2" stroke="#1F8F44" stroke-width="1.50" stroke-linecap="round" opacity="0.55"/>
+  <path d="M197.1 524.2 L180.8 503.9" stroke="#1F8F44" stroke-width="1.02" stroke-linecap="round" opacity="0.55"/>
+  <path d="M180.8 503.9 L165.3 499.5" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="165.3" cy="499.5" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M180.8 503.9 L179.0 489.0" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="179.0" cy="489.0" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M197.1 524.2 L208.6 502.7" stroke="#1F8F44" stroke-width="1.02" stroke-linecap="round" opacity="0.55"/>
+  <path d="M208.6 502.7 L206.9 487.8" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="206.9" cy="487.8" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M208.6 502.7 L220.9 495.8" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="220.9" cy="495.8" r="2.4" fill="#33FF66" opacity="0.20"/>
+</svg>

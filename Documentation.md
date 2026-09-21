@@ -20,41 +20,105 @@ Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare 
 
 ---
 
-## 2. Architektur-Entscheidungen
-
-### 2.1 Alles in einer Datei
-
-Der ganze Code liegt in einer einzigen `index.html` — HTML, CSS und JavaScript zusammen. Das ist Absicht. Vorteile für den Prototyp:
-
+## 2. Architektur-Entscheidungen### 2.1 Ein Frontend, eine Datei
+Das ganze Frontend liegt weiterhin in einer einzigen `index.html` — HTML, CSS und JavaScript zusammen. Das ist Absicht. Vorteile für den Prototyp:
 - Keine Build-Tools, kein Bundler
 - Sofortiges Deployment über GitHub Pages
 - Schnelle Änderungen möglich
+Die **Daten** liegen seit Version 0.7 nicht mehr in dieser Datei, sondern in `data/trees.json` und in der SQLite-Tabelle (siehe 2.5). Eine spätere Aufteilung in Module ist jederzeit möglich. Für die Demo ist sie aber nicht nötig.
 
-Eine spätere Aufteilung in Module ist jederzeit möglich. Für die Demo ist sie aber nicht nötig.
+### 2.2 Zwei Betriebsarten: statisch oder mit Backend
+Compendium läuft in zwei Betriebsarten:
 
-### 2.2 JSON statt Datenbank
+| Betriebsart | Wo | Woher kommen die Daten |
+|---|---|---|
+| Statisch | GitHub Pages | `data/trees.json` per `fetch` |
+| Mit Backend | lokal: `python app.py` | SQLite über `GET /api/trees` |
 
-Die Genre-Bäume sind direkt im JavaScript-Code als Objekt gespeichert. Auch das ist Absicht. Vorteile:
+Das ist Absicht. GitHub Pages liefert nur statische Dateien aus, dort läuft kein Python. Der Prototyp bleibt deshalb auch ohne Server voll funktionsfähig.
 
-- Kein Backend nötig
-- Keine Hosting-Kosten
-- Keine Anmeldung, keine Sicherheitsregeln
-- Keine Netzwerkabhängigkeit
+**Warum sich diese Entscheidung geändert hat:** Die Versionen 0.1 bis 0.6 speicherten die Bäume direkt im JavaScript. Vorteile waren damals: kein Backend nötig, keine Hosting-Kosten, keine Netzwerkabhängigkeit. Im Unterricht wurde dann gezeigt, wie man Daten mit Flask aus einer SQL-Tabelle lädt. Dieser Weg wurde in Version 0.7 umgesetzt, weil er zwei echte Vorteile bringt:
+- Die Daten liegen getrennt vom Code.
+- Der Baum kommt aus einer SQL-Abfrage, nicht aus einem Objekt im Speicher.
 
-Eine echte Datenbank (z. B. Firebase oder Flask-Backend, siehe Abschnitt 8) ist im Backlog geplant.
+Firebase bleibt als spätere Option im Backlog.
 
 ### 2.3 Zwei Bäume statt einem
 
-Der Prototyp hat zwei Bäume:
+Der Prototyp hat zwei Bäume. In `data/trees.json` stehen sie unter den Schlüsseln `literature` und `novels`:
 
-- `literatureTree` — Belletristik und Fachliteratur
-- `novelTree` — Manga und Web-Novels
+- `literature` — Belletristik und Fachliteratur
+- `novels` — Manga und Web-Novels
 
-Beide Bäume nutzen dieselbe Logik und dieselbe Datenstruktur. Das beweist: Die Architektur ist erweiterbar. Ein drittes Baum (z. B. Filme) braucht nur neue Daten und einen neuen Button — keine neuen Funktionen.
+Beide Bäume nutzen dieselbe Logik und dieselbe Datenstruktur. Das beweist: Die Architektur ist erweiterbar. Ein dritter Baum (z. B. Filme) braucht nur neue Daten und einen neuen Knopf — keine neuen Funktionen.### 2.4 Keine externen Abhängigkeiten (Frontend)
+Im Frontend werden nur HTML5, CSS3 und Vanilla JavaScript verwendet. Keine Frameworks, keine Bibliotheken. Das bedeutet: weniger Wartung, weniger Fehlerquellen, keine Einarbeitung in fremde Tools.
 
-### 2.4 Keine externen Abhängigkeiten
+### 2.5 Backend: JSON → SQLite → API
+Seit Version 0.7 gibt es ein kleines Backend. Es besteht aus drei Teilen:
 
-Es werden nur HTML5, CSS3 und Vanilla JavaScript verwendet. Keine Frameworks, keine Bibliotheken. Das bedeutet: weniger Wartung, weniger Fehlerquellen, keine Einarbeitung in fremde Tools.
+```text
+data/trees.json  →  seed.py  →  data/compendium.db  →  app.py  →  GET /api/trees
+```
+
+| Datei | Aufgabe |
+|---|---|
+| `data/trees.json` | Die Daten. Eine lesbare Textdatei, sie ist die Quelle. |
+| `seed.py` | Liest die JSON-Datei und schreibt sie in die SQLite-Tabelle `nodes`. |
+| `app.py` | Flask-Server. Liefert `index.html` und `GET /api/trees`. |
+| `generate_covers.py` | Erzeugt die Titelbilder und trägt die Wikipedia-Links ein (siehe 2.6). Nur nötig, wenn Werke dazukommen. |
+| `data/compendium.db` | Die Datenbank selbst. Sie wird immer neu erzeugt und steht in `.gitignore`. |
+
+Die Datenbankdatei liegt **nicht** im Repository. Sie entsteht mit `python seed.py`. Wenn sie fehlt, legt `app.py` sie beim Start selbst an.
+
+Das Frontend fragt zuerst `GET /api/trees` ab. Nur wenn das nicht geht, lädt es `data/trees.json`. So zeigt die lokale Demo das Backend, und die Live-Demo auf GitHub Pages läuft trotzdem ohne Server.
+
+**Endpunkte**
+
+| Methode | Pfad | Aufgabe |
+|---|---|---|
+| GET | `/` | liefert `index.html` |
+| GET | `/api/trees` | beide Bäume als JSON aus der SQLite-Tabelle |
+| POST | `/api/works` | legt ein neues Werk an |
+| POST | `/api/covers` | lädt ein Titelbild nach `data/covers/` |
+| GET | `/data/covers/<datei>` | liefert die Titelbilder aus |
+
+**Wo neue Werke gespeichert werden**
+
+`POST /api/works` schreibt an **zwei** Stellen: zuerst in die Tabelle `nodes`, danach in `data/trees.json`. Der Grund: Die Datenbank wird aus der JSON-Datei erzeugt (siehe oben). Würde nur die Datenbank geändert, wäre die Ergänzung beim nächsten `python seed.py` wieder weg. Klappt das Schreiben in die Datei nicht, löscht der Server die neue Zeile wieder und antwortet mit Fehler 500. So bleiben Tabelle und Datei gleich.
+
+Pflichtfelder: `parent_id` (muss eine Kategorie sein), `title`, `author`. Optional: `id`, `desc`, `recommended`, `cover`, `wiki`, `related_id`, `related_title`.
+
+| Antwort | Bedeutung |
+|---|---|
+| 201 | Werk angelegt |
+| 400 | Pflichtfeld fehlt, falscher Body, `parent_id` ist ein Buch oder das Bild hat das falsche Format |
+| 404 | `parent_id` gibt es nicht |
+| 409 | ID ist schon vergeben |
+| 413 | Bild ist größer als 3 MB |
+| 500 | `data/trees.json` konnte nicht geschrieben werden (Datenbank wird zurückgerollt) |
+
+Titelbilder: erlaubt sind JPG, JPEG, PNG und WEBP bis 3 MB. Der Dateiname wird aus der Werk-ID gebildet (`Prüfwerk Eins` → `pruefwerk-eins.png`).
+
+### 2.6 Titelbilder: selbst erzeugt statt fremd geladen
+
+Alle 43 Werke haben ein Titelbild. Diese Bilder sind **selbst erzeugt**: das Skript `generate_covers.py` schreibt für jedes Werk eine SVG-Datei nach `data/covers/<id>.svg` und trägt den Pfad in das Feld `cover` ein.
+
+```text
+data/trees.json  →  generate_covers.py  →  data/covers/*.svg  +  cover/wiki in data/trees.json  →  seed.py  →  Datenbank
+```
+
+| Frage | Antwort |
+|---|---|
+| Warum keine echten Buchcover? | Die deutsche Wikipedia zeigt keine Buchcover (dort sind nicht-freie Dateien nicht erlaubt), die englische nur unter „fair use". Diese Begründung gilt für Wikipedia, **nicht** für dieses Repository und nicht für GitHub Pages. Fremde Bilder herunterzuladen wäre rechtlich nicht sauber, ein eigenes Bild ist es. |
+| Was ist ein SVG? | Eine Bilddatei, die nur aus Text besteht: Flächen, Linien, Schrift. Der Browser zeichnet sie wie ein Foto. Etwa 3 KB pro Bild, also sehr klein. |
+| Wie sieht ein Titelbild aus? | Oben klein der Baum und die Kategorie, in der Mitte der Titel in einer Serifenschrift, darunter der Autor in einer Monospace-Schrift, unten ein feines Zweigmotiv, oben rechts ★ bei empfohlenen Werken. |
+| Warum sieht nicht jedes Bild gleich aus? | Verlauf und Lichtpunkt hängen vom Werk ab, das Zweigmotiv von der Kategorie. Alle Werke einer Kategorie teilen also das Motiv. Das ist eine Designregel, kein Zufall. |
+| Kann man das Bild zweimal erzeugen? | Ja. Das Skript ist **deterministisch**: derselbe Titel ergibt Byte für Byte dasselbe Bild (Hashwert aus der Werk-ID). Zweimal ausführen ändert nichts. |
+| Wird ein hochgeladenes Bild überschrieben? | Nein. Ein im Browser hochgeladenes Bild bleibt stehen; ersetzt werden nur erzeugte `.svg`-Dateien. Mit `--force` kann man das erzwingen. |
+
+Das Skript nutzt nur die Standardbibliothek von Python, also keine zusätzliche Abhängigkeit. Es ist die einzige Stelle, an der Titelbilder entstehen — im Repository liegt keine fremde Bilddatei.
+
+**Wikipedia-Links:** 40 der 43 Werke haben einen Artikel. Das Skript trägt ihn als Feld `wiki` ein, auf der Karte wird daraus der Knopf „↗ Wikipedia". Drei Werke haben in der deutschen und englischen Wikipedia keinen Artikel und bleiben ohne Link: *Die Kunst des Seins* (der deutsche Artikel „Haben oder Sein" beschreibt ein anderes Buch von Fromm), *The Legendary Moonlight Sculptor* und *The Legendary Mechanic*. Die Liste steht als `WIKI_LINKS` im Skript; sie ist aus `docs/COVER_KANDIDATEN.md` hervorgegangen.
 
 ---
 
@@ -70,6 +134,8 @@ Jeder Knoten ist entweder eine **Kategorie** oder ein **Buch**.
 | `children` | Liste weiterer Knoten | – |
 | `author` | – | Autor |
 | `recommended` | – | optional, zeigt ★ |
+| `cover` | – | optional, Pfad zum Titelbild, z. B. `data/covers/1984.svg` |
+| `wiki` | – | optional, Link zum Wikipedia-Artikel |
 | `relatedId` | – | optional, verknüpftes Werk |
 | `relatedTitle` | – | optional, Name der Verknüpfung |
 
@@ -80,7 +146,24 @@ Zwei Bäume werden im Objekt `trees` gespeichert:
 
 Die Anzeigenamen für die Kopfzeile stehen in `treeLabels`. Dadurch kann man einen Baum umbenennen, ohne die Daten zu ändern.
 
-**Aktueller Umfang:** 35 Werke in 13 Kategorien.
+**Aktueller Umfang:** 43 Werke in 17 Unterkategorien, verteilt auf zwei Bäume (26 Werke in der Literatur, 17 in Manga & Web-Novels). 13 Werke tragen ein ★. Alle 43 haben ein Titelbild, 40 davon einen Wikipedia-Link (siehe 2.6).
+
+Dieselben Daten stehen in der SQL-Tabelle `nodes`. Aus dem verschachtelten JSON wird eine flache Tabelle, in der die Nachbarschaft durch `parent_id` entsteht:
+
+| Spalte | Bedeutung |
+|---|---|
+| `id` | ID des Knotens, weltweit eindeutig |
+| `parent_id` | ID der übergeordneten Kategorie; `NULL` = Wurzel |
+| `tree` | `literature` oder `novels` |
+| `title`, `description` | Titel und Kurzbeschreibung |
+| `is_book` | `1` = Buch (Blatt), `0` = Kategorie |
+| `author`, `recommended` | Autor und ★ (`1` = empfohlen) |
+| `cover`, `wiki` | Pfad zum Titelbild und Link zum Wikipedia-Artikel |
+
+Beide Felder sind optional. Fehlen sie, sieht die Karte aus wie vor Version 0.7 — es gibt also keinen Bruch im Layout.
+| `related_id`, `related_title` | Ziel des Cross-Media-Links |
+
+Insgesamt stehen 62 Zeilen in der Tabelle. Der Baum wird beim Auslesen wieder zusammengesetzt (siehe 2.5).
 
 ---
 
@@ -103,6 +186,8 @@ Ein Klick auf „Zurück" liest den letzten Knoten aus dem Stack und zeigt ihn w
 
 ### 4.2 Wichtige Funktionen
 
+- **`loadTrees()`** — lädt die Baumdaten. Zuerst über `GET /api/trees`, sonst aus `data/trees.json`.
+- **`start()`** — ruft `loadTrees()` auf, prüft das Ergebnis und rendert den Startknoten. Wird einmal am Ende des Skripts aufgerufen.
 - **`renderNode(node)`** — zeigt die Kinder eines Knotens als Karten. Kategorien sind klickbar, Bücher nicht. Bei Büchern prüft die Funktion nach dem Rendern, ob die Beschreibung abgeschnitten ist. Wenn ja, fügt sie den Button „Mehr anzeigen" ein (siehe 4.5).
 - **`findPath(node, targetId)`** — sucht einen Knoten mit einer bestimmten ID. Gibt den ganzen Pfad von der Wurzel zurück.
 - **`navigateTo(targetId)`** — springt zu einem Knoten, auch in den anderen Baum. Wird für Cross-Links benutzt. Wenn das Ziel ein Buch ist, springt die App zur übergeordneten Kategorie — so sieht der Nutzer das Buch im Kontext.
@@ -140,7 +225,7 @@ Wichtig dabei: Der Button erscheint nur, wenn der Text wirklich zu lang ist. Kur
 
 Ein Buch kann optional mit einem Werk im anderen Baum verknüpft werden. Dafür gibt es die Felder `relatedId` und `relatedTitle`. Auf der Buch-Karte erscheint dann ein Button mit dem Symbol `↔`. Ein Klick darauf ruft `navigateTo()` auf und springt zum verknüpften Werk — auch in den anderen Baum.
 
-**Aktuelles Beispiel:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito.
+**Aktuelles Beispiel:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito. Die Verknüpfung ist in beide Richtungen hinterlegt: der Roman kennt die Manga, die Manga kennt den Roman. Deshalb tragen zwei Datensätze ein `relatedId` — es ist aber **eine** Verknüpfung (ein Paar).
 
 Diese Funktion war ursprünglich nur als Roadmap-Ziel geplant. Sie ist aber schon als Basis umgesetzt. Das zeigt: Die Architektur ist wirklich erweiterbar, nicht nur auf dem Papier. Weitere Verknüpfungen sind im Backlog.
 
@@ -180,6 +265,22 @@ Der Prototyp nutzt ein dunkles Farbschema im „Matrix"-Stil. Alle Farben sind a
 
 **Titel:** Der Titel steht mittig, in einer Systemschrift mit Serifen (Georgia, Palatino, Times), gesperrt mit einer Laufweite von 0.16 em. Der Untertitel ist dieselbe Schrift, kursiv. Das wirkt wie die Titelseite eines Buches. Auch hier werden keine Schriften nachgeladen.
 
+**Karte als Poster (ab Version 0.9):** Bei Kategorien zeigt die Karte Titel, Beschreibung und Werk-Zähler. Bei Werken ist die Karte selbst das Titelbild: Das Bild füllt die Karte oben im Seitenverhältnis 2:3, unten liegt eine dunkle Leiste mit Beschreibung und den Knöpfen „↗ Wikipedia" und Cross-Media-Link. Titel und Autor stehen auf den generierten Bildern schon auf dem Cover, deshalb wiederholt die Karte sie nicht. Bei Kategorien zeigt die Karte Titel, Beschreibung und Werk-Zähler.
+
+Drei Sonderfälle sind abgefangen:
+
+| Fall | Verhalten |
+|---|---|
+| Werk ohne Bild | dunkle Ersatzfläche mit Titel und Autor |
+| Bild aus dem Formular (Foto, ohne Schrift) | Titel und Autor als kleine Zeile unten auf dem Bild, ★ als Ecke |
+| Generiertes SVG | nichts zusätzlich — Titel, Autor und ★ stehen schon auf dem Bild (sonst stünde ★ doppelt) |
+
+Werke stehen in engeren Spalten (etwa 185 px) als Kategorien (300 px) — das Raster richtet sich danach, ob in einer Ebene nur Werke liegen. So sieht eine Kategorie wie ein Bücherregal aus.
+
+**Titelbilder:** Die Titelbilder folgen demselben Design-System, aber in einer eigenen Komposition: fester Rahmen in `--green-dim`, Verlauf von `--card-bg` nach `--bg`, oben Baum und Kategorie in Monospace, in der Mitte der Titel in einer Serifenschrift (wie eine Buchseite), darunter der Autor in Monospace, unten ein feines Zweigmotiv. Die sechs Farbwerte sind **dieselben** wie in der Tabelle oben — die Bilder führen keine neuen Farben ein. Die Regeln stehen in [docs/DESIGN_GUIDE.md](./docs/DESIGN_GUIDE.md), Abschnitt 3.1.
+
+**Formular:** Der Knopf „＋ Werk hinzufügen" öffnet ein Formular für neue Werke. Es benutzt dieselben Farbvariablen und Formen wie der Rest der Seite — neue Farben gibt es nicht. Das Formular erscheint nur, wenn das Backend läuft.
+
 **Formsprache:** Karten und Buttons sind gerundet (Karten 14px, Buttons als Pillen). Der farbige Balken links ist ein `inset`-Schatten und kein `border-left`, damit er der Rundung folgt. Der Werk-Zähler ist ein Chip. Alle diese Werte stehen als Variablen in `:root`. Die Farbwerte der Tabelle bleiben unverändert.
 
 ---
@@ -188,13 +289,27 @@ Der Prototyp nutzt ein dunkles Farbschema im „Matrix"-Stil. Alle Farben sind a
 
 Aktuelle Grenzen:
 
-- Keine Datenbank — die Daten sind hartcodiert.
+- Neue Werke lassen sich nur lokal anlegen (Formular oder `POST /api/works`), nicht auf der Live-Demo.
+- Bilder können nur über die API hochgeladen werden; ohne laufendes Backend gar nicht.
+- Der Schreib-Endpunkt hat kein Login. Er gehört zum lokalen Prototyp.
+- In die Tabelle schreibt `seed.py` (alles) und `app.py` (einzelne neue Werke).
 - Keine Build-Pipeline, keine Module.
 - Keine automatisierten Tests.
-- Nur eine Cross-Media-Verknüpfung.
+- Nur eine Cross-Media-Verknüpfung (ein Paar).
 - Keine Suche und keine Filter.
+- Drei Werke haben keinen Wikipedia-Link, weil es keinen Artikel gibt (siehe 2.6).
+- Die Titelbilder sind typografisch erzeugt, keine Fotografien oder Verlagscover. Das ist eine bewusste Entscheidung (Rechte, Einheitlichkeit, Dateigröße).
 
-**Nächster Schritt: Flask-Backend**
+Damit die Live-Demo ohne Backend vollständig aussieht, sind die Titelbilder statische Dateien im Repository: sie funktionieren ohne Server und ohne Netz. Nur das **Anlegen** neuer Werke braucht das lokale Backend, weil GitHub Pages keine Python-Programme ausführt.
+
+**Umgesetzt in Version 0.8: Titelbilder und Wikipedia-Links**
+
+- Die Bilder sind selbst erzeugt (SVG) statt fremd geladen — Begründung in 2.6.
+- Alle 43 Werke haben ein Bild; 40 haben einen Link zum Artikel, gespeichert als Feld in den Daten.
+- Drei Werke bleiben ohne Link, weil es keinen Artikel gibt — die Liste steht in 2.6.
+- Der Bild-Bauplan ist eine Designregel und steht in [docs/DESIGN_GUIDE.md](./docs/DESIGN_GUIDE.md), Abschnitt 3.1.
+
+**Umgesetzt in Version 0.7: Flask-Backend**
 
 Im Unterricht wurde ein einfaches Flask-Beispiel gezeigt:
 
@@ -202,11 +317,20 @@ Im Unterricht wurde ein einfaches Flask-Beispiel gezeigt:
 - Das Backend antwortet mit JSON.
 - Das Frontend zeigt die Daten an.
 
-Dieses Muster ist ein guter nächster Schritt für Compendium. Statt die Genre-Bäume direkt im JavaScript zu speichern, könnten sie über einen Flask-Endpunkt geladen werden. Vorteile:
+Dieses Muster ist jetzt in Compendium eingebaut:
+
+- `data/trees.json` enthält die Genre-Bäume als Datei.
+- `seed.py` schreibt sie in die SQLite-Tabelle `nodes`.
+- `app.py` liefert sie über `GET /api/trees`.
+- Das Frontend lädt sie per `fetch` und rendert sie wie vorher.
+
+Vorteile:
 
 - Die Daten sind vom Code getrennt.
 - Neue Werke können ohne Code-Änderung hinzugefügt werden.
 - Flask ist leichtgewichtig und gut für den Einstieg geeignet.
+
+Die Live-Demo auf GitHub Pages funktioniert unverändert weiter, weil das Frontend als Ausweichlösung die JSON-Datei laden kann.
 
 Firebase bleibt als spätere Option im Backlog.
 
@@ -252,6 +376,38 @@ Firebase bleibt als spätere Option im Backlog.
 - Titel als gesperrte Serifenschrift, mittig, wie eine Buchseite
 - Keine neuen Dateien, keine externen Abhängigkeiten
 
+### Version 0.7 — Flask-Backend mit SQLite
+- Die Daten sind aus `index.html` in die Datei `data/trees.json` gewandert
+- `seed.py` erzeugt daraus die SQLite-Tabelle `nodes`
+- `app.py` (Flask) liefert beide Bäume über `GET /api/trees`
+- Das Frontend lädt per `fetch`: zuerst über die API, sonst aus der JSON-Datei
+- Die statische Live-Demo bleibt ohne Backend funktionsfähig
+- Fehlermeldung in der Klasse `.status`, wenn keine Daten geladen werden können
+- Dokumentation um Abschnitt 2.5 und die SQL-Spalten in Abschnitt 3 ergänzt
+- Neue Felder `cover` (Titelbild) und `wiki` (Wikipedia-Link), beide optional
+- Karten zeigen links ein Titelbild und darunter den Link „↗ Wikipedia"
+- Formular „＋ Werk hinzufügen" im Frontend, sichtbar nur mit laufendem Backend
+- `POST /api/covers` lädt Titelbilder nach `data/covers/`, `GET /data/covers/<datei>` liefert sie aus
+- Die Datenbank wird automatisch neu erzeugt, wenn das Schema sich ändert
+
+### Version 0.9 — Karte als Poster
+- Buchkarten zeigen das Titelbild auf der ganzen Karte (Seitenverhältnis 2:3), darunter Beschreibung und Knöpfe
+- Titel und Autor stehen auf den generierten Bildern und werden nicht wiederholt
+- Werke liegen in engeren Spalten, wenn eine Ebene nur Werke enthält — Kategorien bleiben breit
+- ★ steht bei generierten Bildern im Bild selbst; bei fremden Bildern als Ecke auf dem Cover
+- Fallback: Werk ohne Bild zeigt eine dunkle Fläche mit Titel und Autor
+- „Mehr anzeigen", Cross-Media-Sprung und Escape funktionieren wie vorher
+
+### Version 0.8 — Titelbilder und Wikipedia-Links
+- `generate_covers.py` (neu) erzeugt für alle 43 Werke ein Titelbild als SVG in `data/covers/`
+- Die Bilder sind typografisch: Baum, Kategorie, Titel, Autor, Zweigmotiv, ★ — in den Farben des Design-Systems
+- Das Skript ist deterministisch und braucht keine zusätzliche Bibliothek
+- 40 Werke bekommen das neue Feld `wiki`; auf der Karte erscheint der Knopf „↗ Wikipedia"
+- Drei Werke bleiben ohne Link, weil es keinen Artikel gibt
+- Karten zeigen links das Titelbild (78 px, 2:3); ohne Bild sieht die Karte aus wie vorher
+- Designregeln für Titelbilder in `docs/DESIGN_GUIDE.md` (Abschnitt 3.1)
+- Readme erklärt, warum das Formular nur lokal funktioniert
+
 ---
 
-*Stand: Prototyp, präsentationsbereit.*
+*Stand: Prototyp, präsentationsbereit (Version 0.9).*

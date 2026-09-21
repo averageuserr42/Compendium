@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" role="img" aria-label="Titelbild: Dune – Frank Herbert">
+  <title>Dune – Frank Herbert</title>
+  <defs>
+    <linearGradient id="bg" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#121712"/>
+      <stop offset="55%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#0E1410"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0%" stop-color="#1F8F44" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#1F8F44" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <circle cx="200" cy="560" r="230" fill="url(#glow)"/>
+  <rect x="18" y="18" width="364" height="564" fill="none" stroke="#1F8F44" stroke-width="1" opacity="0.35"/>
+
+  <text x="200.0" y="60" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="11" fill="#9FCDAF" letter-spacing="3.4" opacity="0.85">LITERATUR</text>
+  <text x="200.0" y="82" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#1F8F44" letter-spacing="1.6">SCIENCE FICTION</text>
+  <path d="M168.0 102 L232.0 102" stroke="#33FF66" stroke-width="1" opacity="0.45"/>
+  <text x="200.0" y="295.7" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#FFFFFF" letter-spacing="0.5">Dune</text>
+  <path d="M176.0 339.4 L224.0 339.4" stroke="#33FF66" stroke-width="1" opacity="0.35"/>
+  <text x="200.0" y="373.4" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12.5" fill="#9FCDAF" letter-spacing="2.2">FRANK HERBERT</text>
+  <path d="M200.0 566.0 L202.7 526.0" stroke="#1F8F44" stroke-width="1.50" stroke-linecap="round" opacity="0.55"/>
+  <path d="M202.7 526.0 L190.1 504.6" stroke="#1F8F44" stroke-width="1.02" stroke-linecap="round" opacity="0.55"/>
+  <path d="M190.1 504.6 L176.1 498.1" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="176.1" cy="498.1" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M190.1 504.6 L190.3 490.2" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="190.3" cy="490.2" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M202.7 526.0 L216.3 507.1" stroke="#1F8F44" stroke-width="1.02" stroke-linecap="round" opacity="0.55"/>
+  <path d="M216.3 507.1 L216.6 492.7" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="216.6" cy="492.7" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M216.3 507.1 L228.7 501.9" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="228.7" cy="501.9" r="2.4" fill="#33FF66" opacity="0.20"/>
+</svg>

@@ -1,0 +1,534 @@
+{
+  "literature": {
+    "id": "lit-root",
+    "title": "Wähle deinen Pfad",
+    "children": [
+      {
+        "id": "fiction",
+        "title": "Belletristik",
+        "desc": "Eintauchen in fiktive Welten, Geschichten und Romane.",
+        "children": [
+          {
+            "id": "scifi",
+            "title": "Science Fiction",
+            "desc": "Technologische Zukunftsvisionen und ferne Galaxien.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "1984",
+                "title": "1984",
+                "author": "George Orwell",
+                "recommended": true,
+                "desc": "Eine dystopische Welt unter totaler Überwachung, in der Sprache selbst zur Waffe wird. Orwells Klassiker ist eine Warnung vor Machtmissbrauch und Gedankenkontrolle, die nichts von ihrer Aktualität verloren hat.",
+                "cover": "data/covers/1984.svg",
+                "wiki": "https://de.wikipedia.org/wiki/1984_%28Roman%29"
+              },
+              {
+                "isBook": true,
+                "id": "last-question",
+                "title": "Die letzte Frage",
+                "author": "Isaac Asimov",
+                "recommended": true,
+                "desc": "Eine der berühmtesten Kurzgeschichten der Science Fiction — die Menschheit sucht über Äonen hinweg nach einer Antwort auf die letzte Frage. Asimov verdichtet Thermodynamik, Kosmologie und Philosophie in wenigen Seiten und liefert einen der stärksten Schlusssätze des Genres.",
+                "cover": "data/covers/last-question.svg",
+                "wiki": "https://en.wikipedia.org/wiki/The_Last_Question"
+              },
+              {
+                "isBook": true,
+                "id": "dune",
+                "title": "Dune",
+                "author": "Frank Herbert",
+                "desc": "Ein Meisterwerk über Politik, Religion und Ökologie auf einem Wüstenplaneten. Frank Herbert erschuf damit die Vorlage für moderne Science Fiction und behandelt Themen, die bis heute aktuell sind.",
+                "cover": "data/covers/dune.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Dune"
+              },
+              {
+                "isBook": true,
+                "id": "foundation",
+                "title": "Foundation",
+                "author": "Isaac Asimov",
+                "desc": "Der Fall und Wiederaufbau eines galaktischen Imperiums über Jahrtausende hinweg. Asimov verbindet Mathematik, Geschichte und Soziologie zu einer einzigartigen Zukunftsvision.",
+                "cover": "data/covers/foundation.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Foundation"
+              },
+              {
+                "isBook": true,
+                "id": "fahrenheit",
+                "title": "Fahrenheit 451",
+                "author": "Ray Bradbury",
+                "desc": "In einer Gesellschaft, in der Bücher verboten sind, arbeitet Guy Montag als Feuerwehrmann, dessen Aufgabe es ist, sie zu verbrennen. Bradbury erzählt von Medienkonsum, Zensur und dem Wert des Lesens.",
+                "cover": "data/covers/fahrenheit.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Fahrenheit_451"
+              },
+              {
+                "isBook": true,
+                "id": "neuromancer",
+                "title": "Neuromancer",
+                "author": "William Gibson",
+                "desc": "Der Roman, der das Cyberpunk-Genre begründete. Gibson zeichnet eine Welt aus Konzernen, Hackern und künstlicher Intelligenz, deren Einfluss bis heute in der Popkultur spürbar ist.",
+                "cover": "data/covers/neuromancer.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Neuromancer"
+              }
+            ]
+          },
+          {
+            "id": "fantasy",
+            "title": "Fantasy",
+            "desc": "Magie, Mythen und epische Heldenreisen.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "lotr",
+                "title": "Der Herr der Ringe",
+                "author": "J.R.R. Tolkien",
+                "desc": "Der Klassiker, der das Fantasy-Genre definierte. Tolkien erschuf mit Mittelerde eine vollständige Welt samt eigener Sprachen, Geschichte und Mythologie.",
+                "cover": "data/covers/lotr.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Der_Herr_der_Ringe"
+              },
+              {
+                "isBook": true,
+                "id": "hobbit",
+                "title": "Der Hobbit",
+                "author": "J.R.R. Tolkien",
+                "desc": "Ein gemütlicher Hobbit wird auf ein Abenteuer mit Drachen, Zwergen und einem Ring geschickt. Tolkiens Vorläufer zu Der Herr der Ringe — zugänglicher und verspielter, aber mit demselben erzählerischen Tiefgang.",
+                "cover": "data/covers/hobbit.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Der_Hobbit"
+              },
+              {
+                "isBook": true,
+                "id": "asoiaf",
+                "title": "A Song of Ice and Fire",
+                "author": "George R. R. Martin",
+                "desc": "Ein brutales politisches Spiel um den Eisernen Thron in einer Welt ohne klare Helden. Martin bricht bewusst mit Fantasy-Konventionen und erzählt von Macht, Verrat und Moral jenseits von Gut und Böse.",
+                "cover": "data/covers/asoiaf.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Das_Lied_von_Eis_und_Feuer"
+              }
+            ]
+          },
+          {
+            "id": "world-lit",
+            "title": "Weltliteratur",
+            "desc": "Klassiker der internationalen Moderne.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "auferstehung",
+                "title": "Auferstehung",
+                "author": "Leo Tolstoi",
+                "recommended": true,
+                "desc": "Tolstois letzter großer Roman über Schuld, Vergebung und gesellschaftliche Ungerechtigkeit im zaristischen Russland. Ein Fürst folgt einer Verurteilten nach Sibirien — und findet dort keine einfache Erlösung, sondern eine unbequeme Wahrheit.",
+                "cover": "data/covers/auferstehung.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Auferstehung"
+              },
+              {
+                "isBook": true,
+                "id": "meister-margarita",
+                "title": "Der Meister und Margarita",
+                "author": "Michail Bulgakow",
+                "recommended": true,
+                "desc": "Der Teufel besucht das atheistische Moskau der 1930er Jahre — und stiftet Chaos zwischen Bürokratie, Literaturbetrieb und Liebe. Bulgakow verwebt Satire, Religion und Fantastik zu einem der bedeutendsten Romane des 20. Jahrhunderts.",
+                "cover": "data/covers/meister-margarita.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Der_Meister_und_Margarita"
+              },
+              {
+                "isBook": true,
+                "id": "alchimist",
+                "title": "Der Alchimist",
+                "author": "Paulo Coelho",
+                "recommended": true,
+                "desc": "Ein andalusischer Hirtenjunge zieht los, um einen Schatz zu finden — und entdeckt unterwegs, was wirklich zählt. Coelhos Parabel über Träume, Mut und Selbstverwirklichung wurde in über 80 Sprachen übersetzt.",
+                "cover": "data/covers/alchimist.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Der_Alchimist"
+              },
+              {
+                "isBook": true,
+                "id": "jakobsweg",
+                "title": "Auf dem Jakobsweg",
+                "author": "Paulo Coelho",
+                "recommended": true,
+                "desc": "Coelhos persönlicher Bericht über seine Pilgerreise nach Santiago de Compostela im Jahr 1986. Kein Reiseführer, sondern eine Reflexion über Selbstfindung, Verzicht und die Fragen, die man sich unterwegs stellt.",
+                "cover": "data/covers/jakobsweg.svg",
+                "wiki": "https://en.wikipedia.org/wiki/The_Pilgrimage"
+              },
+              {
+                "isBook": true,
+                "id": "nlh-novel",
+                "title": "No Longer Human",
+                "author": "Osamu Dazai",
+                "desc": "Eine schonungslose Innenschau über Entfremdung und Identitätsverlust im modernen Japan. Dazai verarbeitet eigene Erfahrungen zu einem der eindringlichsten Werke der japanischen Moderne.",
+                "relatedId": "nlh-manga",
+                "relatedTitle": "No Longer Human (Manga)",
+                "cover": "data/covers/nlh-novel.svg",
+                "wiki": "https://en.wikipedia.org/wiki/No_Longer_Human"
+              },
+              {
+                "isBook": true,
+                "id": "process",
+                "title": "Der Process",
+                "author": "Franz Kafka",
+                "desc": "Josef K. wird eines Morgens verhaftet, ohne zu erfahren, warum. Kafka beschreibt eine bürokratische Albtraumwelt, in der Schuld und Verfahren undurchschaubar bleiben.",
+                "cover": "data/covers/process.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Der_Process"
+              },
+              {
+                "isBook": true,
+                "id": "verwandlung",
+                "title": "Die Verwandlung",
+                "author": "Franz Kafka",
+                "desc": "Gregor Samsa erwacht eines Morgens als Käfer. Kafkas berühmteste Erzählung über Familie, Ausgrenzung und den Verlust menschlicher Identität.",
+                "cover": "data/covers/verwandlung.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Die_Verwandlung"
+              },
+              {
+                "isBook": true,
+                "id": "schuld",
+                "title": "Schuld und Sühne",
+                "author": "Fjodor Dostojewski",
+                "desc": "Ein mittelloser Student begeht einen Mord und ringt danach mit Schuld, Gewissen und Erlösung. Dostojewski verbindet Psychologie, Moral und Gesellschaftskritik in einem der einflussreichsten Romane der Weltliteratur.",
+                "cover": "data/covers/schuld.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Schuld_und_S%C3%BChne"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "non-fiction",
+        "title": "Fachliteratur",
+        "desc": "Wissen, Philosophie, Geschichte und Technologie.",
+        "children": [
+          {
+            "id": "tech",
+            "title": "Informatik & Code",
+            "desc": "Bücher über Softwareentwicklung und Architektur.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "clean-code",
+                "title": "Clean Code",
+                "author": "Robert C. Martin",
+                "desc": "Ein Handbuch für agile Softwarehandwerkskunst mit Prinzipien für lesbaren und wartbaren Code. Martin zeigt, wie Software nicht nur funktioniert, sondern langfristig verständlich bleibt.",
+                "cover": "data/covers/clean-code.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Clean_Code"
+              },
+              {
+                "isBook": true,
+                "id": "pragmatic",
+                "title": "The Pragmatic Programmer",
+                "author": "Hunt & Thomas",
+                "desc": "Ein Leitfaden für praktische Entwickler, der Werkzeuge, Denkweisen und Verantwortung verbindet. Die Autoren formulieren Prinzipien, die unabhängig von Sprache und Framework gelten.",
+                "cover": "data/covers/pragmatic.svg",
+                "wiki": "https://en.wikipedia.org/wiki/The_Pragmatic_Programmer"
+              },
+              {
+                "isBook": true,
+                "id": "refactoring",
+                "title": "Refactoring",
+                "author": "Martin Fowler",
+                "desc": "Wie man bestehenden Code systematisch verbessert, ohne sein Verhalten zu ändern. Fowler liefert einen Katalog von Techniken, die heute zum Standardrepertoire professioneller Entwicklung gehören.",
+                "cover": "data/covers/refactoring.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Refactoring"
+              }
+            ]
+          },
+          {
+            "id": "philosophy",
+            "title": "Philosophie",
+            "desc": "Gedanken über die Existenz, Moral und Erkenntnis.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "kunst-seins",
+                "title": "Die Kunst des Seins",
+                "author": "Erich Fromm",
+                "recommended": true,
+                "desc": "Fromm fragt, was ein erfülltes Leben jenseits von Besitz und Konsum bedeuten kann. Kurz vor seinem Tod verfasst, ist das Buch eine knappe, klare Zusammenfassung seiner humanistischen Philosophie.",
+                "cover": "data/covers/kunst-seins.svg"
+              },
+              {
+                "isBook": true,
+                "id": "meditations",
+                "title": "Meditationen",
+                "author": "Marcus Aurelius",
+                "desc": "Tagebuch eines römischen Kaisers über den Stoizismus — Selbstdisziplin, Akzeptanz und innere Ruhe. Kein theoretisches Werk, sondern praktische Notizen eines Menschen an der Macht.",
+                "cover": "data/covers/meditations.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Selbstbetrachtungen"
+              },
+              {
+                "isBook": true,
+                "id": "sisyphos",
+                "title": "Der Mythos des Sisyphos",
+                "author": "Albert Camus",
+                "desc": "Camus fragt, ob das Leben trotz fehlenden Sinns lebenswert ist. Seine Antwort — der absurde Mensch — ist ein zentraler Text der modernen Philosophie.",
+                "cover": "data/covers/sisyphos.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Der_Mythos_des_Sisyphos"
+              },
+              {
+                "isBook": true,
+                "id": "zarathustra",
+                "title": "Also sprach Zarathustra",
+                "author": "Friedrich Nietzsche",
+                "desc": "Nietzsches philosophisches Prosagedicht über den Übermenschen, den Willen zur Macht und die Ewige Wiederkunft. Provokant, poetisch und bis heute umstritten.",
+                "cover": "data/covers/zarathustra.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Also_sprach_Zarathustra"
+              }
+            ]
+          },
+          {
+            "id": "science-society",
+            "title": "Wissenschaft & Gesellschaft",
+            "desc": "Sachbücher über Wissenschaft, Geschichte und ihre Wirkung auf die Gesellschaft.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "sapiens",
+                "title": "Sapiens: Eine kurze Geschichte der Menschheit",
+                "author": "Yuval Noah Harari",
+                "recommended": true,
+                "desc": "Von den ersten Jägern und Sammlern bis zu künstlicher Intelligenz und Gentechnik — Harari erzählt die Geschichte unserer Spezies in großen Linien. Das Buch stellt unbequeme Fragen zu Fortschritt, Moral und der Zukunft des Menschen.",
+                "cover": "data/covers/sapiens.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Eine_kurze_Geschichte_der_Menschheit"
+              },
+              {
+                "isBook": true,
+                "id": "lsd",
+                "title": "LSD: Mein Sorgenkind",
+                "author": "Albert Hofmann",
+                "recommended": true,
+                "desc": "Albert Hofmann, der Entdecker des LSD, erzählt die Geschichte seiner Substanz — von der zufälligen Entdeckung 1943 bis zu ihrer kulturellen Wirkung. Ein wissenschaftliches Memoir, das zugleich eine Warnung und eine Verteidigung ist.",
+                "cover": "data/covers/lsd.svg",
+                "wiki": "https://en.wikipedia.org/wiki/LSD%2C_My_Problem_Child"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "novels": {
+    "id": "novel-root",
+    "title": "Wähle deinen Pfad",
+    "children": [
+      {
+        "id": "manga",
+        "title": "Manga",
+        "desc": "Japanische Comics in allen Stilrichtungen und Zielgruppen.",
+        "children": [
+          {
+            "id": "shonen",
+            "title": "Shonen",
+            "desc": "Actionreiche Geschichten für junge Leser.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "one-piece",
+                "title": "One Piece",
+                "author": "Eiichiro Oda",
+                "desc": "Piratenabenteuer über Freiheit, Träume und Freundschaft — seit über 25 Jahren. Oda verbindet Humor, Tragik und Weltbau in einem der erfolgreichsten Werke der Comicgeschichte.",
+                "cover": "data/covers/one-piece.svg",
+                "wiki": "https://de.wikipedia.org/wiki/One_Piece"
+              },
+              {
+                "isBook": true,
+                "id": "aot",
+                "title": "Attack on Titan",
+                "author": "Hajime Isayama",
+                "desc": "Dystopie über Menschheit, Mauern und Freiheit, in der jede Antwort neue Fragen aufwirft. Isayama erzählt von Krieg, Schuld und dem, was Menschen füreinander tun — im Guten wie im Bösen.",
+                "cover": "data/covers/aot.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Attack_on_Titan"
+              },
+              {
+                "isBook": true,
+                "id": "fma",
+                "title": "Fullmetal Alchemist",
+                "author": "Hiromu Arakawa",
+                "desc": "Zwei Brüder suchen den Stein der Weisen, um ihre Körper wiederherzustellen. Ein Manga über Krieg, Wissenschaft und Moral, der seine Geschichte konsequent zu Ende erzählt.",
+                "cover": "data/covers/fma.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Fullmetal_Alchemist"
+              }
+            ]
+          },
+          {
+            "id": "seinen",
+            "title": "Seinen",
+            "desc": "Erwachsene Themen, psychologische Tiefe.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "nlh-manga",
+                "title": "No Longer Human",
+                "author": "Junji Ito (Adaption)",
+                "desc": "Manga-Adaption von Osamu Dazais Roman, visualisiert im typischen Stil Junji Itos. Eine düstere, verstörende Interpretation, die die Vorlage in Bildern neu erzählt.",
+                "relatedId": "nlh-novel",
+                "relatedTitle": "No Longer Human (Roman)",
+                "cover": "data/covers/nlh-manga.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Gezeichnet_%28Dazai_Osamu%29"
+              },
+              {
+                "isBook": true,
+                "id": "berserk",
+                "title": "Berserk",
+                "author": "Kentaro Miura",
+                "desc": "Ein düsteres Dark-Fantasy-Epos über Schicksal, Freundschaft und Verrat. Miura erschuf eine Welt, die in ihrer Brutalität und Tiefe bis heute Maßstäbe setzt.",
+                "cover": "data/covers/berserk.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Berserk"
+              },
+              {
+                "isBook": true,
+                "id": "monster",
+                "title": "Monster",
+                "author": "Naoki Urasawa",
+                "desc": "Ein Arzt rettet einen Jungen — Jahre später wird dieser zum Serienmörder. Urasawa verbindet Thriller, Psychologie und Nachkriegsgeschichte zu einem Meisterwerk der Spannung.",
+                "cover": "data/covers/monster.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Monster"
+              }
+            ]
+          },
+          {
+            "id": "shoujo",
+            "title": "Shoujo",
+            "desc": "Emotionale Geschichten über Beziehungen und Erwachsenwerden.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "fruits-basket",
+                "title": "Fruits Basket",
+                "author": "Natsuki Takaya",
+                "desc": "Ein Waisenmädchen trifft eine Familie mit einem seltsamen Fluch. Hinter der warmen Oberfläche erzählt die Geschichte von Trauma, Familie und Heilung.",
+                "cover": "data/covers/fruits-basket.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Fruits_Basket"
+              },
+              {
+                "isBook": true,
+                "id": "nana",
+                "title": "Nana",
+                "author": "Ai Yazawa",
+                "desc": "Zwei Frauen, beide Nana, teilen sich in Tokio eine Wohnung und träumen von Musik und Liebe. Ai Yazawa zeichnet Erwachsenwerden, Abhängigkeit und Verlust mit ungewöhnlicher Ehrlichkeit.",
+                "cover": "data/covers/nana.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Nana"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "webnovel",
+        "title": "Web-Novels",
+        "desc": "Digital publizierte Romanformen, oft mit Manga- oder Anime-Adaption.",
+        "children": [
+          {
+            "id": "light-novel",
+            "title": "Light Novels",
+            "desc": "Illustrierte Romane aus Japan, häufig mit Anime-Adaption.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "spice-wolf",
+                "title": "Spice and Wolf",
+                "author": "Isuna Hasekura",
+                "desc": "Wirtschaft und Romantik im mittelalterlichen Europa — ein Kaufmann und eine Wolfsgöttin reisen gemeinsam. Hasekura verbindet Handel, Philosophie und leise Romanze zu einer ungewöhnlichen Reihe.",
+                "cover": "data/covers/spice-wolf.svg",
+                "wiki": "https://de.wikipedia.org/wiki/%C5%8Ckami_to_K%C5%8Dshinry%C5%8D"
+              },
+              {
+                "isBook": true,
+                "id": "re-zero",
+                "title": "Re:Zero",
+                "author": "Tappei Nagatsuki",
+                "desc": "Zeitschleifen, Trauma und Heldentum wider Willen — Subaru stirbt, um zu lernen. Nagatsuki dekonstruiert das Isekai-Genre und stellt seine Hauptfigur auf eine ehrliche Probe.",
+                "cover": "data/covers/re-zero.svg",
+                "wiki": "https://en.wikipedia.org/wiki/Re%3AZero"
+              },
+              {
+                "isBook": true,
+                "id": "overlord",
+                "title": "Overlord",
+                "author": "Kugane Maruyama",
+                "desc": "Ein Spieler bleibt nach dem Logout in einer fremden Welt gefangen — als Skelettmagier mit übermächtiger Macht. Der Roman erzählt konsequent aus der Perspektive des Bösewichts.",
+                "cover": "data/covers/overlord.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Overlord"
+              }
+            ]
+          },
+          {
+            "id": "isekai",
+            "title": "Isekai",
+            "desc": "Protagonisten in fremden Welten.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "mushoku",
+                "title": "Mushoku Tensei",
+                "author": "Rifujin na Magonote",
+                "desc": "Ein erfolgloser Mensch wird in einer Fantasywelt wiedergeboren und bekommt eine zweite Chance. Die Reihe gilt als Wegbereiter moderner Isekai-Literatur.",
+                "cover": "data/covers/mushoku.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Mushoku_Tensei"
+              },
+              {
+                "isBook": true,
+                "id": "konosuba",
+                "title": "Konosuba",
+                "author": "Natsume Akatsuki",
+                "desc": "Ein junger Mann stirbt und landet in einer Fantasywelt — begleitet von einer nutzlosen Göttin. Eine Parodie auf Isekai-Klischees, die ihre Figuren trotzdem ernst nimmt.",
+                "cover": "data/covers/konosuba.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Kono_Subarashii_Sekai_ni_Shukufuku_o%21"
+              }
+            ]
+          },
+          {
+            "id": "korean-webnovel",
+            "title": "Koreanische Web-Novels",
+            "desc": "Digital publizierte Romane aus Südkorea, oft mit Manga- oder Anime-Adaption.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "solo-leveling",
+                "title": "Solo Leveling",
+                "author": "Chugong",
+                "recommended": true,
+                "desc": "Ein schwacher Jäger erhält ein System, das ihm erlaubt, unbegrenzt stärker zu werden — und steigt zur stärksten Waffe der Menschheit auf. Die koreanische Web-Novel verbindet Action, Aufstiegsfantasie und eine düstere Welt voller Monster.",
+                "cover": "data/covers/solo-leveling.svg",
+                "wiki": "https://de.wikipedia.org/wiki/Solo_Leveling"
+              },
+              {
+                "isBook": true,
+                "id": "lms",
+                "title": "The Legendary Moonlight Sculptor",
+                "author": "Nam Heesung",
+                "recommended": true,
+                "desc": "Ein verschuldeter junger Mann verdient sein Geld in einem Virtual-Reality-Spiel, das zur zweiten Welt geworden ist. Die koreanische Web-Novel verbindet Wirtschaft, Rollenspiel und Aufstiegsfantasie auf ungewöhnlich konsequente Weise.",
+                "cover": "data/covers/lms.svg"
+              },
+              {
+                "isBook": true,
+                "id": "world-after-fall",
+                "title": "The World After the Fall",
+                "author": "Sing-Shong",
+                "recommended": true,
+                "desc": "Als plötzlich gigantische Türme auf der Erde erscheinen und Monster die Menschheit bedrohen, wird Jaehwan zum Tower Walker. Doch nach 100 Ebenen entdeckt er, dass der Turm eine Illusion war — und beschließt, das System selbst zu zerstören, das ihn und die Welt betrogen hat.",
+                "cover": "data/covers/world-after-fall.svg",
+                "wiki": "https://en.wikipedia.org/wiki/The_World_After_the_Fall"
+              }
+            ]
+          },
+          {
+            "id": "chinese-webnovel",
+            "title": "Chinesische Web-Novels",
+            "desc": "Digital publizierte Romane aus China, häufig mit Science-Fiction- oder Wuxia-Elementen.",
+            "children": [
+              {
+                "isBook": true,
+                "id": "legendary-mechanic",
+                "title": "The Legendary Mechanic",
+                "author": "Qi Peijia",
+                "recommended": true,
+                "desc": "Ein Spieler erwacht in der Welt des Spiels — nicht als Held, sondern als NPC mit eigenen Zielen. Die chinesische Web-Novel erzählt aus ungewöhnlicher Perspektive von Systemen, Macht und Überleben.",
+                "cover": "data/covers/legendary-mechanic.svg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

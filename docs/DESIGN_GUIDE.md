@@ -56,7 +56,37 @@ Kategorie-Karte und Buch-Karte unterscheiden sich über einen farbigen Balken li
 box-shadow: inset 3px 0 0 var(--green), var(--shadow-card);
 ```
 
-Ein `border-left` würde an den runden Ecken abgeschnitten. Der `inset`-Schatten folgt der Rundung. Das ist der Grund für diese Lösung.
+Ein `border-left` würde an den runden Ecken abgeschnitten. Der `inset`-Schatten folgt der Rundung. Das ist der Grund für diese Lösung. (Seit Version 0.9 gilt das nur noch für Kategorie-Karten — Buchkarten sind Poster ohne Balken, siehe 3.2.)
+
+### 3.1 Titelbilder (SVG)
+
+Die Titelbilder liegen als SVG in `data/covers/`. Sie werden von `generate_covers.py` erzeugt und folgen demselben Prinzip wie die Oberfläche: **Farben bleiben, die Komposition darf sich ändern.**
+
+| Ebene | Regel |
+|---|---|
+| Farben | Nur aus `:root`: `--bg`, `--card-bg`, `--green`, `--green-dim`, `--text-white`, `--text-muted`. Die Bilder führen keine neue Farbe ein. |
+| Bauplan | Rahmen in `--green-dim`, Verlauf von `--card-bg` nach `--bg`, ein weicher Lichtpunkt, oben Baum und Kategorie, in der Mitte der Titel in Serifenschrift, darunter der Autor in Monospace, unten ein feines Zweigmotiv, oben rechts ★. Seit Version 0.9 füllt das Bild die ganze Buchkarte — es ist der Hauptträger von Titel und Autor. |
+| Format | 400 × 600 Pixel (2:3) — dasselbe Verhältnis, das die Poster-Karte braucht. |
+| Zweigmotiv | Hängt an der **Kategorie**, nicht am Werk: alle Werke einer Kategorie teilen das Motiv. Beim Blättern sieht man so die Struktur des Baums. |
+| Verlauf und Lichtpunkt | Hängen am Werk (Hashwert der ID). Deshalb gleicht kein Bild dem anderen. |
+| Schriften | Nur Systemschriften: Serifenschrift für den Titel, Monospace für Autor und Etiketten — wie im Rest der Seite. |
+| ★ | Erscheint nur bei `recommended: true`. |
+
+Wer die Gestaltung ändern will, ändert `generate_covers.py` und führt das Skript neu aus. Die Dateien von Hand zu bearbeiten ist möglich, aber der nächste Lauf des Skripts überschreibt sie.
+
+**Was man nicht tun sollte:** fotografische Buchcover aus dem Netz einsetzen. Die Begründung steht in [Documentation.md](../Documentation.md), Abschnitt 2.6.
+
+### 3.2 Buchkarten als Poster (ab Version 0.9)
+
+Eine Buchkarte ist ein vertikales Poster: Das Titelbild füllt die Karte oben (2:3), darunter liegt eine dunkle Leiste mit Beschreibung und Knöpfen. Die Regeln:
+
+1. **Das Bild ist die Karte.** Keine zweite Überschrift, kein Autor-Block — beides steht auf dem generierten SVG. Sonst stünde jeder Titel doppelt.
+2. **Kein doppelter ★.** Bei generierten Bildern ist der Stern im Bild. Ein `cover-badge` erscheint nur bei fremden Bildern (Foto aus dem Formular) und im Fallback.
+3. **Zwei Spaltenbreiten.** Ebenen mit nur Werken nutzen `grid-books` (etwa 185 px), alles andere 300 px. Die Klasse setzt `renderNode()` je nachdem, ob in der Ebene nur Bücher liegen.
+4. **Leiste unten.** `.book-overlay` hat einen Verlauf von halbtransparent zu `--card-bg` und eine obere Grenze in `--border`. Die Beschreibung bleibt auf 2 Zeilen begrenzt („Mehr anzeigen", siehe Dokumentation 4.5).
+5. **Fallback ohne Bild:** dunkle Fläche mit Titel in `--serif` kursiv und Autor in Monospace — die Hierarchie der alten Karte, nur auf einer Posterfläche.
+
+Wer die Posterbreite ändert, ändert `minmax` in `.grid-books` und prüft auf dem Telefon, ob die Knöpfe noch in eine Zeile passen.
 
 ---
 
@@ -95,6 +125,7 @@ Die Karten sind keine Buttons und bekommen deshalb keinen Fokus-Rahmen.
 2. **Der Unterschied stark gegen gedämpft.** Kräftiger grüner Balken heißt klickbar, gedämpfter Balken heißt Buch. Ohne diesen Unterschied versteht der Nutzer die Navigation nicht mehr.
 3. **Kursiver Buchtitel und Autor in Großbuchstaben.** Das ist die visuelle Hierarchie zwischen Kategorie und Werk.
 4. **Kein `display` für `#back-btn` im CSS.** Das JavaScript setzt `display` auf `block` oder `none`. Steht im CSS ein `display`, verschwindet die Schaltfläche nicht mehr.
+5. **Neue Farben in den Titelbildern.** Die Bilder nutzen ausschließlich die Werte aus `:root` (Regeln in Abschnitt 3.1).
 
 ---
 
@@ -119,6 +150,9 @@ Die Karten sind keine Buttons und bekommen deshalb keinen Fokus-Rahmen.
 - Einen Cross-Media-Link anklicken: wechselt die App in den anderen Baum?
 - Escape drücken: kommt man eine Ebene zurück?
 - Fenster schmal ziehen: brechen die Karten um?
+- Sind auf den Buchkarten Titelbilder zu sehen (78 px, 2:3)?
+- Führt der Knopf „↗ Wikipedia" auf einen Artikel, der wirklich zu diesem Werk gehört?
+- `python generate_covers.py` erneut ausführen: verändern sich die Dateien? (Antwort: nein, das Skript ist deterministisch.)
 - Prüfen: keine neuen Dateien, keine externen Links, keine Bibliotheken.
 
 Stand: Prototyp, präsentationsbereit.

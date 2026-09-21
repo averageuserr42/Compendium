@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" role="img" aria-label="Titelbild: Clean Code – Robert C. Martin">
+  <title>Clean Code – Robert C. Martin</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121712"/>
+      <stop offset="55%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#0E1410"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0%" stop-color="#1F8F44" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#1F8F44" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg)"/>
+  <circle cx="200" cy="560" r="230" fill="url(#glow)"/>
+  <rect x="18" y="18" width="364" height="564" fill="none" stroke="#1F8F44" stroke-width="1" opacity="0.35"/>
+
+  <text x="200.0" y="60" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="11" fill="#9FCDAF" letter-spacing="3.4" opacity="0.85">LITERATUR</text>
+  <text x="200.0" y="82" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#1F8F44" letter-spacing="1.6">INFORMATIK &amp; CODE</text>
+  <path d="M168.0 102 L232.0 102" stroke="#33FF66" stroke-width="1" opacity="0.45"/>
+  <text x="200.0" y="295.7" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" fill="#FFFFFF" letter-spacing="0.5">Clean Code</text>
+  <path d="M176.0 339.4 L224.0 339.4" stroke="#33FF66" stroke-width="1" opacity="0.35"/>
+  <text x="200.0" y="373.4" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="12.5" fill="#9FCDAF" letter-spacing="2.2">ROBERT C. MARTIN</text>
+  <path d="M200.0 566.0 L204.3 516.8" stroke="#1F8F44" stroke-width="1.50" stroke-linecap="round" opacity="0.55"/>
+  <path d="M204.3 516.8 L191.2 489.1" stroke="#1F8F44" stroke-width="1.02" stroke-linecap="round" opacity="0.55"/>
+  <path d="M191.2 489.1 L175.5 478.4" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="175.5" cy="478.4" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M191.2 489.1 L192.0 471.3" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="192.0" cy="471.3" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M204.3 516.8 L219.9 492.7" stroke="#1F8F44" stroke-width="1.02" stroke-linecap="round" opacity="0.55"/>
+  <path d="M219.9 492.7 L220.7 475.0" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="220.7" cy="475.0" r="2.4" fill="#33FF66" opacity="0.20"/>
+  <path d="M219.9 492.7 L234.4 484.6" stroke="#1F8F44" stroke-width="0.69" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="234.4" cy="484.6" r="2.4" fill="#33FF66" opacity="0.20"/>
+</svg>

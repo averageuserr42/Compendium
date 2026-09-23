@@ -20,7 +20,9 @@ Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare 
 
 ---
 
-## 2. Architektur-Entscheidungen### 2.1 Ein Frontend, eine Datei
+## 2. Architektur-Entscheidungen
+
+### 2.1 Ein Frontend, eine Datei
 Das ganze Frontend liegt weiterhin in einer einzigen `index.html` — HTML, CSS und JavaScript zusammen. Das ist Absicht. Vorteile für den Prototyp:
 - Keine Build-Tools, kein Bundler
 - Sofortiges Deployment über GitHub Pages
@@ -101,7 +103,7 @@ Titelbilder: erlaubt sind JPG, JPEG, PNG und WEBP bis 3 MB. Der Dateiname wird a
 
 ### 2.6 Titelbilder: selbst erzeugt statt fremd geladen
 
-Alle 43 Werke haben ein Titelbild. Diese Bilder sind **selbst erzeugt**: das Skript `generate_covers.py` schreibt für jedes Werk eine SVG-Datei nach `data/covers/<id>.svg` und trägt den Pfad in das Feld `cover` ein.
+Alle 44 Werke haben ein Titelbild. Diese Bilder sind **selbst erzeugt**: das Skript `generate_covers.py` schreibt für jedes Werk eine SVG-Datei nach `data/covers/<id>.svg` und trägt den Pfad in das Feld `cover` ein.
 
 ```text
 data/trees.json  →  generate_covers.py  →  data/covers/*.svg  +  cover/wiki in data/trees.json  →  seed.py  →  Datenbank
@@ -118,7 +120,7 @@ data/trees.json  →  generate_covers.py  →  data/covers/*.svg  +  cover/wiki 
 
 Das Skript nutzt nur die Standardbibliothek von Python, also keine zusätzliche Abhängigkeit. Es ist die einzige Stelle, an der Titelbilder entstehen — im Repository liegt keine fremde Bilddatei.
 
-**Wikipedia-Links:** 40 der 43 Werke haben einen Artikel. Das Skript trägt ihn als Feld `wiki` ein, auf der Karte wird daraus der Knopf „↗ Wikipedia". Drei Werke haben in der deutschen und englischen Wikipedia keinen Artikel und bleiben ohne Link: *Die Kunst des Seins* (der deutsche Artikel „Haben oder Sein" beschreibt ein anderes Buch von Fromm), *The Legendary Moonlight Sculptor* und *The Legendary Mechanic*. Die Liste steht als `WIKI_LINKS` im Skript; sie ist aus `docs/COVER_KANDIDATEN.md` hervorgegangen.
+**Wikipedia-Links:** 41 der 44 Werke haben einen Artikel. Das Skript trägt ihn als Feld `wiki` ein, auf der Karte wird daraus der Knopf „↗ Wikipedia". Drei Werke haben in der deutschen und englischen Wikipedia keinen Artikel und bleiben ohne Link: *Die Kunst des Seins* (der deutsche Artikel „Haben oder Sein" beschreibt ein anderes Buch von Fromm), *The Legendary Moonlight Sculptor* und *The Legendary Mechanic*.
 
 ---
 
@@ -146,7 +148,7 @@ Zwei Bäume werden im Objekt `trees` gespeichert:
 
 Die Anzeigenamen für die Kopfzeile stehen in `treeLabels`. Dadurch kann man einen Baum umbenennen, ohne die Daten zu ändern.
 
-**Aktueller Umfang:** 43 Werke in 17 Unterkategorien, verteilt auf zwei Bäume (26 Werke in der Literatur, 17 in Manga & Web-Novels). 13 Werke tragen ein ★. Alle 43 haben ein Titelbild, 40 davon einen Wikipedia-Link (siehe 2.6).
+**Aktueller Umfang:** 44 Werke in 17 Unterkategorien, verteilt auf zwei Bäume (26 Werke in der Literatur, 18 in Manga & Web-Novels). 13 Werke tragen ein ★. Alle 44 haben ein Titelbild, 41 davon einen Wikipedia-Link (siehe 2.6).
 
 Dieselben Daten stehen in der SQL-Tabelle `nodes`. Aus dem verschachtelten JSON wird eine flache Tabelle, in der die Nachbarschaft durch `parent_id` entsteht:
 
@@ -163,7 +165,7 @@ Dieselben Daten stehen in der SQL-Tabelle `nodes`. Aus dem verschachtelten JSON 
 Beide Felder sind optional. Fehlen sie, sieht die Karte aus wie vor Version 0.7 — es gibt also keinen Bruch im Layout.
 | `related_id`, `related_title` | Ziel des Cross-Media-Links |
 
-Insgesamt stehen 62 Zeilen in der Tabelle. Der Baum wird beim Auslesen wieder zusammengesetzt (siehe 2.5).
+Insgesamt stehen 63 Zeilen in der Tabelle. Der Baum wird beim Auslesen wieder zusammengesetzt (siehe 2.5).
 
 ---
 
@@ -225,9 +227,11 @@ Wichtig dabei: Der Button erscheint nur, wenn der Text wirklich zu lang ist. Kur
 
 Ein Buch kann optional mit einem Werk im anderen Baum verknüpft werden. Dafür gibt es die Felder `relatedId` und `relatedTitle`. Auf der Buch-Karte erscheint dann ein Button mit dem Symbol `↔`. Ein Klick darauf ruft `navigateTo()` auf und springt zum verknüpften Werk — auch in den anderen Baum.
 
-**Aktuelles Beispiel:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito. Die Verknüpfung ist in beide Richtungen hinterlegt: der Roman kennt die Manga, die Manga kennt den Roman. Deshalb tragen zwei Datensätze ein `relatedId` — es ist aber **eine** Verknüpfung (ein Paar).
+**Aktuelle Beispiele:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito — und die Web-Novel *Solo Leveling* von Chugong ↔ die Manhwa-Adaption von DUBU (Redice Studio). Die Verknüpfung ist in beide Richtungen hinterlegt: jedes Werk kennt sein Gegenstück. Deshalb tragen vier Datensätze ein `relatedId` — das sind **zwei** Verknüpfungen (zwei Paare).
 
 Diese Funktion war ursprünglich nur als Roadmap-Ziel geplant. Sie ist aber schon als Basis umgesetzt. Das zeigt: Die Architektur ist wirklich erweiterbar, nicht nur auf dem Papier. Weitere Verknüpfungen sind im Backlog.
+
+Beide Paare verbinden dieselbe Geschichte über zwei Medien hinweg — einmal Japan (Roman ↔ Manga), einmal Korea (Web-Novel ↔ Manhwa). Damit ist das Prinzip über beide Bäume und zwei Kulturen hinweg gezeigt.
 
 ---
 
@@ -295,7 +299,7 @@ Aktuelle Grenzen:
 - In die Tabelle schreibt `seed.py` (alles) und `app.py` (einzelne neue Werke).
 - Keine Build-Pipeline, keine Module.
 - Keine automatisierten Tests.
-- Nur eine Cross-Media-Verknüpfung (ein Paar).
+- Zwei Cross-Media-Verknüpfungen (zwei Paare: *No Longer Human*, *Solo Leveling*).
 - Keine Suche und keine Filter.
 - Drei Werke haben keinen Wikipedia-Link, weil es keinen Artikel gibt (siehe 2.6).
 - Die Titelbilder sind typografisch erzeugt, keine Fotografien oder Verlagscover. Das ist eine bewusste Entscheidung (Rechte, Einheitlichkeit, Dateigröße).
@@ -305,7 +309,7 @@ Damit die Live-Demo ohne Backend vollständig aussieht, sind die Titelbilder sta
 **Umgesetzt in Version 0.8: Titelbilder und Wikipedia-Links**
 
 - Die Bilder sind selbst erzeugt (SVG) statt fremd geladen — Begründung in 2.6.
-- Alle 43 Werke haben ein Bild; 40 haben einen Link zum Artikel, gespeichert als Feld in den Daten.
+- Alle 44 Werke haben ein Bild; 41 haben einen Link zum Artikel, gespeichert als Feld in den Daten.
 - Drei Werke bleiben ohne Link, weil es keinen Artikel gibt — die Liste steht in 2.6.
 - Der Bild-Bauplan ist eine Designregel und steht in [docs/DESIGN_GUIDE.md](./docs/DESIGN_GUIDE.md), Abschnitt 3.1.
 
@@ -390,6 +394,13 @@ Firebase bleibt als spätere Option im Backlog.
 - `POST /api/covers` lädt Titelbilder nach `data/covers/`, `GET /data/covers/<datei>` liefert sie aus
 - Die Datenbank wird automatisch neu erzeugt, wenn das Schema sich ändert
 
+### Version 0.10 — Zweite Cross-Media-Verknüpfung, Fußzeile, Aufräumen
+- Zweite Cross-Media-Verknüpfung: Web-Novel *Solo Leveling* (Chugong) ↔ Manhwa-Adaption (DUBU, Redice Studio) — der Manhwa ist als neues Werk im Baum Manga › Seinen
+- Jetzt 44 Werke, 44 Titelbilder, 41 Wikipedia-Links
+- Fußzeile mit Link zum GitHub-Repository und Kuratierung-Legende
+- Knöpfe auf den Postern bleiben auf schmalen Fenstern (Telefon) in einer Zeile
+- Recherche-Dokumente zu den Titelbildern (`docs/COVER_KANDIDATEN.*`) entfernt — die Ergebnisse stehen in 2.6 und im Skript
+
 ### Version 0.9 — Karte als Poster
 - Buchkarten zeigen das Titelbild auf der ganzen Karte (Seitenverhältnis 2:3), darunter Beschreibung und Knöpfe
 - Titel und Autor stehen auf den generierten Bildern und werden nicht wiederholt
@@ -410,4 +421,4 @@ Firebase bleibt als spätere Option im Backlog.
 
 ---
 
-*Stand: Prototyp, präsentationsbereit (Version 0.9).*
+*Stand: Prototyp, präsentationsbereit (Version 0.10).*

@@ -11,9 +11,9 @@ Dieses Repository enthält den interaktiven Frontend-Prototypen, der das Kernkon
 - Dynamisches DOM-Rendering mittels Vanilla JavaScript.
 - Klick-basierte Navigation (Drill-Down) durch die Kategorien.
 - **Zwei parallele Bäume:** Literatur (Belletristik / Fachliteratur) und Manga & Web-Novels, umschaltbar über einen Tree-Switcher im Header.
-- **Erste Cross-Media-Verknüpfungen** zwischen thematisch verwandten Werken aus beiden Bäumen (z. B. Roman ↔ Manga-Adaption desselben Stoffs) — ursprünglich als späteres Roadmap-Ziel geplant, jetzt als Basis-Implementierung vorhanden.
+- **Zwei Cross-Media-Verknüpfungen** zwischen thematisch verwandten Werken aus beiden Bäumen (Roman ↔ Manga-Adaption von Osamu Dazai, Web-Novel ↔ Manhwa-Adaption von Solo Leveling) — ursprünglich als späteres Roadmap-Ziel geplant, jetzt als Basis-Implementierung vorhanden.
 - Integriertes Design-System (Dark-Theme mit Akzentfarben, "Matrix"-Stil).
-- **Titelbilder und Wikipedia-Links:** Alle 43 Werke haben ein Titelbild, 40 davon einen Link zum Wikipedia-Artikel. Beide Felder sind optional — fehlen sie, sieht die Karte aus wie vorher. Die Titelbilder sind **selbst erzeugt** (SVG, typografisch): im Repository liegt keine fremde Bilddatei.
+- **Titelbilder und Wikipedia-Links:** Alle 44 Werke haben ein Titelbild, 41 davon einen Link zum Wikipedia-Artikel. Beide Felder sind optional — fehlen sie, sieht die Karte aus wie vorher. Die Titelbilder sind **selbst erzeugt** (SVG, typografisch): im Repository liegt keine fremde Bilddatei.
 - **Neue Werke über den Browser:** Mit laufendem Backend öffnet der Knopf „＋ Werk hinzufügen" ein Formular (Kategorie, Titel, Autor, Beschreibung, Wikipedia-Link, Bild, ★). Gespeichert wird über `POST /api/works`, Bilder gehen über `POST /api/covers` nach `data/covers/`. Auf der Live-Demo ist das Formular nicht sichtbar, weil dort kein Backend läuft — die Begründung steht unten unter „Formular nur lokal".
 
 Für Details zur Architektur und den Designentscheidungen siehe [Documentation.md](./Documentation.md).

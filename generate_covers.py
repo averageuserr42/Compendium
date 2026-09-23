@@ -98,6 +98,7 @@ WIKI_LINKS = {
     "mushoku": "https://de.wikipedia.org/wiki/Mushoku_Tensei",
     "konosuba": "https://de.wikipedia.org/wiki/Kono_Subarashii_Sekai_ni_Shukufuku_o%21",
     "solo-leveling": "https://de.wikipedia.org/wiki/Solo_Leveling",
+    "solo-leveling-manhwa": "https://en.wikipedia.org/wiki/Solo_Leveling",
     "world-after-fall": "https://en.wikipedia.org/wiki/The_World_After_the_Fall",
 }
 

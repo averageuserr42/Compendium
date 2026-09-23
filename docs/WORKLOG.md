@@ -3,7 +3,7 @@
 Dieses Protokoll hält fest, was wann geändert wurde und warum.
 Es ergänzt die Trello-Karte: Trello zeigt den Plan, dieses Protokoll zeigt die Umsetzung.
 
-Tageszusammenfassungen im Schulformat stehen in `TAGESDOKUMENTATION_JJJJ-MM-TT.md` (aktuell: [TAGESDOKUMENTATION_2026-09-21.md](./TAGESDOKUMENTATION_2026-09-21.md)).
+Tageszusammenfassungen im Schulformat werden außerhalb des Repositoriums geführt und in der Akademie hochgeladen (zuletzt: 2026-09-21).
 
 Regeln für dieses Protokoll:
 
@@ -30,6 +30,14 @@ Hinweis: Die Einträge vor dem 19.09.2026 sind aus der Git-Historie rekonstruier
 ---
 
 ## Einträge
+
+### 2026-09-23 – Zweite Cross-Media-Verknüpfung, Fußzeile, Aufräumen (Version 0.10)
+
+- **Was:** Neue Verknüpfung: Web-Novel *Solo Leveling* (Chugong) ↔ Manhwa-Adaption (DUBU, Redice Studio). Der Manhwa steht als neues Werk in Manga › Seinen, beide Richtungen sind in den Daten hinterlegt. Dazu: Fußzeile mit GitHub-Link und Kuratierung-Legende, und die Knöpfe auf den Postern bleiben auf schmalen Fenstern (bis 480 px) in einer Zeile. Entfernt: `docs/COVER_KANDIDATEN.md` und `docs/cover-kandidaten.json` (Recherche abgeschlossen, Ergebnisse stehen in Dokumentation 2.6 und im Skript) sowie die Tagesdokumentation vom 21.09. (sie ist in der Akademie hochgeladen, nicht fürs Repository).
+- **Warum:** Der offene Punkt „nur eine Cross-Media-Verknüpfung" aus der Dokumentation ist damit geschlossen — zwei Paare zeigen das Prinzip über beide Bäume (Japan: Roman ↔ Manga, Korea: Web-Novel ↔ Manhwa). Der Fußzeilen-Punkt war offen geblieben, weil die ★-Legende nur im Kopfbereich stand. Der offene Punkt aus 0.9 (Knöpfe auf dem Telefon) ist damit ebenfalls geprüft und geschlossen.
+- **Dateien:** `data/trees.json` (neues Werk + zwei relatedId-Felder, Generator hat cover/wiki ergänzt), `generate_covers.py` (ein Eintrag in `WIKI_LINKS`), `index.html` (Fußzeile, Media-Query für schmale Fenster), `Documentation.md` (Abschnitt 5, Zahlen 44/41/63, Changelog 0.10), `README.md` (Zahlen), `docs/CODE_TOUR.md` (Zahlen, Stand-Zeile), gelöscht: `docs/COVER_KANDIDATEN.md`, `docs/cover-kandidaten.json`, `docs/TAGESDOKUMENTATION_2026-09-21.txt`.
+- **Ergebnis (geprüft):** Diff gegen die gesicherte Vorgängerdatei zeigt nur den neuen Manhwa-Knoten und die zwei `relatedId`-Felder. 44 Werke, 13 ★, 44 Titelbilder, 41 Wikipedia-Links, alle IDs eindeutig. Im Browser (Flask-Modus): Cross-Media-Sprung in beide Richtungen führt zur richtigen Kategorie, das Manhwa-Bild lädt. Bei 375 px Fensterbreite stehen beide Knöpfe in einer Zeile (Höhe 35 px). Fußzeile sichtbar, Link mit `target="_blank" rel="noopener"`. Im statischen Modus separat geprüft.
+- **Offen:** Nichts. Code eingefroren zur Präsentationsvorbereitung.
 
 ### 2026-09-21 – Buchkarte als Poster (Version 0.9)
 

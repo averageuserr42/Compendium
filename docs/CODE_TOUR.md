@@ -201,7 +201,7 @@ python generate_covers.py       # только если добавились п�
 | `title_layout()` | Подбирает размер шрифта и переносит длинное название на строки, чтобы оно влезло в блок. |
 | `branch()` | Рисует ветку и вызывает себя для ветвления — та же рекурсия, что и в `seed.py`. |
 | `digest_of()` | `hashlib.sha256(...)` — отсюда берётся «разнообразие». Поэтому результат повторяем. |
-| `main()` | Пишет 43 файла, заполняет `cover` и `wiki`, переписывает `data/trees.json`, пересобирает базу. |
+| `main()` | Пишет 44 файла, заполняет `cover` и `wiki`, переписывает `data/trees.json`, пересобирает базу. |
 
 Три вещи, которые стоит понимать:
 
@@ -241,7 +241,7 @@ python generate_covers.py       # только если добавились п�
 | Wie unterscheidet der Code generierte und hochgeladene Bilder? | Am Pfad: nur der Generator schreibt `.svg`-Dateien, das Formular nimmt JPG/PNG/WEBP. |
 | Woher kommen die Titelbilder? | Aus einem eigenen Skript (`generate_covers.py`). Es schreibt typografische SVG-Dateien — rechtlich sauber und einheitlich. |
 | Warum keine echten Buchcover? | Die deutsche Wikipedia zeigt keine Buchcover (dort sind nicht-freie Dateien nicht erlaubt), die englische nur unter „fair use". Für dieses Repository wäre das rechtlich nicht sauber. |
-| Wie viele Werke haben einen Wikipedia-Link? | 40 von 43. Drei haben keinen Artikel in der deutschen oder englischen Wikipedia. |
+| Wie viele Werke haben einen Wikipedia-Link? | 41 von 44. Drei haben keinen Artikel in der deutschen oder englischen Wikipedia. |
 
 ---
 
@@ -254,4 +254,4 @@ python generate_covers.py       # только если добавились п�
 
 ---
 
-*Stand: Version 0.8 (Titelbilder und Wikipedia-Links).*
+*Stand: Version 0.10 (zweite Cross-Media-Verknüpfung).*

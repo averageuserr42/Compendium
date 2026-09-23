@@ -381,6 +381,17 @@
                 "desc": "Ein Arzt rettet einen Jungen — Jahre später wird dieser zum Serienmörder. Urasawa verbindet Thriller, Psychologie und Nachkriegsgeschichte zu einem Meisterwerk der Spannung.",
                 "cover": "data/covers/monster.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Monster"
+              },
+              {
+                "isBook": true,
+                "id": "solo-leveling-manhwa",
+                "title": "Solo Leveling",
+                "author": "DUBU (Redice Studio) (Adaption)",
+                "desc": "Die Manhwa-Adaption der Web-Novel von Chugong, illustriert von DUBU (Redice Studio). Die Aufstiegsgeschichte Sung Jinwoos in vollständig kolorierten Panels — weltweit einer der erfolgreichsten Webtoons.",
+                "relatedId": "solo-leveling",
+                "relatedTitle": "Solo Leveling (Web-Novel)",
+                "cover": "data/covers/solo-leveling-manhwa.svg",
+                "wiki": "https://en.wikipedia.org/wiki/Solo_Leveling"
               }
             ]
           },
@@ -488,6 +499,8 @@
                 "recommended": true,
                 "desc": "Ein schwacher Jäger erhält ein System, das ihm erlaubt, unbegrenzt stärker zu werden — und steigt zur stärksten Waffe der Menschheit auf. Die koreanische Web-Novel verbindet Action, Aufstiegsfantasie und eine düstere Welt voller Monster.",
                 "cover": "data/covers/solo-leveling.svg",
+                "relatedId": "solo-leveling-manhwa",
+                "relatedTitle": "Solo Leveling (Manhwa)",
                 "wiki": "https://de.wikipedia.org/wiki/Solo_Leveling"
               },
               {

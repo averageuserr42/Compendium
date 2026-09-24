@@ -29,7 +29,15 @@ Für Details zur Architektur und den Designentscheidungen siehe [Documentation.m
 Die Live-Demo läuft ohne Server: das Frontend lädt `data/trees.json` selbst. Flask und SQLite werden dafür nicht gebraucht.
 👉 **[Hier klicken für die Live-Demo](https://averageuserr42.github.io/Compendium/)**
 
-**Mit Backend starten (Flask + SQLite)**
+**Mit Backend starten (Flask + SQLite) – Windows: Doppelklick auf `start.bat`**
+
+Das Skript erzeugt die Datenbank und startet den Server in einem Schritt:
+
+```bash
+start.bat
+```
+
+Oder manuell:
 
 ```bash
 python -m pip install flask

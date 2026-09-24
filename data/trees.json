@@ -29,7 +29,7 @@
                 "title": "Die letzte Frage",
                 "author": "Isaac Asimov",
                 "recommended": true,
-                "desc": "Eine der berühmtesten Kurzgeschichten der Science Fiction — die Menschheit sucht über Äonen hinweg nach einer Antwort auf die letzte Frage. Asimov verdichtet Thermodynamik, Kosmologie und Philosophie in wenigen Seiten und liefert einen der stärksten Schlusssätze des Genres.",
+                "desc": "Eine der berühmtesten Kurzgeschichten der Science Fiction – die Menschheit sucht über Äonen hinweg nach einer Antwort auf die letzte Frage. Asimov verdichtet Thermodynamik, Kosmologie und Philosophie in wenigen Seiten und liefert einen der stärksten Schlusssätze des Genres.",
                 "cover": "data/covers/last-question.svg",
                 "wiki": "https://en.wikipedia.org/wiki/The_Last_Question"
               },
@@ -90,7 +90,7 @@
                 "id": "hobbit",
                 "title": "Der Hobbit",
                 "author": "J.R.R. Tolkien",
-                "desc": "Ein gemütlicher Hobbit wird auf ein Abenteuer mit Drachen, Zwergen und einem Ring geschickt. Tolkiens Vorläufer zu Der Herr der Ringe — zugänglicher und verspielter, aber mit demselben erzählerischen Tiefgang.",
+                "desc": "Ein gemütlicher Hobbit wird auf ein Abenteuer mit Drachen, Zwergen und einem Ring geschickt. Tolkiens Vorläufer zu Der Herr der Ringe – zugänglicher und verspielter, aber mit demselben erzählerischen Tiefgang.",
                 "cover": "data/covers/hobbit.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Der_Hobbit"
               },
@@ -116,7 +116,7 @@
                 "title": "Auferstehung",
                 "author": "Leo Tolstoi",
                 "recommended": true,
-                "desc": "Tolstois letzter großer Roman über Schuld, Vergebung und gesellschaftliche Ungerechtigkeit im zaristischen Russland. Ein Fürst folgt einer Verurteilten nach Sibirien — und findet dort keine einfache Erlösung, sondern eine unbequeme Wahrheit.",
+                "desc": "Tolstois letzter großer Roman über Schuld, Vergebung und gesellschaftliche Ungerechtigkeit im zaristischen Russland. Ein Fürst folgt einer Verurteilten nach Sibirien – und findet dort keine einfache Erlösung, sondern eine unbequeme Wahrheit.",
                 "cover": "data/covers/auferstehung.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Auferstehung"
               },
@@ -126,7 +126,7 @@
                 "title": "Der Meister und Margarita",
                 "author": "Michail Bulgakow",
                 "recommended": true,
-                "desc": "Der Teufel besucht das atheistische Moskau der 1930er Jahre — und stiftet Chaos zwischen Bürokratie, Literaturbetrieb und Liebe. Bulgakow verwebt Satire, Religion und Fantastik zu einem der bedeutendsten Romane des 20. Jahrhunderts.",
+                "desc": "Der Teufel besucht das atheistische Moskau der 1930er Jahre – und stiftet Chaos zwischen Bürokratie, Literaturbetrieb und Liebe. Bulgakow verwebt Satire, Religion und Fantastik zu einem der bedeutendsten Romane des 20. Jahrhunderts.",
                 "cover": "data/covers/meister-margarita.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Der_Meister_und_Margarita"
               },
@@ -136,7 +136,7 @@
                 "title": "Der Alchimist",
                 "author": "Paulo Coelho",
                 "recommended": true,
-                "desc": "Ein andalusischer Hirtenjunge zieht los, um einen Schatz zu finden — und entdeckt unterwegs, was wirklich zählt. Coelhos Parabel über Träume, Mut und Selbstverwirklichung wurde in über 80 Sprachen übersetzt.",
+                "desc": "Ein andalusischer Hirtenjunge zieht los, um einen Schatz zu finden – und entdeckt unterwegs, was wirklich zählt. Coelhos Parabel über Träume, Mut und Selbstverwirklichung wurde in über 80 Sprachen übersetzt.",
                 "cover": "data/covers/alchimist.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Der_Alchimist"
               },
@@ -250,7 +250,7 @@
                 "id": "meditations",
                 "title": "Meditationen",
                 "author": "Marcus Aurelius",
-                "desc": "Tagebuch eines römischen Kaisers über den Stoizismus — Selbstdisziplin, Akzeptanz und innere Ruhe. Kein theoretisches Werk, sondern praktische Notizen eines Menschen an der Macht.",
+                "desc": "Tagebuch eines römischen Kaisers über den Stoizismus – Selbstdisziplin, Akzeptanz und innere Ruhe. Kein theoretisches Werk, sondern praktische Notizen eines Menschen an der Macht.",
                 "cover": "data/covers/meditations.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Selbstbetrachtungen"
               },
@@ -259,7 +259,7 @@
                 "id": "sisyphos",
                 "title": "Der Mythos des Sisyphos",
                 "author": "Albert Camus",
-                "desc": "Camus fragt, ob das Leben trotz fehlenden Sinns lebenswert ist. Seine Antwort — der absurde Mensch — ist ein zentraler Text der modernen Philosophie.",
+                "desc": "Camus fragt, ob das Leben trotz fehlenden Sinns lebenswert ist. Seine Antwort – der absurde Mensch – ist ein zentraler Text der modernen Philosophie.",
                 "cover": "data/covers/sisyphos.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Der_Mythos_des_Sisyphos"
               },
@@ -285,7 +285,7 @@
                 "title": "Sapiens: Eine kurze Geschichte der Menschheit",
                 "author": "Yuval Noah Harari",
                 "recommended": true,
-                "desc": "Von den ersten Jägern und Sammlern bis zu künstlicher Intelligenz und Gentechnik — Harari erzählt die Geschichte unserer Spezies in großen Linien. Das Buch stellt unbequeme Fragen zu Fortschritt, Moral und der Zukunft des Menschen.",
+                "desc": "Von den ersten Jägern und Sammlern bis zu künstlicher Intelligenz und Gentechnik – Harari erzählt die Geschichte unserer Spezies in großen Linien. Das Buch stellt unbequeme Fragen zu Fortschritt, Moral und der Zukunft des Menschen.",
                 "cover": "data/covers/sapiens.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Eine_kurze_Geschichte_der_Menschheit"
               },
@@ -295,7 +295,7 @@
                 "title": "LSD: Mein Sorgenkind",
                 "author": "Albert Hofmann",
                 "recommended": true,
-                "desc": "Albert Hofmann, der Entdecker des LSD, erzählt die Geschichte seiner Substanz — von der zufälligen Entdeckung 1943 bis zu ihrer kulturellen Wirkung. Ein wissenschaftliches Memoir, das zugleich eine Warnung und eine Verteidigung ist.",
+                "desc": "Albert Hofmann, der Entdecker des LSD, erzählt die Geschichte seiner Substanz – von der zufälligen Entdeckung 1943 bis zu ihrer kulturellen Wirkung. Ein wissenschaftliches Memoir, das zugleich eine Warnung und eine Verteidigung ist.",
                 "cover": "data/covers/lsd.svg",
                 "wiki": "https://en.wikipedia.org/wiki/LSD%2C_My_Problem_Child"
               }
@@ -324,7 +324,7 @@
                 "id": "one-piece",
                 "title": "One Piece",
                 "author": "Eiichiro Oda",
-                "desc": "Piratenabenteuer über Freiheit, Träume und Freundschaft — seit über 25 Jahren. Oda verbindet Humor, Tragik und Weltbau in einem der erfolgreichsten Werke der Comicgeschichte.",
+                "desc": "Piratenabenteuer über Freiheit, Träume und Freundschaft – seit über 25 Jahren. Oda verbindet Humor, Tragik und Weltbau in einem der erfolgreichsten Werke der Comicgeschichte.",
                 "cover": "data/covers/one-piece.svg",
                 "wiki": "https://de.wikipedia.org/wiki/One_Piece"
               },
@@ -333,7 +333,7 @@
                 "id": "aot",
                 "title": "Attack on Titan",
                 "author": "Hajime Isayama",
-                "desc": "Dystopie über Menschheit, Mauern und Freiheit, in der jede Antwort neue Fragen aufwirft. Isayama erzählt von Krieg, Schuld und dem, was Menschen füreinander tun — im Guten wie im Bösen.",
+                "desc": "Dystopie über Menschheit, Mauern und Freiheit, in der jede Antwort neue Fragen aufwirft. Isayama erzählt von Krieg, Schuld und dem, was Menschen füreinander tun – im Guten wie im Bösen.",
                 "cover": "data/covers/aot.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Attack_on_Titan"
               },
@@ -378,7 +378,7 @@
                 "id": "monster",
                 "title": "Monster",
                 "author": "Naoki Urasawa",
-                "desc": "Ein Arzt rettet einen Jungen — Jahre später wird dieser zum Serienmörder. Urasawa verbindet Thriller, Psychologie und Nachkriegsgeschichte zu einem Meisterwerk der Spannung.",
+                "desc": "Ein Arzt rettet einen Jungen – Jahre später wird dieser zum Serienmörder. Urasawa verbindet Thriller, Psychologie und Nachkriegsgeschichte zu einem Meisterwerk der Spannung.",
                 "cover": "data/covers/monster.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Monster"
               },
@@ -387,7 +387,7 @@
                 "id": "solo-leveling-manhwa",
                 "title": "Solo Leveling",
                 "author": "DUBU (Redice Studio) (Adaption)",
-                "desc": "Die Manhwa-Adaption der Web-Novel von Chugong, illustriert von DUBU (Redice Studio). Die Aufstiegsgeschichte Sung Jinwoos in vollständig kolorierten Panels — weltweit einer der erfolgreichsten Webtoons.",
+                "desc": "Die Manhwa-Adaption der Web-Novel von Chugong, illustriert von DUBU (Redice Studio). Die Aufstiegsgeschichte Sung Jinwoos in vollständig kolorierten Panels – weltweit einer der erfolgreichsten Webtoons.",
                 "relatedId": "solo-leveling",
                 "relatedTitle": "Solo Leveling (Web-Novel)",
                 "cover": "data/covers/solo-leveling-manhwa.svg",
@@ -437,7 +437,7 @@
                 "id": "spice-wolf",
                 "title": "Spice and Wolf",
                 "author": "Isuna Hasekura",
-                "desc": "Wirtschaft und Romantik im mittelalterlichen Europa — ein Kaufmann und eine Wolfsgöttin reisen gemeinsam. Hasekura verbindet Handel, Philosophie und leise Romanze zu einer ungewöhnlichen Reihe.",
+                "desc": "Wirtschaft und Romantik im mittelalterlichen Europa – ein Kaufmann und eine Wolfsgöttin reisen gemeinsam. Hasekura verbindet Handel, Philosophie und leise Romanze zu einer ungewöhnlichen Reihe.",
                 "cover": "data/covers/spice-wolf.svg",
                 "wiki": "https://de.wikipedia.org/wiki/%C5%8Ckami_to_K%C5%8Dshinry%C5%8D"
               },
@@ -446,7 +446,7 @@
                 "id": "re-zero",
                 "title": "Re:Zero",
                 "author": "Tappei Nagatsuki",
-                "desc": "Zeitschleifen, Trauma und Heldentum wider Willen — Subaru stirbt, um zu lernen. Nagatsuki dekonstruiert das Isekai-Genre und stellt seine Hauptfigur auf eine ehrliche Probe.",
+                "desc": "Zeitschleifen, Trauma und Heldentum wider Willen – Subaru stirbt, um zu lernen. Nagatsuki dekonstruiert das Isekai-Genre und stellt seine Hauptfigur auf eine ehrliche Probe.",
                 "cover": "data/covers/re-zero.svg",
                 "wiki": "https://en.wikipedia.org/wiki/Re%3AZero"
               },
@@ -455,7 +455,7 @@
                 "id": "overlord",
                 "title": "Overlord",
                 "author": "Kugane Maruyama",
-                "desc": "Ein Spieler bleibt nach dem Logout in einer fremden Welt gefangen — als Skelettmagier mit übermächtiger Macht. Der Roman erzählt konsequent aus der Perspektive des Bösewichts.",
+                "desc": "Ein Spieler bleibt nach dem Logout in einer fremden Welt gefangen – als Skelettmagier mit übermächtiger Macht. Der Roman erzählt konsequent aus der Perspektive des Bösewichts.",
                 "cover": "data/covers/overlord.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Overlord"
               }
@@ -480,7 +480,7 @@
                 "id": "konosuba",
                 "title": "Konosuba",
                 "author": "Natsume Akatsuki",
-                "desc": "Ein junger Mann stirbt und landet in einer Fantasywelt — begleitet von einer nutzlosen Göttin. Eine Parodie auf Isekai-Klischees, die ihre Figuren trotzdem ernst nimmt.",
+                "desc": "Ein junger Mann stirbt und landet in einer Fantasywelt – begleitet von einer nutzlosen Göttin. Eine Parodie auf Isekai-Klischees, die ihre Figuren trotzdem ernst nimmt.",
                 "cover": "data/covers/konosuba.svg",
                 "wiki": "https://de.wikipedia.org/wiki/Kono_Subarashii_Sekai_ni_Shukufuku_o%21"
               }
@@ -497,7 +497,7 @@
                 "title": "Solo Leveling",
                 "author": "Chugong",
                 "recommended": true,
-                "desc": "Ein schwacher Jäger erhält ein System, das ihm erlaubt, unbegrenzt stärker zu werden — und steigt zur stärksten Waffe der Menschheit auf. Die koreanische Web-Novel verbindet Action, Aufstiegsfantasie und eine düstere Welt voller Monster.",
+                "desc": "Ein schwacher Jäger erhält ein System, das ihm erlaubt, unbegrenzt stärker zu werden – und steigt zur stärksten Waffe der Menschheit auf. Die koreanische Web-Novel verbindet Action, Aufstiegsfantasie und eine düstere Welt voller Monster.",
                 "cover": "data/covers/solo-leveling.svg",
                 "relatedId": "solo-leveling-manhwa",
                 "relatedTitle": "Solo Leveling (Manhwa)",
@@ -518,7 +518,7 @@
                 "title": "The World After the Fall",
                 "author": "Sing-Shong",
                 "recommended": true,
-                "desc": "Als plötzlich gigantische Türme auf der Erde erscheinen und Monster die Menschheit bedrohen, wird Jaehwan zum Tower Walker. Doch nach 100 Ebenen entdeckt er, dass der Turm eine Illusion war — und beschließt, das System selbst zu zerstören, das ihn und die Welt betrogen hat.",
+                "desc": "Als plötzlich gigantische Türme auf der Erde erscheinen und Monster die Menschheit bedrohen, wird Jaehwan zum Tower Walker. Doch nach 100 Ebenen entdeckt er, dass der Turm eine Illusion war – und beschließt, das System selbst zu zerstören, das ihn und die Welt betrogen hat.",
                 "cover": "data/covers/world-after-fall.svg",
                 "wiki": "https://en.wikipedia.org/wiki/The_World_After_the_Fall"
               }
@@ -535,7 +535,7 @@
                 "title": "The Legendary Mechanic",
                 "author": "Qi Peijia",
                 "recommended": true,
-                "desc": "Ein Spieler erwacht in der Welt des Spiels — nicht als Held, sondern als NPC mit eigenen Zielen. Die chinesische Web-Novel erzählt aus ungewöhnlicher Perspektive von Systemen, Macht und Überleben.",
+                "desc": "Ein Spieler erwacht in der Welt des Spiels – nicht als Held, sondern als NPC mit eigenen Zielen. Die chinesische Web-Novel erzählt aus ungewöhnlicher Perspektive von Systemen, Macht und Überleben.",
                 "cover": "data/covers/legendary-mechanic.svg"
               }
             ]

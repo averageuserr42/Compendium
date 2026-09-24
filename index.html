@@ -304,7 +304,7 @@
             background: #0d110d;
         }
 
-        /* ★ als Ecke auf dem Bild — auch für hochgeladene Fotos sichtbar */
+        /* ★ als Ecke auf dem Bild – auch für hochgeladene Fotos sichtbar */
         .cover-badge {
             position: absolute;
             top: 0.55rem;
@@ -659,7 +659,7 @@
     </div>
 
     <footer class="site-footer">
-        <p>Compendium — <a href="https://github.com/averageuserr42/Compendium" target="_blank" rel="noopener">GitHub-Repository</a> · ★ = persönlich gelesen und empfohlen</p>
+        <p>Compendium – <a href="https://github.com/averageuserr42/Compendium" target="_blank" rel="noopener">GitHub-Repository</a> · ★ = persönlich gelesen und empfohlen</p>
     </footer>
 
     <script>
@@ -682,7 +682,7 @@
                         return await response.json();
                     }
                 } catch (error) {
-                    // Server nicht erreichbar — nächste Quelle versuchen
+                    // Server nicht erreichbar – nächste Quelle versuchen
                 }
             }
 
@@ -785,7 +785,7 @@
             updateBreadcrumb();
             backBtn.style.display = historyStack.length > 0 ? 'block' : 'none';
 
-            // Kategorien brauchen breite Karten, Bücher enge Poster —
+            // Kategorien brauchen breite Karten, Bücher enge Poster –
             // die Spaltenbreite gehört deshalb an den Container.
             const onlyBooks = node.children.length > 0 && node.children.every(child => child.isBook);
             grid.classList.toggle('grid-books', onlyBooks);
@@ -797,10 +797,10 @@
 
                 if (child.isBook) {
                     // Generierte SVG-Cover tragen Titel und Autor selbst.
-                    // Fremde Bilder (z. B. Foto aus dem Formular) nicht —
+                    // Fremde Bilder (z. B. Foto aus dem Formular) nicht –
                     // dafür gibt es die Zeile unten auf dem Bild.
                     const isSvgCover = typeof child.cover === 'string' && child.cover.endsWith('.svg');
-                    // ★ steht schon im SVG — Badge nur für Bilder ohne eigene Schrift
+                    // ★ steht schon im SVG – Badge nur für Bilder ohne eigene Schrift
                     const badge = (child.recommended && !isSvgCover)
                         ? '<span class="cover-badge" title="Persönlich gelesen und empfohlen">★</span>'
                         : '';

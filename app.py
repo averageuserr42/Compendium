@@ -125,7 +125,7 @@ def api_trees():
 
 @app.route("/api/works", methods=["POST"])
 def api_add_work():
-    """Legt ein neues Werk an — in der Datenbank und in data/trees.json."""
+    """Legt ein neues Werk an – in der Datenbank und in data/trees.json."""
     data = request.get_json(silent=True) or {}
 
     missing = [

@@ -18,7 +18,7 @@ Das Skript ist deterministisch: derselbe Titel ergibt Byte für Byte dasselbe
 Bild. Es braucht keine externen Bibliotheken, nur die Standardbibliothek.
 
 Zwei Design-Regeln (siehe docs/DESIGN_GUIDE.md):
-  * Die Farbpalette ist fest — dieselben Werte wie :root in index.html.
+  * Die Farbpalette ist fest – dieselben Werte wie :root in index.html.
   * Die Komposition variiert: Verlauf, Lichtpunkt und Zweigmotiv hängen vom
     Werk und von der Kategorie ab. Alle Werke einer Kategorie teilen also das
     Motiv, unterscheiden sich aber im Hintergrund und im Titelbild-Aufbau.
@@ -118,7 +118,7 @@ def esc(text) -> str:
 
 
 def digest_of(value: str) -> bytes:
-    """Stabiler Hashwert — daraus entsteht die „Zufälligkeit" des Motivs."""
+    """Stabiler Hashwert – daraus entsteht die „Zufälligkeit" des Motivs."""
     return hashlib.sha256(value.encode("utf-8")).digest()
 
 
@@ -153,11 +153,11 @@ def small_caps_layout(text: str, max_width: float) -> tuple:
     for size in (12, 11, 10, 9, 8):
         if len(text) * (size * 0.62 + 1.4) <= max_width:
             return size
-    return 8  # längste Kategorie: „Wissenschaft & Gesellschaft" — passt auch so
+    return 8  # längste Kategorie: „Wissenschaft & Gesellschaft" – passt auch so
 
 
 def star_points(cx: float, cy: float, outer: float, inner: float) -> str:
-    """Fünfzackiger Stern als Polygon — als Zeichen gezeichnet, nicht als Text,
+    """Fünfzackiger Stern als Polygon – als Zeichen gezeichnet, nicht als Text,
     damit er auf jedem System gleich aussieht."""
     points = []
     for index in range(10):
@@ -277,7 +277,7 @@ def cover_svg(book: dict, category: str, tree: str) -> str:
 
 def walk_books(node, tree, found):
     """Sammelt alle Werke. `node` ist dabei immer eine Kategorie,
-    die Werke stehen direkt darunter — also ist node["title"] die Kategorie.
+    die Werke stehen direkt darunter – also ist node["title"] die Kategorie.
 
     (Wichtig: den Pfad nicht an das Werk selbst hängen, sonst steht später
     der Werktitel dort, wo die Kategorie stehen soll.)
@@ -342,7 +342,7 @@ def main(argv=None) -> int:
 
     print(f"Titelbilder geschrieben: {written}")
     if skipped:
-        print(f"Übersprungen (eigenes Bild vorhanden): {skipped} — mit --force überschreiben")
+        print(f"Übersprungen (eigenes Bild vorhanden): {skipped} – mit --force überschreiben")
     print(f"Wikipedia-Links gesetzt: {links}")
     print(f"Werke insgesamt: {len(books)}")
     print(f"Datenbank: {path.name}")

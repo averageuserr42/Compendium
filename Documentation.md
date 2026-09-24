@@ -14,16 +14,16 @@ Compendium löst das mit einem **Genre-Baum**. Der Aufbau ist einfach:
 - **Äste** = Untergenres
 - **Blätter** = einzelne Werke
 
-Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare Struktur statt einer endlosen Liste. Der Start-Inhalt zeigt klassische Werke für ein breites Publikum — nicht nur eine kleine Nische.
+Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare Struktur statt einer endlosen Liste. Der Start-Inhalt zeigt klassische Werke für ein breites Publikum – nicht nur eine kleine Nische.
 
-**Zielgruppe:** Menschen, die Orientierung suchen — Schüler, Berufseinsteiger, lebenslang Lernende.
+**Zielgruppe:** Menschen, die Orientierung suchen – Schüler, Berufseinsteiger, lebenslang Lernende.
 
 ---
 
 ## 2. Architektur-Entscheidungen
 
 ### 2.1 Ein Frontend, eine Datei
-Das ganze Frontend liegt weiterhin in einer einzigen `index.html` — HTML, CSS und JavaScript zusammen. Das ist Absicht. Vorteile für den Prototyp:
+Das ganze Frontend liegt weiterhin in einer einzigen `index.html` – HTML, CSS und JavaScript zusammen. Das ist Absicht. Vorteile für den Prototyp:
 - Keine Build-Tools, kein Bundler
 - Sofortiges Deployment über GitHub Pages
 - Schnelle Änderungen möglich
@@ -49,10 +49,10 @@ Firebase bleibt als spätere Option im Backlog.
 
 Der Prototyp hat zwei Bäume. In `data/trees.json` stehen sie unter den Schlüsseln `literature` und `novels`:
 
-- `literature` — Belletristik und Fachliteratur
-- `novels` — Manga und Web-Novels
+- `literature` – Belletristik und Fachliteratur
+- `novels` – Manga und Web-Novels
 
-Beide Bäume nutzen dieselbe Logik und dieselbe Datenstruktur. Das beweist: Die Architektur ist erweiterbar. Ein dritter Baum (z. B. Filme) braucht nur neue Daten und einen neuen Knopf — keine neuen Funktionen.### 2.4 Keine externen Abhängigkeiten (Frontend)
+Beide Bäume nutzen dieselbe Logik und dieselbe Datenstruktur. Das beweist: Die Architektur ist erweiterbar. Ein dritter Baum (z. B. Filme) braucht nur neue Daten und einen neuen Knopf – keine neuen Funktionen.### 2.4 Keine externen Abhängigkeiten (Frontend)
 Im Frontend werden nur HTML5, CSS3 und Vanilla JavaScript verwendet. Keine Frameworks, keine Bibliotheken. Das bedeutet: weniger Wartung, weniger Fehlerquellen, keine Einarbeitung in fremde Tools.
 
 ### 2.5 Backend: JSON → SQLite → API
@@ -118,7 +118,7 @@ data/trees.json  →  generate_covers.py  →  data/covers/*.svg  +  cover/wiki 
 | Kann man das Bild zweimal erzeugen? | Ja. Das Skript ist **deterministisch**: derselbe Titel ergibt Byte für Byte dasselbe Bild (Hashwert aus der Werk-ID). Zweimal ausführen ändert nichts. |
 | Wird ein hochgeladenes Bild überschrieben? | Nein. Ein im Browser hochgeladenes Bild bleibt stehen; ersetzt werden nur erzeugte `.svg`-Dateien. Mit `--force` kann man das erzwingen. |
 
-Das Skript nutzt nur die Standardbibliothek von Python, also keine zusätzliche Abhängigkeit. Es ist die einzige Stelle, an der Titelbilder entstehen — im Repository liegt keine fremde Bilddatei.
+Das Skript nutzt nur die Standardbibliothek von Python, also keine zusätzliche Abhängigkeit. Es ist die einzige Stelle, an der Titelbilder entstehen – im Repository liegt keine fremde Bilddatei.
 
 **Wikipedia-Links:** 41 der 44 Werke haben einen Artikel. Das Skript trägt ihn als Feld `wiki` ein, auf der Karte wird daraus der Knopf „↗ Wikipedia". Drei Werke haben in der deutschen und englischen Wikipedia keinen Artikel und bleiben ohne Link: *Die Kunst des Seins* (der deutsche Artikel „Haben oder Sein" beschreibt ein anderes Buch von Fromm), *The Legendary Moonlight Sculptor* und *The Legendary Mechanic*.
 
@@ -143,8 +143,8 @@ Jeder Knoten ist entweder eine **Kategorie** oder ein **Buch**.
 
 Zwei Bäume werden im Objekt `trees` gespeichert:
 
-- **`literatureTree`** — Belletristik (Science Fiction, Fantasy, Weltliteratur) und Fachliteratur (Informatik, Philosophie, Wissenschaft & Gesellschaft)
-- **`novelTree`** — Manga (Shonen, Seinen, Shoujo) und Web-Novels (Light Novels, Isekai, koreanische, chinesische)
+- **`literatureTree`** – Belletristik (Science Fiction, Fantasy, Weltliteratur) und Fachliteratur (Informatik, Philosophie, Wissenschaft & Gesellschaft)
+- **`novelTree`** – Manga (Shonen, Seinen, Shoujo) und Web-Novels (Light Novels, Isekai, koreanische, chinesische)
 
 Die Anzeigenamen für die Kopfzeile stehen in `treeLabels`. Dadurch kann man einen Baum umbenennen, ohne die Daten zu ändern.
 
@@ -162,7 +162,7 @@ Dieselben Daten stehen in der SQL-Tabelle `nodes`. Aus dem verschachtelten JSON 
 | `author`, `recommended` | Autor und ★ (`1` = empfohlen) |
 | `cover`, `wiki` | Pfad zum Titelbild und Link zum Wikipedia-Artikel |
 
-Beide Felder sind optional. Fehlen sie, sieht die Karte aus wie vor Version 0.7 — es gibt also keinen Bruch im Layout.
+Beide Felder sind optional. Fehlen sie, sieht die Karte aus wie vor Version 0.7 – es gibt also keinen Bruch im Layout.
 | `related_id`, `related_title` | Ziel des Cross-Media-Links |
 
 Insgesamt stehen 63 Zeilen in der Tabelle. Der Baum wird beim Auslesen wieder zusammengesetzt (siehe 2.5).
@@ -175,8 +175,8 @@ Insgesamt stehen 63 Zeilen in der Tabelle. Der Baum wird beim Auslesen wieder zu
 
 Die Navigation funktioniert ohne Page-Reload. Zwei Variablen speichern den Zustand:
 
-- `currentNode` — der aktuelle Knoten
-- `historyStack` — Liste der vorherigen Knoten
+- `currentNode` – der aktuelle Knoten
+- `historyStack` – Liste der vorherigen Knoten
 
 Ein Klick auf eine Kategorie macht drei Dinge:
 
@@ -188,13 +188,13 @@ Ein Klick auf „Zurück" liest den letzten Knoten aus dem Stack und zeigt ihn w
 
 ### 4.2 Wichtige Funktionen
 
-- **`loadTrees()`** — lädt die Baumdaten. Zuerst über `GET /api/trees`, sonst aus `data/trees.json`.
-- **`start()`** — ruft `loadTrees()` auf, prüft das Ergebnis und rendert den Startknoten. Wird einmal am Ende des Skripts aufgerufen.
-- **`renderNode(node)`** — zeigt die Kinder eines Knotens als Karten. Kategorien sind klickbar, Bücher nicht. Bei Büchern prüft die Funktion nach dem Rendern, ob die Beschreibung abgeschnitten ist. Wenn ja, fügt sie den Button „Mehr anzeigen" ein (siehe 4.5).
-- **`findPath(node, targetId)`** — sucht einen Knoten mit einer bestimmten ID. Gibt den ganzen Pfad von der Wurzel zurück.
-- **`navigateTo(targetId)`** — springt zu einem Knoten, auch in den anderen Baum. Wird für Cross-Links benutzt. Wenn das Ziel ein Buch ist, springt die App zur übergeordneten Kategorie — so sieht der Nutzer das Buch im Kontext.
-- **`switchTree(key)`** — wechselt zwischen den zwei Bäumen. Der `historyStack` wird dabei geleert, damit die Zurück-Taste nicht in den anderen Baum springt.
-- **`countWorks(node)`** — zählt rekursiv alle Bücher unter einer Kategorie. Zeigt „X Werke" auf der Karte.
+- **`loadTrees()`** – lädt die Baumdaten. Zuerst über `GET /api/trees`, sonst aus `data/trees.json`.
+- **`start()`** – ruft `loadTrees()` auf, prüft das Ergebnis und rendert den Startknoten. Wird einmal am Ende des Skripts aufgerufen.
+- **`renderNode(node)`** – zeigt die Kinder eines Knotens als Karten. Kategorien sind klickbar, Bücher nicht. Bei Büchern prüft die Funktion nach dem Rendern, ob die Beschreibung abgeschnitten ist. Wenn ja, fügt sie den Button „Mehr anzeigen" ein (siehe 4.5).
+- **`findPath(node, targetId)`** – sucht einen Knoten mit einer bestimmten ID. Gibt den ganzen Pfad von der Wurzel zurück.
+- **`navigateTo(targetId)`** – springt zu einem Knoten, auch in den anderen Baum. Wird für Cross-Links benutzt. Wenn das Ziel ein Buch ist, springt die App zur übergeordneten Kategorie – so sieht der Nutzer das Buch im Kontext.
+- **`switchTree(key)`** – wechselt zwischen den zwei Bäumen. Der `historyStack` wird dabei geleert, damit die Zurück-Taste nicht in den anderen Baum springt.
+- **`countWorks(node)`** – zählt rekursiv alle Bücher unter einer Kategorie. Zeigt „X Werke" auf der Karte.
 
 ### 4.3 Breadcrumb-Navigation
 
@@ -225,13 +225,13 @@ Wichtig dabei: Der Button erscheint nur, wenn der Text wirklich zu lang ist. Kur
 
 ## 5. Cross-Media-Verknüpfung
 
-Ein Buch kann optional mit einem Werk im anderen Baum verknüpft werden. Dafür gibt es die Felder `relatedId` und `relatedTitle`. Auf der Buch-Karte erscheint dann ein Button mit dem Symbol `↔`. Ein Klick darauf ruft `navigateTo()` auf und springt zum verknüpften Werk — auch in den anderen Baum.
+Ein Buch kann optional mit einem Werk im anderen Baum verknüpft werden. Dafür gibt es die Felder `relatedId` und `relatedTitle`. Auf der Buch-Karte erscheint dann ein Button mit dem Symbol `↔`. Ein Klick darauf ruft `navigateTo()` auf und springt zum verknüpften Werk – auch in den anderen Baum.
 
-**Aktuelle Beispiele:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito — und die Web-Novel *Solo Leveling* von Chugong ↔ die Manhwa-Adaption von DUBU (Redice Studio). Die Verknüpfung ist in beide Richtungen hinterlegt: jedes Werk kennt sein Gegenstück. Deshalb tragen vier Datensätze ein `relatedId` — das sind **zwei** Verknüpfungen (zwei Paare).
+**Aktuelle Beispiele:** Der Roman *No Longer Human* von Osamu Dazai ↔ die Manga-Adaption von Junji Ito – und die Web-Novel *Solo Leveling* von Chugong ↔ die Manhwa-Adaption von DUBU (Redice Studio). Die Verknüpfung ist in beide Richtungen hinterlegt: jedes Werk kennt sein Gegenstück. Deshalb tragen vier Datensätze ein `relatedId` – das sind **zwei** Verknüpfungen (zwei Paare).
 
 Diese Funktion war ursprünglich nur als Roadmap-Ziel geplant. Sie ist aber schon als Basis umgesetzt. Das zeigt: Die Architektur ist wirklich erweiterbar, nicht nur auf dem Papier. Weitere Verknüpfungen sind im Backlog.
 
-Beide Paare verbinden dieselbe Geschichte über zwei Medien hinweg — einmal Japan (Roman ↔ Manga), einmal Korea (Web-Novel ↔ Manhwa). Damit ist das Prinzip über beide Bäume und zwei Kulturen hinweg gezeigt.
+Beide Paare verbinden dieselbe Geschichte über zwei Medien hinweg – einmal Japan (Roman ↔ Manga), einmal Korea (Web-Novel ↔ Manhwa). Damit ist das Prinzip über beide Bäume und zwei Kulturen hinweg gezeigt.
 
 ---
 
@@ -277,13 +277,13 @@ Drei Sonderfälle sind abgefangen:
 |---|---|
 | Werk ohne Bild | dunkle Ersatzfläche mit Titel und Autor |
 | Bild aus dem Formular (Foto, ohne Schrift) | Titel und Autor als kleine Zeile unten auf dem Bild, ★ als Ecke |
-| Generiertes SVG | nichts zusätzlich — Titel, Autor und ★ stehen schon auf dem Bild (sonst stünde ★ doppelt) |
+| Generiertes SVG | nichts zusätzlich – Titel, Autor und ★ stehen schon auf dem Bild (sonst stünde ★ doppelt) |
 
-Werke stehen in engeren Spalten (etwa 185 px) als Kategorien (300 px) — das Raster richtet sich danach, ob in einer Ebene nur Werke liegen. So sieht eine Kategorie wie ein Bücherregal aus.
+Werke stehen in engeren Spalten (etwa 185 px) als Kategorien (300 px) – das Raster richtet sich danach, ob in einer Ebene nur Werke liegen. So sieht eine Kategorie wie ein Bücherregal aus.
 
-**Titelbilder:** Die Titelbilder folgen demselben Design-System, aber in einer eigenen Komposition: fester Rahmen in `--green-dim`, Verlauf von `--card-bg` nach `--bg`, oben Baum und Kategorie in Monospace, in der Mitte der Titel in einer Serifenschrift (wie eine Buchseite), darunter der Autor in Monospace, unten ein feines Zweigmotiv. Die sechs Farbwerte sind **dieselben** wie in der Tabelle oben — die Bilder führen keine neuen Farben ein. Die Regeln stehen in [docs/DESIGN_GUIDE.md](./docs/DESIGN_GUIDE.md), Abschnitt 3.1.
+**Titelbilder:** Die Titelbilder folgen demselben Design-System, aber in einer eigenen Komposition: fester Rahmen in `--green-dim`, Verlauf von `--card-bg` nach `--bg`, oben Baum und Kategorie in Monospace, in der Mitte der Titel in einer Serifenschrift (wie eine Buchseite), darunter der Autor in Monospace, unten ein feines Zweigmotiv. Die sechs Farbwerte sind **dieselben** wie in der Tabelle oben – die Bilder führen keine neuen Farben ein. Die Regeln stehen in [docs/DESIGN_GUIDE.md](./docs/DESIGN_GUIDE.md), Abschnitt 3.1.
 
-**Formular:** Der Knopf „＋ Werk hinzufügen" öffnet ein Formular für neue Werke. Es benutzt dieselben Farbvariablen und Formen wie der Rest der Seite — neue Farben gibt es nicht. Das Formular erscheint nur, wenn das Backend läuft.
+**Formular:** Der Knopf „＋ Werk hinzufügen" öffnet ein Formular für neue Werke. Es benutzt dieselben Farbvariablen und Formen wie der Rest der Seite – neue Farben gibt es nicht. Das Formular erscheint nur, wenn das Backend läuft.
 
 **Formsprache:** Karten und Buttons sind gerundet (Karten 14px, Buttons als Pillen). Der farbige Balken links ist ein `inset`-Schatten und kein `border-left`, damit er der Rundung folgt. Der Werk-Zähler ist ein Chip. Alle diese Werte stehen als Variablen in `:root`. Die Farbwerte der Tabelle bleiben unverändert.
 
@@ -308,9 +308,9 @@ Damit die Live-Demo ohne Backend vollständig aussieht, sind die Titelbilder sta
 
 **Umgesetzt in Version 0.8: Titelbilder und Wikipedia-Links**
 
-- Die Bilder sind selbst erzeugt (SVG) statt fremd geladen — Begründung in 2.6.
+- Die Bilder sind selbst erzeugt (SVG) statt fremd geladen – Begründung in 2.6.
 - Alle 44 Werke haben ein Bild; 41 haben einen Link zum Artikel, gespeichert als Feld in den Daten.
-- Drei Werke bleiben ohne Link, weil es keinen Artikel gibt — die Liste steht in 2.6.
+- Drei Werke bleiben ohne Link, weil es keinen Artikel gibt – die Liste steht in 2.6.
 - Der Bild-Bauplan ist eine Designregel und steht in [docs/DESIGN_GUIDE.md](./docs/DESIGN_GUIDE.md), Abschnitt 3.1.
 
 **Umgesetzt in Version 0.7: Flask-Backend**
@@ -342,35 +342,35 @@ Firebase bleibt als spätere Option im Backlog.
 
 ## 9. Änderungen im Überblick
 
-### Version 0.1 — Erster Prototyp
+### Version 0.1 – Erster Prototyp
 - Ein Literatur-Baum
 - Drill-Down mit Zurück-Button
 - Einfache Karten für Bücher und Kategorien
 
-### Version 0.2 — Zweiter Baum und Cross-Media
+### Version 0.2 – Zweiter Baum und Cross-Media
 - Zweiter Baum für Manga und Web-Novels
 - Umschalter zwischen Bäumen
 - Erste Cross-Media-Verknüpfung (*No Longer Human*)
 - `findPath()` und `navigateTo()`
 
-### Version 0.3 — Inhalte und Kuratierung
+### Version 0.3 – Inhalte und Kuratierung
 - 35 Werke in 13 Kategorien
 - ★-System für persönliche Empfehlungen
 - Breadcrumb-Navigation
 - Werk-Zähler auf Kategorien
 
-### Version 0.4 — Optimierung für Präsentation
+### Version 0.4 – Optimierung für Präsentation
 - Größere Schrift für Video und Online
 - Einblend-Animation für Karten
 - Escape-Taste als Zurück-Shortcut
 
-### Version 0.5 — Mehr anzeigen
+### Version 0.5 – Mehr anzeigen
 - Lange Buchbeschreibungen werden auf 2 Zeilen begrenzt (CSS line-clamp)
 - Button „Mehr anzeigen" / „Weniger anzeigen" klappt den Text auf und zu
 - Der Button erscheint nur, wenn der Text wirklich abgeschnitten ist
 - Reihenfolge in der Buchkarte: Titel, Autor, Beschreibung, Toggle, Cross-Link
 
-### Version 0.6 — Visuelle Auffrischung
+### Version 0.6 – Visuelle Auffrischung
 - Karten und Buttons sind gerundet (Radius 14px, Buttons als Pillen)
 - Weiche Schatten, die Karte hebt sich beim Hover um 3px
 - Fließtext in einer Systemschrift, Monospace nur für Etiketten
@@ -380,7 +380,7 @@ Firebase bleibt als spätere Option im Backlog.
 - Titel als gesperrte Serifenschrift, mittig, wie eine Buchseite
 - Keine neuen Dateien, keine externen Abhängigkeiten
 
-### Version 0.7 — Flask-Backend mit SQLite
+### Version 0.7 – Flask-Backend mit SQLite
 - Die Daten sind aus `index.html` in die Datei `data/trees.json` gewandert
 - `seed.py` erzeugt daraus die SQLite-Tabelle `nodes`
 - `app.py` (Flask) liefert beide Bäume über `GET /api/trees`
@@ -394,24 +394,24 @@ Firebase bleibt als spätere Option im Backlog.
 - `POST /api/covers` lädt Titelbilder nach `data/covers/`, `GET /data/covers/<datei>` liefert sie aus
 - Die Datenbank wird automatisch neu erzeugt, wenn das Schema sich ändert
 
-### Version 0.10 — Zweite Cross-Media-Verknüpfung, Fußzeile, Aufräumen
-- Zweite Cross-Media-Verknüpfung: Web-Novel *Solo Leveling* (Chugong) ↔ Manhwa-Adaption (DUBU, Redice Studio) — der Manhwa ist als neues Werk im Baum Manga › Seinen
+### Version 0.10 – Zweite Cross-Media-Verknüpfung, Fußzeile, Aufräumen
+- Zweite Cross-Media-Verknüpfung: Web-Novel *Solo Leveling* (Chugong) ↔ Manhwa-Adaption (DUBU, Redice Studio) – der Manhwa ist als neues Werk im Baum Manga › Seinen
 - Jetzt 44 Werke, 44 Titelbilder, 41 Wikipedia-Links
 - Fußzeile mit Link zum GitHub-Repository und Kuratierung-Legende
 - Knöpfe auf den Postern bleiben auf schmalen Fenstern (Telefon) in einer Zeile
-- Recherche-Dokumente zu den Titelbildern (`docs/COVER_KANDIDATEN.*`) entfernt — die Ergebnisse stehen in 2.6 und im Skript
+- Recherche-Dokumente zu den Titelbildern (`docs/COVER_KANDIDATEN.*`) entfernt – die Ergebnisse stehen in 2.6 und im Skript
 
-### Version 0.9 — Karte als Poster
+### Version 0.9 – Karte als Poster
 - Buchkarten zeigen das Titelbild auf der ganzen Karte (Seitenverhältnis 2:3), darunter Beschreibung und Knöpfe
 - Titel und Autor stehen auf den generierten Bildern und werden nicht wiederholt
-- Werke liegen in engeren Spalten, wenn eine Ebene nur Werke enthält — Kategorien bleiben breit
+- Werke liegen in engeren Spalten, wenn eine Ebene nur Werke enthält – Kategorien bleiben breit
 - ★ steht bei generierten Bildern im Bild selbst; bei fremden Bildern als Ecke auf dem Cover
 - Fallback: Werk ohne Bild zeigt eine dunkle Fläche mit Titel und Autor
 - „Mehr anzeigen", Cross-Media-Sprung und Escape funktionieren wie vorher
 
-### Version 0.8 — Titelbilder und Wikipedia-Links
+### Version 0.8 – Titelbilder und Wikipedia-Links
 - `generate_covers.py` (neu) erzeugt für alle 43 Werke ein Titelbild als SVG in `data/covers/`
-- Die Bilder sind typografisch: Baum, Kategorie, Titel, Autor, Zweigmotiv, ★ — in den Farben des Design-Systems
+- Die Bilder sind typografisch: Baum, Kategorie, Titel, Autor, Zweigmotiv, ★ – in den Farben des Design-Systems
 - Das Skript ist deterministisch und braucht keine zusätzliche Bibliothek
 - 40 Werke bekommen das neue Feld `wiki`; auf der Karte erscheint der Knopf „↗ Wikipedia"
 - Drei Werke bleiben ohne Link, weil es keinen Artikel gibt

@@ -56,7 +56,7 @@ Kategorie-Karte und Buch-Karte unterscheiden sich über einen farbigen Balken li
 box-shadow: inset 3px 0 0 var(--green), var(--shadow-card);
 ```
 
-Ein `border-left` würde an den runden Ecken abgeschnitten. Der `inset`-Schatten folgt der Rundung. Das ist der Grund für diese Lösung. (Seit Version 0.9 gilt das nur noch für Kategorie-Karten — Buchkarten sind Poster ohne Balken, siehe 3.2.)
+Ein `border-left` würde an den runden Ecken abgeschnitten. Der `inset`-Schatten folgt der Rundung. Das ist der Grund für diese Lösung. (Seit Version 0.9 gilt das nur noch für Kategorie-Karten – Buchkarten sind Poster ohne Balken, siehe 3.2.)
 
 ### 3.1 Titelbilder (SVG)
 
@@ -65,11 +65,11 @@ Die Titelbilder liegen als SVG in `data/covers/`. Sie werden von `generate_cover
 | Ebene | Regel |
 |---|---|
 | Farben | Nur aus `:root`: `--bg`, `--card-bg`, `--green`, `--green-dim`, `--text-white`, `--text-muted`. Die Bilder führen keine neue Farbe ein. |
-| Bauplan | Rahmen in `--green-dim`, Verlauf von `--card-bg` nach `--bg`, ein weicher Lichtpunkt, oben Baum und Kategorie, in der Mitte der Titel in Serifenschrift, darunter der Autor in Monospace, unten ein feines Zweigmotiv, oben rechts ★. Seit Version 0.9 füllt das Bild die ganze Buchkarte — es ist der Hauptträger von Titel und Autor. |
-| Format | 400 × 600 Pixel (2:3) — dasselbe Verhältnis, das die Poster-Karte braucht. |
+| Bauplan | Rahmen in `--green-dim`, Verlauf von `--card-bg` nach `--bg`, ein weicher Lichtpunkt, oben Baum und Kategorie, in der Mitte der Titel in Serifenschrift, darunter der Autor in Monospace, unten ein feines Zweigmotiv, oben rechts ★. Seit Version 0.9 füllt das Bild die ganze Buchkarte – es ist der Hauptträger von Titel und Autor. |
+| Format | 400 × 600 Pixel (2:3) – dasselbe Verhältnis, das die Poster-Karte braucht. |
 | Zweigmotiv | Hängt an der **Kategorie**, nicht am Werk: alle Werke einer Kategorie teilen das Motiv. Beim Blättern sieht man so die Struktur des Baums. |
 | Verlauf und Lichtpunkt | Hängen am Werk (Hashwert der ID). Deshalb gleicht kein Bild dem anderen. |
-| Schriften | Nur Systemschriften: Serifenschrift für den Titel, Monospace für Autor und Etiketten — wie im Rest der Seite. |
+| Schriften | Nur Systemschriften: Serifenschrift für den Titel, Monospace für Autor und Etiketten – wie im Rest der Seite. |
 | ★ | Erscheint nur bei `recommended: true`. |
 
 Wer die Gestaltung ändern will, ändert `generate_covers.py` und führt das Skript neu aus. Die Dateien von Hand zu bearbeiten ist möglich, aber der nächste Lauf des Skripts überschreibt sie.
@@ -80,11 +80,11 @@ Wer die Gestaltung ändern will, ändert `generate_covers.py` und führt das Skr
 
 Eine Buchkarte ist ein vertikales Poster: Das Titelbild füllt die Karte oben (2:3), darunter liegt eine dunkle Leiste mit Beschreibung und Knöpfen. Die Regeln:
 
-1. **Das Bild ist die Karte.** Keine zweite Überschrift, kein Autor-Block — beides steht auf dem generierten SVG. Sonst stünde jeder Titel doppelt.
+1. **Das Bild ist die Karte.** Keine zweite Überschrift, kein Autor-Block – beides steht auf dem generierten SVG. Sonst stünde jeder Titel doppelt.
 2. **Kein doppelter ★.** Bei generierten Bildern ist der Stern im Bild. Ein `cover-badge` erscheint nur bei fremden Bildern (Foto aus dem Formular) und im Fallback.
 3. **Zwei Spaltenbreiten.** Ebenen mit nur Werken nutzen `grid-books` (etwa 185 px), alles andere 300 px. Die Klasse setzt `renderNode()` je nachdem, ob in der Ebene nur Bücher liegen.
 4. **Leiste unten.** `.book-overlay` hat einen Verlauf von halbtransparent zu `--card-bg` und eine obere Grenze in `--border`. Die Beschreibung bleibt auf 2 Zeilen begrenzt („Mehr anzeigen", siehe Dokumentation 4.5).
-5. **Fallback ohne Bild:** dunkle Fläche mit Titel in `--serif` kursiv und Autor in Monospace — die Hierarchie der alten Karte, nur auf einer Posterfläche.
+5. **Fallback ohne Bild:** dunkle Fläche mit Titel in `--serif` kursiv und Autor in Monospace – die Hierarchie der alten Karte, nur auf einer Posterfläche.
 
 Wer die Posterbreite ändert, ändert `minmax` in `.grid-books` und prüft auf dem Telefon, ob die Knöpfe noch in eine Zeile passen.
 

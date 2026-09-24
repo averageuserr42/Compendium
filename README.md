@@ -1,9 +1,9 @@
 # Compendium - Prototyp
 
-**Ein neuer Zugang zur Literatur. Ordnung im Meer der Bücher.**
+**Teile deine Bibliothek. Ordnung im Meer der Bücher.**
 
 ## Über das Projekt
-Compendium ist ein Proof-of-Concept für eine strukturierte Literatur-Navigation. Statt auf Bestseller-Listen oder Black-Box-Algorithmen zu setzen, nutzt Compendium einen **Genre-Baum**, um Leser von der Wurzel (Hauptkategorie) über die Äste (Untergenres) bis zu den Blättern (einzelne kuratierte Werke) zu führen.
+Compendium ist ein Proof-of-Concept für eine einfache Idee: Seine persönliche Bibliothek als **Navigation teilen** – als Genre-Baum mit eigenen ★-Empfehlungen, nicht als Dateiablage. Statt auf Bestseller-Listen oder Black-Box-Algorithmen zu setzen, führt der **Genre-Baum** von der Wurzel (Hauptkategorie) über die Äste (Untergenres) bis zu den Blättern (einzelne kuratierte Werke). Die eigenen Daten liegen in einer JSON-Datei: Wer sie austauscht, bekommt eine fremde kuratierte Bibliothek im selben Design – ohne Code-Änderung.
 
 ## Aktueller Stand (Prototyp)
 Dieses Repository enthält den interaktiven Frontend-Prototypen, der das Kernkonzept demonstriert:

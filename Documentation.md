@@ -14,9 +14,9 @@ Compendium löst das mit einem **Genre-Baum**. Der Aufbau ist einfach:
 - **Äste** = Untergenres
 - **Blätter** = einzelne Werke
 
-Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare Struktur statt einer endlosen Liste. Der Start-Inhalt zeigt klassische Werke für ein breites Publikum – nicht nur eine kleine Nische.
+Der Nutzer klickt sich Schritt für Schritt durch den Baum. Er sieht eine klare Struktur statt einer endlosen Liste. Und der Baum gehört ihm: Die Daten liegen in einer JSON-Datei, die ★-Markierungen kommen aus echter Leseerfahrung. **Wer seine Datei weitergibt, teilt seine persönliche kuratierte Bibliothek** – nicht Buchdateien, sondern seinen Weg durch die Literatur. Der Empfänger sieht sie im selben Design, ohne Code-Änderung. Algorithmen zeigen Popularität – hier teilt ein Mensch, was er wirklich gelesen hat.
 
-**Zielgruppe:** Menschen, die Orientierung suchen – Schüler, Berufseinsteiger, lebenslang Lernende.
+**Zielgruppe:** Menschen, die ihre Leseerfahrung weitergeben wollen – und Menschen, die Orientierung suchen und einer echten Person statt einer Black Box vertrauen.
 
 ---
 
